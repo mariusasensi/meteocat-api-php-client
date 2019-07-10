@@ -1,0 +1,19 @@
+{
+    "name": "mariusasensi/meteocat",
+    "description": "A development package for making Meteocat API REST",
+    "keywords": ["Meteocat", "Meteo.cat", "weather"],
+    "type": "library",
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+    "authors": [
+        {
+            "name": "Màrius Asensi",
+            "email": "marius.asensi@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
