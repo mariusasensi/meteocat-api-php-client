@@ -15,5 +15,15 @@
             "email": "marius.asensi@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": { "Meteocat\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Meteocat\\Tests\\": "tests/" }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-dox": "vendor/bin/phpunit --testdox"
+    },
     "minimum-stability": "dev"
 }
