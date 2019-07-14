@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model;
+namespace Meteocat\Provider;
 
 use GuzzleHttp;
 use Meteocat\Http\Client;

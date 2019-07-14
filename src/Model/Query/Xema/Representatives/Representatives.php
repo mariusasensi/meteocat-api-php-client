@@ -10,7 +10,7 @@ use Meteocat\Model\Query\Xema\Xema;
  * Class Representatives
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/
- * @package Meteocat\Model\Query\Xema
+ * @package Meteocat\Model\Query\Xema\Representatives
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 abstract class Representatives extends Xema

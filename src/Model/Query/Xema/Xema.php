@@ -7,16 +7,16 @@ namespace Meteocat\Model\Query\Xema;
 use Meteocat\Model\Query\Query;
 
 /**
- * Class XemaQuery
+ * Class Xema
  *
  * @link    https://apidocs.meteocat.gencat.cat/section/referencia-tecnica/operacions/xema/
- * @package Meteocat\Model\Query
+ * @package Meteocat\Model\Query\Xema
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 abstract class Xema implements Query
 {
-    protected const NAME    = 'xema';
-    protected const VERSION = 1;
+    private const NAME    = 'xema';
+    private const VERSION = 1;
 
     /**
      * @return string

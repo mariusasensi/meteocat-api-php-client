@@ -8,7 +8,7 @@ namespace Meteocat\Model\Query\Xema\Representatives;
  * Class Estacions
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/#estacions-representatives-per-a-un-municipi-i-una-variable
- * @package Meteocat\Model\Query
+ * @package Meteocat\Model\Query\Xema\Representatives
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 final class Estacions extends Representatives

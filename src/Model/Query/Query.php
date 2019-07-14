@@ -7,7 +7,7 @@ namespace Meteocat\Model\Query;
 /**
  * Interface Query
  *
- * @package Meteocat\Query
+ * @package Meteocat\Model\Query
  * @author Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 interface Query
