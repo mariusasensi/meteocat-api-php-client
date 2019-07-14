@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Representatives;
+namespace Meteocat\Model\Query\Xema\Estacions;
 
 use Meteocat\Model\Query\Xema\Xema;
 
 /**
- * Class Representatives
+ * Class Estacions\Base
  *
- * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/
- * @package Meteocat\Model\Query\Xema\Representatives
+ * @link    https://apidocs.meteocat.gencat.cat/documentacio/metadades-estacions/
+ * @package Meteocat\Model\Query\Xema\Estacions
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-abstract class Representatives extends Xema
+abstract class Base extends Xema
 {
-    private const URI = '/representatives/metadades';
+    private const URI = '/estacions';
 
     /**
      * @return string
      */
-    public function getType() : string
+    public function getName() : string
     {
-        return parent::getType() . '/Representatives';
+        return parent::getName() . '/Estacions';
     }
 
     /**

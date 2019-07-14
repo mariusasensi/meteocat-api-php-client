@@ -15,13 +15,20 @@ use Meteocat\Model\Query\Query;
  */
 abstract class Xema implements Query
 {
+    /**
+     * Endpoint name.
+     */
     private const NAME    = 'xema';
+
+    /**
+     * Endpoint version.
+     */
     private const VERSION = 1;
 
     /**
      * @return string
      */
-    public function getType() : string
+    public function getName() : string
     {
         return 'XEMA';
     }

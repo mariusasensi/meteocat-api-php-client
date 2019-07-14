@@ -11,7 +11,7 @@ namespace Meteocat\Model\Query\Xema\Representatives;
  * @package Meteocat\Model\Query\Xema\Representatives
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Estacions extends Representatives
+final class Estacions extends Base
 {
     /**
      * Endpoint.
@@ -55,9 +55,9 @@ final class Estacions extends Representatives
     /**
      * @return string
      */
-    public function getType() : string
+    public function getName() : string
     {
-        return parent::getType() . "/Estacions";
+        return parent::getName() . "/Estacions";
     }
 
     /**
