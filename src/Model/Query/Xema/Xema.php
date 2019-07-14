@@ -18,12 +18,12 @@ abstract class Xema implements Query
     /**
      * Endpoint name.
      */
-    private const NAME    = 'xema';
+    protected const NAME = 'xema';
 
     /**
      * Endpoint version.
      */
-    private const VERSION = 1;
+    protected const VERSION = 1;
 
     /**
      * @return string

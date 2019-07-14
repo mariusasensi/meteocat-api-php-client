@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Estacions;
+namespace Meteocat\Model\Query\Xema\Mesurades;
 
 /**
- * Class Estacions\Metadades
+ * Class Mesurades\Metadades
  *
- * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/#metadades-de-variables
- * @package Meteocat\Model\Query\Xema\Estacions
+ * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#metadades-duna-variable
+ * @package Meteocat\Model\Query\Xema\Mesurades
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 final class Metadades extends Base
@@ -16,21 +16,21 @@ final class Metadades extends Base
     /**
      * Endpoint.
      */
-    private const URI = '/{codi_estacio}/metadades';
+    private const URI = '/{codi_variable}/metadades';
 
     /**
-     * @var string|null
+     * @var int|null
      */
-    private $estacioCode = null;
+    private $variableCode = null;
 
     /**
      * Metadades constructor.
      *
-     * @param string $estacioCode Station code.
+     * @param int variableCode Variable code.
      */
-    public function __construct(string $estacioCode)
+    public function __construct(int $variableCode)
     {
-        $this->estacioCode = $estacioCode;
+        $this->variableCode = $variableCode;
     }
 
     /**
@@ -39,7 +39,7 @@ final class Metadades extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_estacio}', $this->estacioCode, $uri);
+        $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
 
         return $uri;
     }
