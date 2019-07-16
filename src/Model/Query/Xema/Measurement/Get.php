@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Mesurades;
+namespace Meteocat\Model\Query\Xema\Measurement;
 
 /**
- * Class Mesurades\Metadades
+ * Class Measurement\Get
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#metadades-duna-variable
- * @package Meteocat\Model\Query\Xema\Mesurades
+ * @package Meteocat\Model\Query\Xema\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Metadades extends Base
+final class Get extends Base
 {
     /**
      * Endpoint.
@@ -24,7 +24,7 @@ final class Metadades extends Base
     private $variableCode = null;
 
     /**
-     * Metadades constructor.
+     * Get constructor.
      *
      * @param int variableCode Variable code.
      */
@@ -49,7 +49,7 @@ final class Metadades extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . '/Metadades';
+        return parent::getName() . '/Get';
     }
 
     /**

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Mesurades;
+namespace Meteocat\Model\Query\Xema\Measurement;
 
 use DateTime;
 
 /**
- * Class Mesurades\MetadadesEstacioTotes
+ * Class Measurement\AllByStation
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#metadades-de-les-variables-duna-estacio
- * @package Meteocat\Model\Query\Xema\Estacions
+ * @package Meteocat\Model\Query\Xema\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class MetadadesEstacioTotes extends Base
+final class AllByStation extends Base
 {
     /**
      * Endpoint.
@@ -23,48 +23,48 @@ final class MetadadesEstacioTotes extends Base
     /**
      * @var string|null
      */
-    private $estacioCode = null;
+    private $stationCode = null;
 
     /**
      * @var string|null
      */
-    private $estat = null;
+    private $status = null;
 
     /**
      * @var DateTime|null
      */
-    private $data = null;
+    private $date = null;
 
     /**
-     * MetadadesEstacioTotes constructor.
+     * AllByStation constructor.
      *
-     * @param string $estacioCode
+     * @param string $stationCode
      */
-    public function __construct(string $estacioCode)
+    public function __construct(string $stationCode)
     {
-        $this->estacioCode = $estacioCode;
+        $this->stationCode = $stationCode;
     }
 
     /**
-     * @param string $estat
+     * @param string $status
      *
      * @return $this
      */
-    public function withEstat(string $estat)
+    public function withStatus(string $status)
     {
-        $this->estat = $estat;
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * @param DateTime $data
+     * @param DateTime $date
      *
      * @return $this
      */
-    public function withData(DateTime $data)
+    public function withDate(DateTime $date)
     {
-        $this->data = $data;
+        $this->date = $date;
 
         return $this;
     }
@@ -75,11 +75,11 @@ final class MetadadesEstacioTotes extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_estacio}', $this->estacioCode, $uri);
+        $uri = str_replace('{codi_estacio}', $this->stationCode, $uri);
 
         $query = http_build_query([
-            'estat' => $this->estat,
-            'data'  => is_null($this->data) ? null : $this->data->format(parent::DEFAULT_DATE_FORMAT),
+            'estat' => $this->status,
+            'data'  => is_null($this->date) ? null : $this->date->format(parent::DEFAULT_DATE_FORMAT),
         ]);
 
         return $uri . (empty($query) ? "" : "?{$query}");
@@ -90,7 +90,7 @@ final class MetadadesEstacioTotes extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/MetadadesEstacioTotes";
+        return parent::getName() . "/AllByStation";
     }
 
     /**

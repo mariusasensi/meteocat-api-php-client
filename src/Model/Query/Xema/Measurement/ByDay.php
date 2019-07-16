@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Mesurades;
+namespace Meteocat\Model\Query\Xema\Measurement;
 
 use DateTime;
 
 /**
- * Class Mesurades\VariablePerData
+ * Class Measurement\ByDay
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#dades-duna-variable-per-a-totes-les-estacions
- * @package Meteocat\Model\Query\Xema\Mesurades
+ * @package Meteocat\Model\Query\Xema\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class VariablePerData extends Base
+final class ByDay extends Base
 {
     /**
      * Endpoint.
@@ -23,7 +23,7 @@ final class VariablePerData extends Base
     /**
      * @var string|null
      */
-    private $estacioCode = null;
+    private $stationCode = null;
 
     /**
      * @var int|null
@@ -33,26 +33,26 @@ final class VariablePerData extends Base
     /**
      * @var DateTime|null
      */
-    private $data = null;
+    private $date = null;
 
     /**
-     * VariablePerData constructor.
+     * ByDay constructor.
      *
-     * @param int       $variableCode Variable id.
-     * @param DateTime $date Day to check.
+     * @param int      $variableCode Variable id.
+     * @param DateTime $date         Day to check.
      */
     public function __construct(int $variableCode, DateTime $date)
     {
         $this->variableCode = $variableCode;
-        $this->data = $date;
+        $this->date         = $date;
     }
 
     /**
-     * @param string $estacioCode Station code.
+     * @param string $stationCode Station code.
      */
-    public function withEstacio(string $estacioCode)
+    public function withStation(string $stationCode)
     {
-        $this->estacioCode = $estacioCode;
+        $this->stationCode = $stationCode;
     }
 
     /**
@@ -62,12 +62,12 @@ final class VariablePerData extends Base
     {
         $uri = self::URI;
         $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
-        $uri = str_replace('{any}', $this->data->format('Y'), $uri);
-        $uri = str_replace('{mes}', $this->data->format('m'), $uri);
-        $uri = str_replace('{dia}', $this->data->format('d'), $uri);
+        $uri = str_replace('{any}', $this->date->format('Y'), $uri);
+        $uri = str_replace('{mes}', $this->date->format('m'), $uri);
+        $uri = str_replace('{dia}', $this->date->format('d'), $uri);
 
         $query = http_build_query([
-            'codiEstacio' => $this->estacioCode,
+            'codiEstacio' => $this->stationCode,
         ]);
 
         return $uri . (empty($query) ? "" : "?{$query}");
@@ -78,7 +78,7 @@ final class VariablePerData extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/VariablePerData";
+        return parent::getName() . "/ByDay";
     }
 
     /**

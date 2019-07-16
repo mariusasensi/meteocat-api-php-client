@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Mesurades;
+namespace Meteocat\Model\Query\Xema\Measurement;
 
 /**
- * Class Mesurades\VariableUltima
+ * Class Measurement\Last
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#ultimes-dades-duna-variable-per-a-totes-les-estacions
- * @package Meteocat\Model\Query\Xema\Mesurades
+ * @package Meteocat\Model\Query\Xema\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class VariableUltima extends Base
+final class Last extends Base
 {
     /**
      * Endpoint.
@@ -21,7 +21,7 @@ final class VariableUltima extends Base
     /**
      * @var string|null
      */
-    private $estacioCode = null;
+    private $stationCode = null;
 
     /**
      * @var int|null
@@ -29,7 +29,7 @@ final class VariableUltima extends Base
     private $variableCode = null;
 
     /**
-     * MetadadesEstacio constructor.
+     * Last constructor.
      *
      * @param int $variableCode Variable id.
      */
@@ -39,11 +39,11 @@ final class VariableUltima extends Base
     }
 
     /**
-     * @param string $estacioCode Station code.
+     * @param string $stationCode Station code.
      */
-    public function withEstacio(string $estacioCode)
+    public function withStation(string $stationCode)
     {
-        $this->estacioCode = $estacioCode;
+        $this->stationCode = $stationCode;
     }
 
     /**
@@ -55,7 +55,7 @@ final class VariableUltima extends Base
         $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
 
         $query = http_build_query([
-            'codiEstacio' => $this->estacioCode,
+            'codiEstacio' => $this->stationCode,
         ]);
 
         return $uri . (empty($query) ? "" : "?{$query}");
@@ -66,7 +66,7 @@ final class VariableUltima extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/VariableUltima";
+        return parent::getName() . "/Last";
     }
 
     /**

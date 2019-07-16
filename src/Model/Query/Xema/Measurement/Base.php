@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Mesurades;
+namespace Meteocat\Model\Query\Xema\Measurement;
 
 use Meteocat\Model\Query\Xema\Xema;
 
 /**
- * Class Mesurades\Base
+ * Class Measurement\Base
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/metadades-estacions/
- * @package Meteocat\Model\Query\Xema\Estacions
+ * @package Meteocat\Model\Query\Xema\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 abstract class Base extends Xema
@@ -22,7 +22,7 @@ abstract class Base extends Xema
      */
     public function getName() : string
     {
-        return parent::getName() . '/Mesurades';
+        return parent::getName() . '/Measurement';
     }
 
     /**

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Mesurades;
+namespace Meteocat\Model\Query\Xema\Measurement;
 
 /**
- * Class Mesurades\MetadadesAll
+ * Class Measurement\All
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#metadades-de-totes-les-variables
- * @package Meteocat\Model\Query\Xema\Estacions
+ * @package Meteocat\Model\Query\Xema\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class MetadadesTotes extends Base
+final class All extends Base
 {
     /**
      * Endpoint.
@@ -23,7 +23,7 @@ final class MetadadesTotes extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/MetadadesTotes";
+        return parent::getName() . "/All";
     }
 
     /**

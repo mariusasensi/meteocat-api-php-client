@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Mesurades;
+namespace Meteocat\Model\Query\Xema\Measurement;
 
 /**
- * Class Mesurades\MetadadesEstacio
+ * Class Measurement\GetByStation
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#metadades-duna-variable-duna-estacio
- * @package Meteocat\Model\Query\Xema\Mesurades
+ * @package Meteocat\Model\Query\Xema\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class MetadadesEstacio extends Base
+final class GetByStation extends Base
 {
     /**
      * Endpoint.
@@ -21,7 +21,7 @@ final class MetadadesEstacio extends Base
     /**
      * @var string|null
      */
-    private $estacioCode = null;
+    private $stationCode = null;
 
     /**
      * @var int|null
@@ -29,14 +29,14 @@ final class MetadadesEstacio extends Base
     private $variableCode = null;
 
     /**
-     * MetadadesEstacio constructor.
+     * GetByStation constructor.
      *
-     * @param string $estacioCode Station code.
+     * @param string $stationCode  Station code.
      * @param int    $variableCode Variable id.
      */
-    public function __construct(string $estacioCode, int $variableCode)
+    public function __construct(string $stationCode, int $variableCode)
     {
-        $this->estacioCode  = $estacioCode;
+        $this->stationCode  = $stationCode;
         $this->variableCode = $variableCode;
     }
 
@@ -46,7 +46,7 @@ final class MetadadesEstacio extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_estacio}', $this->estacioCode, $uri);
+        $uri = str_replace('{codi_estacio}', $this->stationCode, $uri);
         $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
 
         return $uri;
@@ -57,7 +57,7 @@ final class MetadadesEstacio extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/MetadadesEstacio";
+        return parent::getName() . "/GetByStation";
     }
 
     /**
