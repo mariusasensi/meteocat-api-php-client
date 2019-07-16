@@ -29,7 +29,10 @@ or
 TODO
 ```
 
-### Query types
-```
-TODO
-```
+### Operation query types
+| Type                  | Query class name | Documentation                                                                                                                        | Description (CA)                                           |
+|-----------------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
+| XEMA - Representative | Station          | [Link](https://apidocs.meteocat.gencat.cat/documentacio/representatives/#estacions-representatives-per-a-un-municipi-i-una-variable) | Estacions representatives per a un municipi i una variable |
+| XEMA - Representative | VariableMetadata | [Link](https://apidocs.meteocat.gencat.cat/documentacio/representatives/#metadades-de-variables)                                     | Metadades de variables                                     |
+| XEMA - Station        | All              | [Link](https://apidocs.meteocat.gencat.cat/documentacio/metadades-estacions/#metadades-de-totes-les-estacions)                       | Metadades de totes les estacions                           |
+| XEMA - Station        | Get              | [Link](https://apidocs.meteocat.gencat.cat/documentacio/metadades-estacions/#metadades-duna-estacio)                                 | Metadades d'una estació                                    |
