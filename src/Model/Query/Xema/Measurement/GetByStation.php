@@ -21,23 +21,23 @@ final class GetByStation extends Base
     /**
      * @var string|null
      */
-    private $stationCode = null;
+    private $station = null;
 
     /**
      * @var int|null
      */
-    private $variableCode = null;
+    private $variable = null;
 
     /**
      * GetByStation constructor.
      *
-     * @param string $stationCode  Station code.
-     * @param int    $variableCode Variable id.
+     * @param string $station  Station code.
+     * @param int    $variable Variable id.
      */
-    public function __construct(string $stationCode, int $variableCode)
+    public function __construct(string $station, int $variable)
     {
-        $this->stationCode  = $stationCode;
-        $this->variableCode = $variableCode;
+        $this->station  = $station;
+        $this->variable = $variable;
     }
 
     /**
@@ -46,8 +46,8 @@ final class GetByStation extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_estacio}', $this->stationCode, $uri);
-        $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
+        $uri = str_replace('{codi_estacio}', $this->station, $uri);
+        $uri = str_replace('{codi_variable}', $this->variable, $uri);
 
         return $uri;
     }

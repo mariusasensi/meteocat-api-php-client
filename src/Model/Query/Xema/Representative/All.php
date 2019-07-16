@@ -11,7 +11,7 @@ namespace Meteocat\Model\Query\Xema\Representative;
  * @package Meteocat\Model\Query\Xema\Representative
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class VariableMetadata extends Base
+final class All extends Base
 {
     /**
      * Endpoint.
@@ -23,7 +23,7 @@ final class VariableMetadata extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . '/VariableMetadata';
+        return parent::getName() . '/All';
     }
 
     /**

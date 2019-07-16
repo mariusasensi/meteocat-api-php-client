@@ -7,13 +7,13 @@ namespace Meteocat\Model\Query\Xema\Measurement;
 use DateTime;
 
 /**
- * Class Measurement\ByDay
+ * Class Measurement\GetByDay
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#dades-duna-variable-per-a-totes-les-estacions
  * @package Meteocat\Model\Query\Xema\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class ByDay extends Base
+final class GetByDay extends Base
 {
     /**
      * Endpoint.
@@ -23,12 +23,12 @@ final class ByDay extends Base
     /**
      * @var string|null
      */
-    private $stationCode = null;
+    private $station = null;
 
     /**
      * @var int|null
      */
-    private $variableCode = null;
+    private $variable = null;
 
     /**
      * @var DateTime|null
@@ -36,23 +36,23 @@ final class ByDay extends Base
     private $date = null;
 
     /**
-     * ByDay constructor.
+     * GetByDay constructor.
      *
-     * @param int      $variableCode Variable id.
-     * @param DateTime $date         Day to check.
+     * @param int      $variable Variable code.
+     * @param DateTime $date     Date to check.
      */
-    public function __construct(int $variableCode, DateTime $date)
+    public function __construct(int $variable, DateTime $date)
     {
-        $this->variableCode = $variableCode;
-        $this->date         = $date;
+        $this->variable = $variable;
+        $this->date     = $date;
     }
 
     /**
-     * @param string $stationCode Station code.
+     * @param string $station Station code.
      */
-    public function withStation(string $stationCode)
+    public function withStation(string $station)
     {
-        $this->stationCode = $stationCode;
+        $this->station = $station;
     }
 
     /**
@@ -61,13 +61,13 @@ final class ByDay extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
+        $uri = str_replace('{codi_variable}', $this->variable, $uri);
         $uri = str_replace('{any}', $this->date->format('Y'), $uri);
         $uri = str_replace('{mes}', $this->date->format('m'), $uri);
         $uri = str_replace('{dia}', $this->date->format('d'), $uri);
 
         $query = http_build_query([
-            'codiEstacio' => $this->stationCode,
+            'codiEstacio' => $this->station,
         ]);
 
         return $uri . (empty($query) ? "" : "?{$query}");
@@ -78,7 +78,7 @@ final class ByDay extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/ByDay";
+        return parent::getName() . "/GetByDay";
     }
 
     /**

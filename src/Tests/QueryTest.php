@@ -19,11 +19,11 @@ class QueryTest extends TestCase
         $this->assertEquals('https://api.meteo.cat/xema/v1/representatives/metadades/municipis/080057/variables/32', $query->getUrl());
     }
 
-    public function testRepresentativesVariableMetadataQuery()
+    public function testRepresentativeAllQuery()
     {
-        $query = new Meteocat\Model\Query\Xema\Representative\VariableMetadata();
+        $query = new Meteocat\Model\Query\Xema\Representative\All();
 
-        $this->assertEquals('XEMA/Representative/VariableMetadata', $query->getName());
+        $this->assertEquals('XEMA/Representative/All', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/representatives/metadades/variables', $query->getUrl());
     }
 
@@ -34,19 +34,19 @@ class QueryTest extends TestCase
         $this->assertEquals('XEMA/Station/All', $query1->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/metadades', $query1->getUrl());
 
-        // With status filter.
+        // With state filter.
         $query2 = new Meteocat\Model\Query\Xema\Station\All();
         $query2
-            ->withStatus('des');
+            ->withState('des');
 
         $this->assertEquals('XEMA/Station/All', $query2->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/metadades?estat=des', $query2->getUrl());
 
-        // With status and date filter.
+        // With state and date filter.
         $query3 = new Meteocat\Model\Query\Xema\Station\All();
         $query3
             ->withData(DateTime::createFromFormat('d-m-Y H:i', '14-07-2019 14:00'))
-            ->withStatus('ope');
+            ->withState('ope');
 
         $this->assertEquals('XEMA/Station/All', $query3->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/metadades?estat=ope&data=2019-07-14Z', $query3->getUrl());
@@ -60,13 +60,13 @@ class QueryTest extends TestCase
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/UG/metadades', $query->getUrl());
     }
 
-    public function testMeasurementByDay()
+    public function testMeasurementGetByDay()
     {
-        $query = new Meteocat\Model\Query\Xema\Measurement\ByDay(32, DateTime::createFromFormat('d-m-Y H:i', '14-07-2019 14:00'));
+        $query = new Meteocat\Model\Query\Xema\Measurement\GetByDay(32, DateTime::createFromFormat('d-m-Y H:i', '14-07-2019 14:00'));
         $query
             ->withStation('UG');
 
-        $this->assertEquals('XEMA/Measurement/ByDay', $query->getName());
+        $this->assertEquals('XEMA/Measurement/GetByDay', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/variables/mesurades/32/2019/07/14?codiEstacio=UG', $query->getUrl());
     }
 
@@ -87,19 +87,19 @@ class QueryTest extends TestCase
         $this->assertEquals('XEMA/Measurement/AllByStation', $query1->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/UG/variables/mesurades/metadades', $query1->getUrl());
 
-        // With status filter.
+        // With state filter.
         $query2 = new Meteocat\Model\Query\Xema\Measurement\AllByStation('UG');
         $query2
-            ->withStatus('ope');
+            ->withState('ope');
 
         $this->assertEquals('XEMA/Measurement/AllByStation', $query2->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/UG/variables/mesurades/metadades?estat=ope', $query2->getUrl());
 
-        // With status and date filter.
+        // With state and date filter.
         $query3 = new Meteocat\Model\Query\Xema\Measurement\AllByStation('UG');
         $query3
             ->withDate(DateTime::createFromFormat('d-m-Y H:i', '14-07-2019 14:00'))
-            ->withStatus('ope');
+            ->withState('ope');
 
         $this->assertEquals('XEMA/Measurement/AllByStation', $query3->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/UG/variables/mesurades/metadades?estat=ope&data=2019-07-14Z', $query3->getUrl());

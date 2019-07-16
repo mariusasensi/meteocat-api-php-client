@@ -23,12 +23,12 @@ final class AllByStation extends Base
     /**
      * @var string|null
      */
-    private $stationCode = null;
+    private $station = null;
 
     /**
      * @var string|null
      */
-    private $status = null;
+    private $state = null;
 
     /**
      * @var DateTime|null
@@ -38,21 +38,21 @@ final class AllByStation extends Base
     /**
      * AllByStation constructor.
      *
-     * @param string $stationCode
+     * @param string $station Station code.
      */
-    public function __construct(string $stationCode)
+    public function __construct(string $station)
     {
-        $this->stationCode = $stationCode;
+        $this->station = $station;
     }
 
     /**
-     * @param string $status
+     * @param string $state
      *
      * @return $this
      */
-    public function withStatus(string $status)
+    public function withState(string $state)
     {
-        $this->status = $status;
+        $this->state = $state;
 
         return $this;
     }
@@ -75,10 +75,10 @@ final class AllByStation extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_estacio}', $this->stationCode, $uri);
+        $uri = str_replace('{codi_estacio}', $this->station, $uri);
 
         $query = http_build_query([
-            'estat' => $this->status,
+            'estat' => $this->state,
             'data'  => is_null($this->date) ? null : $this->date->format(parent::DEFAULT_DATE_FORMAT),
         ]);
 

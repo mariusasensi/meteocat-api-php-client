@@ -21,16 +21,16 @@ final class Get extends Base
     /**
      * @var int|null
      */
-    private $variableCode = null;
+    private $variable = null;
 
     /**
      * Get constructor.
      *
-     * @param int variableCode Variable code.
+     * @param int $variable Variable code.
      */
-    public function __construct(int $variableCode)
+    public function __construct(int $variable)
     {
-        $this->variableCode = $variableCode;
+        $this->variable = $variable;
     }
 
     /**
@@ -39,7 +39,7 @@ final class Get extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
+        $uri = str_replace('{codi_variable}', $this->variable, $uri);
 
         return $uri;
     }

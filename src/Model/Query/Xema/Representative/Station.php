@@ -21,23 +21,23 @@ final class Station extends Base
     /**
      * @var string|null
      */
-    private $cityCode = null;
+    private $city = null;
 
     /**
      * @var int|null
      */
-    private $variableCode = null;
+    private $variable = null;
 
     /**
      * Station constructor.
      *
-     * @param string $cityCode     City id.
-     * @param int    $variableCode Variable id.
+     * @param string $city     City id.
+     * @param int    $variable Variable id.
      */
-    public function __construct(string $cityCode, int $variableCode)
+    public function __construct(string $city, int $variable)
     {
-        $this->cityCode     = $cityCode;
-        $this->variableCode = $variableCode;
+        $this->city     = $city;
+        $this->variable = $variable;
     }
 
     /**
@@ -46,8 +46,8 @@ final class Station extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_municipi}', $this->cityCode, $uri);
-        $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
+        $uri = str_replace('{codi_municipi}', $this->city, $uri);
+        $uri = str_replace('{codi_variable}', $this->variable, $uri);
 
         return $uri;
     }

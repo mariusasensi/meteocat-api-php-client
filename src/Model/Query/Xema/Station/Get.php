@@ -21,16 +21,16 @@ final class Get extends Base
     /**
      * @var string|null
      */
-    private $stationCode = null;
+    private $station = null;
 
     /**
      * Unique constructor.
      *
-     * @param string $stationCode Station code.
+     * @param string $station Station code.
      */
-    public function __construct(string $stationCode)
+    public function __construct(string $station)
     {
-        $this->stationCode = $stationCode;
+        $this->station = $station;
     }
 
     /**
@@ -39,7 +39,7 @@ final class Get extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_estacio}', $this->stationCode, $uri);
+        $uri = str_replace('{codi_estacio}', $this->station, $uri);
 
         return $uri;
     }

@@ -23,7 +23,7 @@ final class All extends Base
     /**
      * @var string|null
      */
-    private $status = null;
+    private $state = null;
 
     /**
      * @var DateTime|null
@@ -31,13 +31,13 @@ final class All extends Base
     private $data = null;
 
     /**
-     * @param string $status
+     * @param string $state
      *
      * @return $this
      */
-    public function withStatus(string $status)
+    public function withState(string $state)
     {
-        $this->status = $status;
+        $this->state = $state;
 
         return $this;
     }
@@ -60,7 +60,7 @@ final class All extends Base
     private function generateUri() : string
     {
         $query = http_build_query([
-            'estat' => $this->status,
+            'estat' => $this->state,
             'data'  => is_null($this->data) ? null : $this->data->format(parent::DEFAULT_DATE_FORMAT),
         ]);
 

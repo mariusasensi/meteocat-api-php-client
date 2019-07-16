@@ -21,29 +21,29 @@ final class Last extends Base
     /**
      * @var string|null
      */
-    private $stationCode = null;
+    private $station = null;
 
     /**
      * @var int|null
      */
-    private $variableCode = null;
+    private $variable = null;
 
     /**
      * Last constructor.
      *
-     * @param int $variableCode Variable id.
+     * @param int $variable Variable code.
      */
-    public function __construct(int $variableCode)
+    public function __construct(int $variable)
     {
-        $this->variableCode = $variableCode;
+        $this->variable = $variable;
     }
 
     /**
-     * @param string $stationCode Station code.
+     * @param string $station Station code.
      */
-    public function withStation(string $stationCode)
+    public function withStation(string $station)
     {
-        $this->stationCode = $stationCode;
+        $this->station = $station;
     }
 
     /**
@@ -52,10 +52,10 @@ final class Last extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
+        $uri = str_replace('{codi_variable}', $this->variable, $uri);
 
         $query = http_build_query([
-            'codiEstacio' => $this->stationCode,
+            'codiEstacio' => $this->station,
         ]);
 
         return $uri . (empty($query) ? "" : "?{$query}");
