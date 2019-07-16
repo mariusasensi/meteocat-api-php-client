@@ -2,28 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Representatives;
+namespace Meteocat\Model\Query\Xema\Representative;
+
+use Meteocat\Model\Query\Xema\Xema;
 
 /**
- * Class Representatives\Metadades
+ * Class Representative\Base
  *
- * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/#metadades-de-variables
- * @package Meteocat\Model\Query\Xema\Representatives
+ * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/
+ * @package Meteocat\Model\Query\Xema\Representative
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Metadades extends Base
+abstract class Base extends Xema
 {
-    /**
-     * Endpoint.
-     */
-    private const URI = '/variables';
+    private const URI = '/representatives/metadades';
 
     /**
      * @return string
      */
     public function getName() : string
     {
-        return parent::getName() . '/Metadades';
+        return parent::getName() . '/Representative';
     }
 
     /**

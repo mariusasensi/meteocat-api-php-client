@@ -11,19 +11,19 @@ use PHPUnit\Framework\TestCase;
  */
 class QueryTest extends TestCase
 {
-    public function testRepresentativesEstacionsQuery()
+    public function testRepresentativeRepresentativeStationQuery()
     {
-        $query = new Meteocat\Model\Query\Xema\Representatives\Estacions('080057', 32);
+        $query = new Meteocat\Model\Query\Xema\Representative\RepresentativeStation('080057', 32);
 
-        $this->assertEquals('XEMA/Representatives/Estacions', $query->getName());
+        $this->assertEquals('XEMA/Representative/RepresentativeStation', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/representatives/metadades/municipis/080057/variables/32', $query->getUrl());
     }
 
-    public function testRepresentativesMetadadesQuery()
+    public function testRepresentativesVariableMetadataQuery()
     {
-        $query = new Meteocat\Model\Query\Xema\Representatives\Metadades();
+        $query = new Meteocat\Model\Query\Xema\Representative\VariableMetadata();
 
-        $this->assertEquals('XEMA/Representatives/Metadades', $query->getName());
+        $this->assertEquals('XEMA/Representative/VariableMetadata', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/representatives/metadades/variables', $query->getUrl());
     }
 

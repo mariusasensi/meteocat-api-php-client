@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Representatives;
+namespace Meteocat\Model\Query\Xema\Representative;
 
 /**
- * Class Estacions
+ * Class RepresentativeStation
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/#estacions-representatives-per-a-un-municipi-i-una-variable
- * @package Meteocat\Model\Query\Xema\Representatives
+ * @package Meteocat\Model\Query\Xema\Representative
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Estacions extends Base
+final class RepresentativeStation extends Base
 {
     /**
      * Endpoint.
@@ -21,7 +21,7 @@ final class Estacions extends Base
     /**
      * @var string|null
      */
-    private $municipiCode = null;
+    private $cityCode = null;
 
     /**
      * @var int|null
@@ -29,14 +29,14 @@ final class Estacions extends Base
     private $variableCode = null;
 
     /**
-     * Estacions constructor.
+     * RepresentativeStation constructor.
      *
-     * @param string $municipiCode City id.
+     * @param string $cityCode     City id.
      * @param int    $variableCode Variable id.
      */
-    public function __construct(string $municipiCode, int $variableCode)
+    public function __construct(string $cityCode, int $variableCode)
     {
-        $this->municipiCode = $municipiCode;
+        $this->cityCode     = $cityCode;
         $this->variableCode = $variableCode;
     }
 
@@ -46,7 +46,7 @@ final class Estacions extends Base
     private function generateUri() : string
     {
         $uri = self::URI;
-        $uri = str_replace('{codi_municipi}', $this->municipiCode, $uri);
+        $uri = str_replace('{codi_municipi}', $this->cityCode, $uri);
         $uri = str_replace('{codi_variable}', $this->variableCode, $uri);
 
         return $uri;
@@ -57,7 +57,7 @@ final class Estacions extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/Estacions";
+        return parent::getName() . "/RepresentativeStation";
     }
 
     /**
