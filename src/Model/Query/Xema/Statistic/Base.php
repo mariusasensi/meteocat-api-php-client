@@ -2,28 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Representative;
+namespace Meteocat\Model\Query\Xema\Statistic;
+
+use Meteocat\Model\Query\Xema\Xema;
 
 /**
- * Class Representative\VariableMetadata
+ * Class Statistic\Base
  *
- * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/#metadades-de-variables
- * @package Meteocat\Model\Query\Xema\Representative
+ * @link    https://apidocs.meteocat.gencat.cat/documentacio/estadistics-diaris/
+ * @package Meteocat\Model\Query\Xema\Statistic
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class All extends Base
+abstract class Base extends Xema
 {
-    /**
-     * Endpoint.
-     */
-    private const URI = '/variables';
+    private const URI = '/variables/estadistics';
 
     /**
      * @return string
      */
     public function getName() : string
     {
-        return parent::getName() . '/All';
+        return parent::getName() . '/Statistic';
     }
 
     /**

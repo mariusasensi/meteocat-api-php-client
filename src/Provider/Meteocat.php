@@ -10,8 +10,8 @@ use Meteocat\Http\Client;
 /**
  * Class Meteocat
  *
- * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  * @package Meteocat\Model
+ * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 final class Meteocat extends Client
 {

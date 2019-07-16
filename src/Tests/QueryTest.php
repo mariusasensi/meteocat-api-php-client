@@ -11,19 +11,19 @@ use PHPUnit\Framework\TestCase;
  */
 class QueryTest extends TestCase
 {
-    public function testRepresentativeStationQuery()
+    public function testRepresentativeGetStationByCityQuery()
     {
-        $query = new Meteocat\Model\Query\Xema\Representative\Station('080057', 32);
+        $query = new Meteocat\Model\Query\Xema\Representative\GetStationByCity('080057', 32);
 
-        $this->assertEquals('XEMA/Representative/Station', $query->getName());
+        $this->assertEquals('XEMA/Representative/GetStationByCity', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/representatives/metadades/municipis/080057/variables/32', $query->getUrl());
     }
 
-    public function testRepresentativeAllQuery()
+    public function testRepresentativeGetAllVariableMetadataQuery()
     {
-        $query = new Meteocat\Model\Query\Xema\Representative\All();
+        $query = new Meteocat\Model\Query\Xema\Representative\GetAllVariableMetadata();
 
-        $this->assertEquals('XEMA/Representative/All', $query->getName());
+        $this->assertEquals('XEMA/Representative/GetAllVariableMetadata', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/representatives/metadades/variables', $query->getUrl());
     }
 
@@ -127,5 +127,90 @@ class QueryTest extends TestCase
 
         $this->assertEquals('XEMA/Measurement/Get', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/variables/mesurades/1/metadades', $query->getUrl());
+    }
+
+    public function testStatisticGetYearlyByVariable()
+    {
+        // Without filters.
+        $query1 = new Meteocat\Model\Query\Xema\Statistic\GetYearlyByVariable(3000);
+
+        $this->assertEquals('XEMA/Statistic/GetYearlyByVariable', $query1->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/anuals/3000', $query1->getUrl());
+
+        // With filter.
+        $query2 = new Meteocat\Model\Query\Xema\Statistic\GetYearlyByVariable(3000);
+        $query2->withStation('UG');
+        $this->assertEquals('XEMA/Statistic/GetYearlyByVariable', $query2->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/anuals/3000?codiEstacio=UG', $query2->getUrl());
+    }
+
+    public function testStatisticGetMonthlyByVariable()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetDailyByVariable()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetYearlyMetadata()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetYearlyMetadataByVariable()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetMonthlyMetadata()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetMonthlyMetadataByVariable()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetDailyMetadata()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetDailyMetadataByVariable()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetYearlyMetadataByStation()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetYearlyMetadataByFilters()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetMonthlyMetadataByStation()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetMonthlyMetadataByFilters()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetDailyMetadataByStation()
+    {
+        $this->assertEquals('TODO', 'TODO');
+    }
+
+    public function testStatisticGetDailyMetadataByFilters()
+    {
+        $this->assertEquals('TODO', 'TODO');
     }
 }

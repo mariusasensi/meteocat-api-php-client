@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\Xema\Representative;
 
 /**
- * Class Station
+ * Class GetStationByCity
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/#estacions-representatives-per-a-un-municipi-i-una-variable
  * @package Meteocat\Model\Query\Xema\Representative
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Station extends Base
+final class GetStationByCity extends Base
 {
     /**
      * Endpoint.
@@ -57,7 +57,7 @@ final class Station extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/Station";
+        return parent::getName() . "/GetStationByCity";
     }
 
     /**

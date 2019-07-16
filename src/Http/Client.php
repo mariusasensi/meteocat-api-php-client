@@ -11,8 +11,8 @@ use Meteocat\Model\Query\Query;
 /**
  * Class Client
  *
- * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  * @package Meteocat\Http
+ * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 abstract class Client
 {
