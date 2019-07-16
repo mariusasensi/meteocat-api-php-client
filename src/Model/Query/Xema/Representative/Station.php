@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\Xema\Representative;
 
 /**
- * Class RepresentativeStation
+ * Class Station
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/#estacions-representatives-per-a-un-municipi-i-una-variable
  * @package Meteocat\Model\Query\Xema\Representative
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class RepresentativeStation extends Base
+final class Station extends Base
 {
     /**
      * Endpoint.
@@ -29,7 +29,7 @@ final class RepresentativeStation extends Base
     private $variableCode = null;
 
     /**
-     * RepresentativeStation constructor.
+     * Station constructor.
      *
      * @param string $cityCode     City id.
      * @param int    $variableCode Variable id.
@@ -57,7 +57,7 @@ final class RepresentativeStation extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/RepresentativeStation";
+        return parent::getName() . "/Station";
     }
 
     /**

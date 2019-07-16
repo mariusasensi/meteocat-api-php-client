@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Estacions;
+namespace Meteocat\Model\Query\Xema\Station;
 
 use Meteocat\Model\Query\Xema\Xema;
 
 /**
- * Class Estacions\Base
+ * Class Station\Base
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/metadades-estacions/
- * @package Meteocat\Model\Query\Xema\Estacions
+ * @package Meteocat\Model\Query\Xema\Station
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 abstract class Base extends Xema
@@ -22,7 +22,7 @@ abstract class Base extends Xema
      */
     public function getName() : string
     {
-        return parent::getName() . '/Estacions';
+        return parent::getName() . '/Station';
     }
 
     /**

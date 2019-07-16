@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Estacions;
+namespace Meteocat\Model\Query\Xema\Station;
 
 use DateTime;
 
 /**
- * Class Estacions\MetadadesTotes
+ * Class Station\All
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/metadades-estacions/#metadades-de-totes-les-estacions
- * @package Meteocat\Model\Query\Xema\Estacions
+ * @package Meteocat\Model\Query\Xema\Station
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class MetadadesTotes extends Base
+final class All extends Base
 {
     /**
      * Endpoint.
@@ -23,7 +23,7 @@ final class MetadadesTotes extends Base
     /**
      * @var string|null
      */
-    private $estat = null;
+    private $status = null;
 
     /**
      * @var DateTime|null
@@ -31,13 +31,13 @@ final class MetadadesTotes extends Base
     private $data = null;
 
     /**
-     * @param string $estat
+     * @param string $status
      *
      * @return $this
      */
-    public function withEstat(string $estat)
+    public function withStatus(string $status)
     {
-        $this->estat = $estat;
+        $this->status = $status;
 
         return $this;
     }
@@ -60,7 +60,7 @@ final class MetadadesTotes extends Base
     private function generateUri() : string
     {
         $query = http_build_query([
-            'estat' => $this->estat,
+            'estat' => $this->status,
             'data'  => is_null($this->data) ? null : $this->data->format(parent::DEFAULT_DATE_FORMAT),
         ]);
 
@@ -72,7 +72,7 @@ final class MetadadesTotes extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/MetadadesTotes";
+        return parent::getName() . "/All";
     }
 
     /**
