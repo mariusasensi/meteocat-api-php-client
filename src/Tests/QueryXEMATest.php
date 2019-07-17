@@ -5,11 +5,11 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class QueryTest
+ * Class QueryXEMATest
  *
  * @author Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-class QueryTest extends TestCase
+class QueryXEMATest extends TestCase
 {
     public function testRepresentativeGetStationByCityQuery()
     {
