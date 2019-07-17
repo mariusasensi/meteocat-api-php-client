@@ -269,4 +269,44 @@ class QueryTest extends TestCase
         $this->assertEquals('XEMA/Statistic/GetDailyMetadataByFilters', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/diaris/1000/metadades', $query->getUrl());
     }
+
+    public function testMultivariableCalculationGetByFilters()
+    {
+        $query = new Meteocat\Model\Query\Xema\MultivariableCalculation\GetByFilters(6006, 'UG', DateTime::createFromFormat('Y-m-d', '2017-03-10'));
+
+        $this->assertEquals('XEMA/MultivariableCalculation/GetByFilters', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/cmv/6006/2017/03/10?codiEstacio=UG', $query->getUrl());
+    }
+
+    public function testMultivariableCalculationGetMetadataByStation()
+    {
+        $query = new Meteocat\Model\Query\Xema\MultivariableCalculation\GetMetadataByStation('CC');
+
+        $this->assertEquals('XEMA/MultivariableCalculation/GetMetadataByStation', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/cmv/metadades', $query->getUrl());
+    }
+
+    public function testMultivariableCalculationGetMetadataByFilters()
+    {
+        $query = new Meteocat\Model\Query\Xema\MultivariableCalculation\GetMetadataByFilters('UG', 6006);
+
+        $this->assertEquals('XEMA/MultivariableCalculation/GetMetadataByFilters', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/UG/variables/cmv/6006/metadades', $query->getUrl());
+    }
+
+    public function testMultivariableCalculationAll()
+    {
+        $query = new Meteocat\Model\Query\Xema\MultivariableCalculation\All();
+
+        $this->assertEquals('XEMA/MultivariableCalculation/All', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/cmv/metadades', $query->getUrl());
+    }
+
+    public function testMultivariableCalculationGetByVariable()
+    {
+        $query = new Meteocat\Model\Query\Xema\MultivariableCalculation\GetByVariable(6006);
+
+        $this->assertEquals('XEMA/MultivariableCalculation/GetByVariable', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/cmv/6006/metadades', $query->getUrl());
+    }
 }
