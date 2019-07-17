@@ -45,7 +45,7 @@ class QueryTest extends TestCase
         // With state and date filter.
         $query3 = new Meteocat\Model\Query\Xema\Station\All();
         $query3
-            ->withData(DateTime::createFromFormat('d-m-Y H:i', '14-07-2019 14:00'))
+            ->withDate(DateTime::createFromFormat('d-m-Y H:i', '14-07-2019 14:00'))
             ->withState('ope');
 
         $this->assertEquals('XEMA/Station/All', $query3->getName());
@@ -308,5 +308,63 @@ class QueryTest extends TestCase
 
         $this->assertEquals('XEMA/MultivariableCalculation/GetByVariable', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/variables/cmv/6006/metadades', $query->getUrl());
+    }
+
+    public function testAuxiliaryGetByFilters()
+    {
+        $query = new Meteocat\Model\Query\Xema\Auxiliary\GetByFilters(900, 'CC', DateTime::createFromFormat('Y-m-d', '2017-03-10'));
+
+        $this->assertEquals('XEMA/Auxiliary/GetByFilters', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/auxiliars/900/2017/03/10?codiEstacio=CC', $query->getUrl());
+    }
+
+    public function testAuxiliaryGetMetadataByStation()
+    {
+        // Without filters.
+        $query = new Meteocat\Model\Query\Xema\Auxiliary\GetMetadataByStation('CC');
+
+        $this->assertEquals('XEMA/Auxiliary/GetMetadataByStation', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/auxiliars/metadades', $query->getUrl());
+
+        // With state filter.
+        $query2 = new Meteocat\Model\Query\Xema\Auxiliary\GetMetadataByStation('CC');
+        $query2
+            ->withState('des');
+
+        $this->assertEquals('XEMA/Auxiliary/GetMetadataByStation', $query2->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/auxiliars/metadades?estat=des', $query2->getUrl());
+
+        // With state and date filter.
+        $query3 = new Meteocat\Model\Query\Xema\Auxiliary\GetMetadataByStation('CC');
+        $query3
+            ->withDate(DateTime::createFromFormat('d-m-Y', '30-03-2017'))
+            ->withState('ope');
+
+        $this->assertEquals('XEMA/Auxiliary/GetMetadataByStation', $query3->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/auxiliars/metadades?estat=ope&data=2017-03-30Z', $query3->getUrl());
+    }
+
+    public function testAuxiliaryGetMetadataByFilters()
+    {
+        $query = new Meteocat\Model\Query\Xema\Auxiliary\GetMetadataByFilters('CC', 900);
+
+        $this->assertEquals('XEMA/Auxiliary/GetMetadataByFilters', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/auxiliars/900/metadades', $query->getUrl());
+    }
+
+    public function testAuxiliaryAll()
+    {
+        $query = new Meteocat\Model\Query\Xema\Auxiliary\All();
+
+        $this->assertEquals('XEMA/Auxiliary/All', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/auxiliars/metadades', $query->getUrl());
+    }
+
+    public function testAuxiliaryGetByVariable()
+    {
+        $query = new Meteocat\Model\Query\Xema\Auxiliary\GetByVariable(900);
+
+        $this->assertEquals('XEMA/Auxiliary/GetByVariable', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/auxiliars/900/metadades', $query->getUrl());
     }
 }

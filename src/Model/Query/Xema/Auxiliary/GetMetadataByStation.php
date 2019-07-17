@@ -2,23 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query\Xema\Station;
+namespace Meteocat\Model\Query\Xema\Auxiliary;
 
 use DateTime;
 
 /**
- * Class Station\All
+ * Class Auxiliary\GetMetadataByStation
  *
- * @link    https://apidocs.meteocat.gencat.cat/documentacio/metadades-estacions/#metadades-de-totes-les-estacions
- * @package Meteocat\Model\Query\Xema\Station
+ * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-auxiliars/#metadades-de-les-variables-duna-estacio
+ * @package Meteocat\Model\Query\Xema\Auxiliary
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class All extends Base
+final class GetMetadataByStation extends Base
 {
     /**
      * Endpoint.
      */
-    private const URI = '/metadades';
+    private const URI = '/estacions/{codi_estacio}/variables/auxiliars/metadades';
+
+    /**
+     * @var string|null
+     */
+    private $station = null;
 
     /**
      * @var string|null
@@ -29,6 +34,16 @@ final class All extends Base
      * @var DateTime|null
      */
     private $date = null;
+
+    /**
+     * GetMetadataByStation constructor.
+     *
+     * @param string $station Station code.
+     */
+    public function __construct(string $station)
+    {
+        $this->station = $station;
+    }
 
     /**
      * @param string $state
@@ -59,12 +74,15 @@ final class All extends Base
      */
     private function generateUri() : string
     {
+        $uri = self::URI;
+        $uri = str_replace('{codi_estacio}', $this->station, $uri);
+
         $query = http_build_query([
             'estat' => $this->state,
             'data'  => is_null($this->date) ? null : $this->date->format(parent::DEFAULT_DATE_FORMAT),
         ]);
 
-        return self::URI . (empty($query) ? "" : "?{$query}");
+        return $uri . (empty($query) ? "" : "?{$query}");
     }
 
     /**
@@ -72,7 +90,7 @@ final class All extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/All";
+        return parent::getName() . "/GetMetadataByStation";
     }
 
     /**
@@ -80,7 +98,7 @@ final class All extends Base
      */
     public function getUrl() : string
     {
-        return parent::getUrl() . $this->generateUri();
+        return sprintf('%s/%s/v%s%s',parent::BASE_URL, parent::NAME, parent::VERSION, $this->generateUri());
     }
 
     /**
