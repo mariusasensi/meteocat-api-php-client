@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Xema\Statistic;
 
+use DateTime;
+
 /**
- * Class Statistic\GetYearlyByVariable
+ * Class Statistic\GetMonthlyByVariable
  *
- * @link    https://apidocs.meteocat.gencat.cat/documentacio/estadistics-diaris/#estadistics-anuals-duna-variable-per-a-totes-les-estacions
+ * @link    https://apidocs.meteocat.gencat.cat/documentacio/estadistics-diaris/#estadistics-mensuals-duna-variable-per-a-totes-les-estacions
  * @package Meteocat\Model\Query\Xema\Statistic
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class GetYearlyByVariable extends Base
+final class GetMonthlyByVariable extends Base
 {
     /**
      * Endpoint.
      */
-    private const URI = '/anuals/{codi_variable}';
+    private const URI = '/mensuals/{codi_variable}';
 
     /**
      * @var int|null
@@ -29,25 +31,28 @@ final class GetYearlyByVariable extends Base
     private $station = null;
 
     /**
-     * GetYearlyByVariable constructor.
-     *
-     * @param int $variable Variable code.
+     * @var DateTime|null
      */
-    public function __construct(int $variable)
+    private $date = null;
+
+    /**
+     * GetMonthlyByVariable constructor.
+     *
+     * @param int      $variable Variable code.
+     * @param DateTime $year     Requested year.
+     */
+    public function __construct(int $variable, DateTime $year)
     {
         $this->variable = $variable;
+        $this->date     = $year;
     }
 
     /**
      * @param string $station
-     *
-     * @return $this
      */
     public function withStation(string $station)
     {
         $this->station = $station;
-
-        return $this;
     }
 
     /**
@@ -60,6 +65,7 @@ final class GetYearlyByVariable extends Base
 
         $query = http_build_query([
             'codiEstacio' => $this->station,
+            'any'         => $this->date->format('Y'),
         ]);
 
         return $uri . (empty($query) ? "" : "?{$query}");
@@ -70,7 +76,7 @@ final class GetYearlyByVariable extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/GetYearlyByVariable";
+        return parent::getName() . "/GetMonthlyByVariable";
     }
 
     /**

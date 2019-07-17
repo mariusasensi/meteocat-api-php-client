@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\Xema\Statistic;
 
 /**
- * Class Statistic\GetYearlyByVariable
+ * Class Statistic\GetMonthlyMetadataByVariable
  *
- * @link    https://apidocs.meteocat.gencat.cat/documentacio/estadistics-diaris/#estadistics-anuals-duna-variable-per-a-totes-les-estacions
+ * @link    https://apidocs.meteocat.gencat.cat/documentacio/estadistics-diaris/#metadades-destadistics-mensuals-per-variable
  * @package Meteocat\Model\Query\Xema\Statistic
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class GetYearlyByVariable extends Base
+final class GetMonthlyMetadataByVariable extends Base
 {
     /**
      * Endpoint.
      */
-    private const URI = '/anuals/{codi_variable}';
+    private const URI = '/mensuals/{codi_variable}/metadades';
 
     /**
      * @var int|null
@@ -24,30 +24,13 @@ final class GetYearlyByVariable extends Base
     private $variable = null;
 
     /**
-     * @var string|null
-     */
-    private $station = null;
-
-    /**
-     * GetYearlyByVariable constructor.
+     * GetYearlyMetadataByVariable constructor.
      *
      * @param int $variable Variable code.
      */
     public function __construct(int $variable)
     {
         $this->variable = $variable;
-    }
-
-    /**
-     * @param string $station
-     *
-     * @return $this
-     */
-    public function withStation(string $station)
-    {
-        $this->station = $station;
-
-        return $this;
     }
 
     /**
@@ -58,11 +41,7 @@ final class GetYearlyByVariable extends Base
         $uri = self::URI;
         $uri = str_replace('{codi_variable}', $this->variable, $uri);
 
-        $query = http_build_query([
-            'codiEstacio' => $this->station,
-        ]);
-
-        return $uri . (empty($query) ? "" : "?{$query}");
+        return $uri;
     }
 
     /**
@@ -70,7 +49,7 @@ final class GetYearlyByVariable extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/GetYearlyByVariable";
+        return parent::getName() . "/GetMonthlyMetadataByVariable";
     }
 
     /**

@@ -146,71 +146,127 @@ class QueryTest extends TestCase
 
     public function testStatisticGetMonthlyByVariable()
     {
-        $this->assertEquals('TODO', 'TODO');
+        // Without filters.
+        $query1 = new Meteocat\Model\Query\Xema\Statistic\GetMonthlyByVariable(2000, DateTime::createFromFormat('y', '18'));
+
+        $this->assertEquals('XEMA/Statistic/GetMonthlyByVariable', $query1->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/mensuals/2000?any=2018', $query1->getUrl());
+
+        // With filter.
+        $query2 = new Meteocat\Model\Query\Xema\Statistic\GetMonthlyByVariable(2000, DateTime::createFromFormat('y', '13'));
+        $query2->withStation('UG');
+        $this->assertEquals('XEMA/Statistic/GetMonthlyByVariable', $query2->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/mensuals/2000?codiEstacio=UG&any=2013', $query2->getUrl());
     }
 
     public function testStatisticGetDailyByVariable()
     {
-        $this->assertEquals('TODO', 'TODO');
+        // Without filters.
+        $query1 = new Meteocat\Model\Query\Xema\Statistic\GetDailyByVariable(1001, DateTime::createFromFormat('F, y', 'january, 18'));
+
+        $this->assertEquals('XEMA/Statistic/GetDailyByVariable', $query1->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/diaris/1001?any=2018&mes=01', $query1->getUrl());
+
+        // With filter.
+        $query2 = new Meteocat\Model\Query\Xema\Statistic\GetDailyByVariable(1001, DateTime::createFromFormat('y-m', '13-12'));
+        $query2->withStation('UG');
+        $this->assertEquals('XEMA/Statistic/GetDailyByVariable', $query2->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/diaris/1001?codiEstacio=UG&any=2013&mes=12', $query2->getUrl());
     }
 
     public function testStatisticGetYearlyMetadata()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetYearlyMetadata();
+
+        $this->assertEquals('XEMA/Statistic/GetYearlyMetadata', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/anuals/metadades', $query->getUrl());
     }
 
     public function testStatisticGetYearlyMetadataByVariable()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetYearlyMetadataByVariable(3001);
+
+        $this->assertEquals('XEMA/Statistic/GetYearlyMetadataByVariable', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/anuals/3001/metadades', $query->getUrl());
     }
 
     public function testStatisticGetMonthlyMetadata()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetMonthlyMetadata();
+
+        $this->assertEquals('XEMA/Statistic/GetMonthlyMetadata', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/mensuals/metadades', $query->getUrl());
     }
 
     public function testStatisticGetMonthlyMetadataByVariable()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetMonthlyMetadataByVariable(2001);
+
+        $this->assertEquals('XEMA/Statistic/GetMonthlyMetadataByVariable', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/mensuals/2001/metadades', $query->getUrl());
     }
 
     public function testStatisticGetDailyMetadata()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetDailyMetadata();
+
+        $this->assertEquals('XEMA/Statistic/GetDailyMetadata', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/diaris/metadades', $query->getUrl());
     }
 
     public function testStatisticGetDailyMetadataByVariable()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetDailyMetadataByVariable(1001);
+
+        $this->assertEquals('XEMA/Statistic/GetDailyMetadataByVariable', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/variables/estadistics/diaris/1001/metadades', $query->getUrl());
     }
 
     public function testStatisticGetYearlyMetadataByStation()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetYearlyMetadataByStation("CC");
+
+        $this->assertEquals('XEMA/Statistic/GetYearlyMetadataByStation', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/anuals/metadades', $query->getUrl());
     }
 
     public function testStatisticGetYearlyMetadataByFilters()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetYearlyMetadataByFilters("CC", 3000);
+
+        $this->assertEquals('XEMA/Statistic/GetYearlyMetadataByFilters', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/anuals/3000/metadades', $query->getUrl());
     }
 
     public function testStatisticGetMonthlyMetadataByStation()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetMonthlyMetadataByStation("CC");
+
+        $this->assertEquals('XEMA/Statistic/GetMonthlyMetadataByStation', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/mensuals/metadades', $query->getUrl());
     }
 
     public function testStatisticGetMonthlyMetadataByFilters()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetMonthlyMetadataByFilters("CC", 2000);
+
+        $this->assertEquals('XEMA/Statistic/GetMonthlyMetadataByFilters', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/mensuals/2000/metadades', $query->getUrl());
     }
 
     public function testStatisticGetDailyMetadataByStation()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetDailyMetadataByStation("CC");
+
+        $this->assertEquals('XEMA/Statistic/GetDailyMetadataByStation', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/diaris/metadades', $query->getUrl());
     }
 
     public function testStatisticGetDailyMetadataByFilters()
     {
-        $this->assertEquals('TODO', 'TODO');
+        $query = new Meteocat\Model\Query\Xema\Statistic\GetDailyMetadataByFilters("CC", 1000);
+
+        $this->assertEquals('XEMA/Statistic/GetDailyMetadataByFilters', $query->getName());
+        $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/diaris/1000/metadades', $query->getUrl());
     }
 }
