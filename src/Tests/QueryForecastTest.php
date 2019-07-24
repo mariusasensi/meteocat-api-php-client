@@ -79,7 +79,7 @@ class QueryForecastTest extends TestCase
         $this->assertEquals('https://api.meteo.cat/pronostic/v1/pirineu/refugis/refugi-colomina/2017/04/20', $query->getUrl());
     }
 
-    public function testGetPyreneesZonesByDates()
+    public function testGetPyreneesZonesByDate()
     {
         $query = new Forecast\GetPyreneesZonesByDate(DateTime::createFromFormat('Y-m-d', '2017-04-19'));
 
