@@ -11,7 +11,8 @@ class FactoryTest extends TestCase
 {
     public function testFactoryQuota()
     {
-        $mockResponse = '{"client":{"nom":"Màrius Asensi Jordà"},"plans":[{"nom":"XDDE_250","periode":"Mensual","maxConsultes":250,"consultesRestants":250,"consultesRealitzades":0},{"nom":"Predicció_100","periode":"Mensual","maxConsultes":100,"consultesRestants":100,"consultesRealitzades":0},{"nom":"XEMA_750","periode":"Mensual","maxConsultes":750,"consultesRestants":749,"consultesRealitzades":1}]}';
+        // Load from file.
+        $mockResponse = file_get_contents(__DIR__ . '/.cached_responses/response.api.meteo.cat.quotes.v1.consum-actual.json');
 
         /** @var Quota $entityResponse */
         $entityResponse = Builder::create((new GetCurrentUsage())->getResponseClass(), $mockResponse);
