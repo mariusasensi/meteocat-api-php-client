@@ -33,6 +33,12 @@ abstract class Forecast implements Query
         return 'Forecast';
     }
 
+    public function getResponseClass() : string
+    {
+        // TODO!
+        return "";
+    }
+
     /**
      * @return string
      */

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Meteocat\Provider;
 
-use GuzzleHttp;
 use Meteocat\Http\Client;
 
 /**
@@ -18,10 +17,12 @@ final class Meteocat extends Client
     /**
      * Meteocat constructor.
      *
-     * @param GuzzleHttp\ClientInterface|null $httpClient
+     * @param string $token
      */
-    protected function __construct(GuzzleHttp\ClientInterface $httpClient = null)
+    public function __construct(string $token)
     {
-        parent::__construct($httpClient);
+        parent::__construct();
+
+        $this->setToken($token);
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Quota\Information;
 
+use Meteocat\Model\Entity\Quota;
+
 /**
  * Class Information\GetCurrentUsage
  *
@@ -40,5 +42,13 @@ final class GetCurrentUsage extends Base
     public function __toString() : string
     {
         return $this->getUrl();
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return Quota::class;
     }
 }

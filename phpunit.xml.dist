@@ -7,6 +7,10 @@
          bootstrap="vendor/autoload.php"
 >
 
+    <php>
+        <server name="API_KEY" value="YOUR_API_KEY" />
+    </php>
+
     <testsuites>
         <testsuite name="Meteocat Test Suite">
             <directory>./src/Tests/</directory>

@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Meteocat\Http;
 
-use Exception;
-use GuzzleHttp;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\RequestException;
+use Meteocat\Model\Entity\Response;
+use Meteocat\Model\Exception\InvalidResponseType;
+use Meteocat\Model\Exception\InvalidServerResponse;
+use Meteocat\Model\Exception\InvalidCredentials;
+use Meteocat\Model\Exception\QuotaExceeded;
+use Meteocat\Model\Factory\Builder;
 use Meteocat\Model\Query\Query;
+use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 
 /**
  * Class Client
@@ -16,30 +24,34 @@ use Meteocat\Model\Query\Query;
  */
 abstract class Client
 {
-
     /**
-     * @var string The Meteocat API token string.
-     * @link https://apidocs.meteocat.gencat.cat/documentacio/seguretat/
-     */
-    protected $token;
-
-    /**
-     * @var GuzzleHttp\ClientInterface A Guzzle HTTP client.
+     * @var ClientInterface A Guzzle HTTP client.
      */
     protected $httpClient;
 
     /**
+     * @link https://apidocs.meteocat.gencat.cat/documentacio/seguretat/
+     * @var string The Meteocat API token string.
+     */
+    private $token;
+
+    /**
+     * @var bool
+     */
+    private $debug = false;
+
+    /**
      * ApiClient constructor.
      *
-     * @param GuzzleHttp\ClientInterface|null $httpClient
+     * @param ClientInterface|null $httpClient Client.
      */
-    protected function __construct(GuzzleHttp\ClientInterface $httpClient = null)
+    protected function __construct(ClientInterface $httpClient = null)
     {
-        $this->httpClient = $httpClient ?: new GuzzleHttp\Client();
+        $this->httpClient = $httpClient ?: new HttpClient();
     }
 
     /**
-     * @param string $token
+     * @param string $token Meteocat API token.
      *
      * @return Client
      */
@@ -51,29 +63,85 @@ abstract class Client
     }
 
     /**
-     * @param Query $query
-     *
-     * @return string
+     * @return Client
      */
-    protected function executeQuery(Query $query): string
+    public function enableDebugMode() : Client
     {
-        $result = null;
+        $this->debug = true;
+
+        return $this;
+    }
+
+    /**
+     * @return Client
+     */
+    public function disableDebugMode() : Client
+    {
+        $this->debug = false;
+
+        return $this;
+    }
+
+    /**
+     * Makes the requests.
+     *
+     * @param Query $query Request to do.
+     *
+     * @return Response
+     */
+    public function executeQuery(Query $query)
+    {
+        $response = null;
 
         try {
-            $result = $this->httpClient->get( $query->getUrl(), [
-                'header' => [
-                    'Accept'    => 'application/json',
-                    'X-api-key' => $this->token,
-                ]
+            $response = $this->getHttpClient()->get($query->getUrl(), [
+                'headers' => [
+                    'accept'    => 'application/json',
+                    'x-api-key' => $this->token,
+                ],
+                'verify'  => !$this->debug,
             ]);
-        } catch (BadResponseException $e) {
-            // TODO: Handle exception
-        } catch (RequestException $e) {
-            // TODO: Handle exception
-        } catch (Exception $e) {
-            // TODO: Handle exception
+        } catch (ClientException $e) {
+            if ($e->getCode() === 401 || $e->getCode() === 403) {
+                throw new InvalidCredentials();
+            } elseif ($e->getCode() === 429) {
+                throw new QuotaExceeded();
+            } else {
+                throw $e;
+            }
+        } catch (ServerException $e) {
+            throw InvalidServerResponse::create($query->getUrl(), $e->getCode());
         }
 
-        return $result;
+        $body = (string)$response->getBody();
+        if (empty($body)) {
+            throw InvalidServerResponse::emptyResponse((string)$query->getUrl());
+        }
+
+        return $this->parseResponse($query->getResponseClass(), $body);
+    }
+
+    /**
+     * Returns the result of the petition in an entity.
+     *
+     * @param string $entity Entity to be generated.
+     * @param string $response Response of the request in json format.
+     *
+     * @return Response
+     * @throws InvalidResponseType
+     */
+    private function parseResponse(string $entity, string $response) : Response
+    {
+        return Builder::create($entity, $response);
+    }
+
+    /**
+     * Returns the HTTP adapter.
+     *
+     * @return HttpClient
+     */
+    protected function getHttpClient() : HttpClient
+    {
+        return $this->httpClient;
     }
 }

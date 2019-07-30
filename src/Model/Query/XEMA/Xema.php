@@ -33,6 +33,12 @@ abstract class Xema implements Query
         return 'XEMA';
     }
 
+    public function getResponseClass() : string
+    {
+        // TODO!
+        return "";
+    }
+
     /**
      * @return string
      */

@@ -29,6 +29,11 @@ interface Query
     public function getUrl() : string;
 
     /**
+     * @return string
+     */
+    public function getResponseClass() : string;
+
+    /**
      * @return mixed
      */
     public function __toString() : string;

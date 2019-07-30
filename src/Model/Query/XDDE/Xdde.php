@@ -33,6 +33,12 @@ abstract class Xdde implements Query
         return 'XDDE';
     }
 
+    public function getResponseClass() : string
+    {
+        // TODO!
+        return "";
+    }
+
     /**
      * @return string
      */
