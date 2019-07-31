@@ -53,7 +53,7 @@ class GetCatalunyaByDate extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/GetCatalunyaByDate";
+        return $this->clear($this->getUrl());
     }
 
     /**
@@ -65,10 +65,19 @@ class GetCatalunyaByDate extends Base
     }
 
     /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
+    }
+
+    /**
      * @return string
      */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

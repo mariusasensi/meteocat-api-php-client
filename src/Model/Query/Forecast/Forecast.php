@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Forecast;
 
+use Meteocat\Model\Query\Base;
 use Meteocat\Model\Query\Query;
 
 /**
@@ -13,7 +14,7 @@ use Meteocat\Model\Query\Query;
  * @package Meteocat\Model\Query\Forecast
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-abstract class Forecast implements Query
+abstract class Forecast extends Base
 {
     /**
      * Endpoint name.
@@ -28,22 +29,8 @@ abstract class Forecast implements Query
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return 'Forecast';
-    }
-
-    public function getResponseClass() : string
-    {
-        // TODO!
-        return "";
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
-        return sprintf('%s/%s/v%s', Query::BASE_URL, self::NAME, self::VERSION);
+        return sprintf('%s://%s/%s/v%s', Query::DEFAULT_PROTOCOL, Query::BASE_URL, self::NAME, self::VERSION);
     }
 }

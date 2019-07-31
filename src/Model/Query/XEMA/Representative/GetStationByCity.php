@@ -55,14 +55,6 @@ final class GetStationByCity extends Base
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return parent::getName() . "/GetStationByCity";
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
         return parent::getUrl() . $this->generateUri();
@@ -71,8 +63,25 @@ final class GetStationByCity extends Base
     /**
      * @return string
      */
+    public function getName() : string
+    {
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
+    }
+
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

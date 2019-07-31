@@ -47,17 +47,26 @@ class GetUltravioletIndexByCity extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getUrl() : string
     {
-        return parent::getName() . '/GetUltravioletIndexByCity';
+        return parent::getUrl() . $this->generateUri();
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getName() : string
     {
-        return parent::getUrl() . $this->generateUri();
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
     }
 
     /**
@@ -65,6 +74,6 @@ class GetUltravioletIndexByCity extends Base
      */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

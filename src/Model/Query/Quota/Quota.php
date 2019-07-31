@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Quota;
 
+use Meteocat\Model\Query\Base;
 use Meteocat\Model\Query\Query;
 
 /**
@@ -13,7 +14,7 @@ use Meteocat\Model\Query\Query;
  * @package Meteocat\Model\Query\Quota
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-abstract class Quota implements Query
+abstract class Quota extends Base
 {
     /**
      * Endpoint name.
@@ -28,16 +29,8 @@ abstract class Quota implements Query
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return 'Quotes';
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
-        return sprintf('%s/%s/v%s', Query::BASE_URL, self::NAME, self::VERSION);
+        return sprintf('%s://%s/%s/v%s', Query::DEFAULT_PROTOCOL, Query::BASE_URL, self::NAME, self::VERSION);
     }
 }

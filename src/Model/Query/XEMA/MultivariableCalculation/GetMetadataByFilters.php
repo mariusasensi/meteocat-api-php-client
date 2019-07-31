@@ -57,7 +57,7 @@ final class GetMetadataByFilters extends Base
      */
     public function getName() : string
     {
-        return parent::getName() . "/GetMetadataByFilters";
+        return $this->clear($this->getUrl());
     }
 
     /**
@@ -65,7 +65,16 @@ final class GetMetadataByFilters extends Base
      */
     public function getUrl() : string
     {
-        return sprintf('%s/%s/v%s%s', parent::BASE_URL, parent::NAME, parent::VERSION, $this->generateUri());
+        return sprintf('%s://%s/%s/v%s%s', parent::DEFAULT_PROTOCOL, parent::BASE_URL, parent::NAME, parent::VERSION, $this->generateUri());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
     }
 
     /**
@@ -73,6 +82,6 @@ final class GetMetadataByFilters extends Base
      */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

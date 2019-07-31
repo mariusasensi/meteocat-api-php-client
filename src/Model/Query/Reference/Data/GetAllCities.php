@@ -23,25 +23,17 @@ final class GetAllCities extends Base
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return parent::getName() . '/GetAllCities';
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
         return parent::getUrl() . self::URI;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function __toString() : string
+    public function getName() : string
     {
-        return $this->getUrl();
+        return $this->clear($this->getUrl());
     }
 
     /**
@@ -50,5 +42,13 @@ final class GetAllCities extends Base
     public function getResponseClass() : string
     {
         return City::class;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __toString() : string
+    {
+        return $this->getName();
     }
 }

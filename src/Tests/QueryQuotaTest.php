@@ -11,7 +11,7 @@ class QueryQuotaTest extends TestCase
     {
         $query = new Information\GetCurrentUsage();
 
-        $this->assertEquals('Quotes/Information/GetCurrentUsage', $query->getName());
+        $this->assertEquals('api.meteo.cat.quotes.v1.consum-actual', $query->getName());
         $this->assertEquals('https://api.meteo.cat/quotes/v1/consum-actual', $query->getUrl());
     }
 }

@@ -15,27 +15,4 @@ use Meteocat\Model\Query\Reference\Reference;
  */
 abstract class Base extends Reference
 {
-    /**
-     * @return string
-     */
-    public function getName() : string
-    {
-        return parent::getName() . '/Data';
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl() : string
-    {
-        return parent::getUrl();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function __toString() : string
-    {
-        return $this->getUrl();
-    }
 }

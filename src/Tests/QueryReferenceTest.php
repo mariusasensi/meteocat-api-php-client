@@ -11,7 +11,7 @@ class QueryReferenceTest extends TestCase
     {
         $query = new Data\GetAllCounties();
 
-        $this->assertEquals('Reference/Data/GetAllCounties', $query->getName());
+        $this->assertEquals('api.meteo.cat.referencia.v1.comarques', $query->getName());
         $this->assertEquals('https://api.meteo.cat/referencia/v1/comarques', $query->getUrl());
     }
 
@@ -19,7 +19,7 @@ class QueryReferenceTest extends TestCase
     {
         $query = new Data\GetAllCities();
 
-        $this->assertEquals('Reference/Data/GetAllCities', $query->getName());
+        $this->assertEquals('api.meteo.cat.referencia.v1.municipis', $query->getName());
         $this->assertEquals('https://api.meteo.cat/referencia/v1/municipis', $query->getUrl());
     }
 
@@ -27,7 +27,7 @@ class QueryReferenceTest extends TestCase
     {
         $query = new Data\GetAllSymbols();
 
-        $this->assertEquals('Reference/Data/GetAllSymbols', $query->getName());
+        $this->assertEquals('api.meteo.cat.referencia.v1.simbols', $query->getName());
         $this->assertEquals('https://api.meteo.cat/referencia/v1/simbols', $query->getUrl());
     }
 }

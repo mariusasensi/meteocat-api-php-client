@@ -21,17 +21,26 @@ class GetPyreneesMountainPeakMetadata extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getUrl() : string
     {
-        return parent::getName() . '/GetPyreneesMountainPeakMetadata';
+        return parent::getUrl() . self::URI;
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getName() : string
     {
-        return parent::getUrl() . self::URI;
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
     }
 
     /**
@@ -39,6 +48,6 @@ class GetPyreneesMountainPeakMetadata extends Base
      */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

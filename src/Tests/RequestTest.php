@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Meteocat\Model\Entity\Quota;
 use Meteocat\Model\Exception\InvalidCredentials;
 use Meteocat\Model\Query\Quota\Information\GetCurrentUsage;
 use Meteocat\Provider\Meteocat;
@@ -20,12 +19,16 @@ class RequestTest extends TestCase
             ->executeQuery(new GetCurrentUsage()); // Bum!
     }
 
+    /*
     public function testRequest()
     {
         $client = new Meteocat($_SERVER['API_KEY']);
-        $client->enableDebugMode();
+        $client
+            ->enableDebugMode()
+            ->saveResponse(__DIR__ . "/.cached_responses");
         $response = $client->executeQuery(new GetCurrentUsage());
 
         $this->assertInstanceOf(Quota::class, $response);
     }
+    */
 }

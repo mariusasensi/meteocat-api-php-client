@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Reference;
 
+use Meteocat\Model\Query\Base;
 use Meteocat\Model\Query\Query;
 
 /**
@@ -13,7 +14,7 @@ use Meteocat\Model\Query\Query;
  * @package Meteocat\Model\Query\Reference
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-abstract class Reference implements Query
+abstract class Reference extends Base
 {
     /**
      * Endpoint name.
@@ -28,16 +29,8 @@ abstract class Reference implements Query
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return 'Reference';
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
-        return sprintf('%s/%s/v%s', Query::BASE_URL, self::NAME, self::VERSION);
+        return sprintf('%s://%s/%s/v%s', Query::DEFAULT_PROTOCOL, Query::BASE_URL, self::NAME, self::VERSION);
     }
 }

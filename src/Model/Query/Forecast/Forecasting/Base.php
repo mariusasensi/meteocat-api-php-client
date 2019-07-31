@@ -15,27 +15,4 @@ use Meteocat\Model\Query\Forecast\Forecast;
  */
 abstract class Base extends Forecast
 {
-    /**
-     * @return string
-     */
-    public function getName() : string
-    {
-        return parent::getName() . '/Forecasting';
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl() : string
-    {
-        return parent::getUrl();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function __toString() : string
-    {
-        return $this->getUrl();
-    }
 }

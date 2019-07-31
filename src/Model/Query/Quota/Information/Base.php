@@ -15,27 +15,4 @@ use Meteocat\Model\Query\Quota\Quota;
  */
 abstract class Base extends Quota
 {
-    /**
-     * @return string
-     */
-    public function getName() : string
-    {
-        return parent::getName() . '/Information';
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl() : string
-    {
-        return parent::getUrl();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function __toString() : string
-    {
-        return $this->getUrl();
-    }
 }

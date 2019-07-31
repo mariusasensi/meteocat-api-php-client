@@ -15,15 +15,10 @@ use Meteocat\Model\Query\XEMA\Xema;
  */
 abstract class Base extends Xema
 {
-    private const URI = '/estacions';
-
     /**
-     * @return string
+     * Partial endpoint.
      */
-    public function getName() : string
-    {
-        return parent::getName() . '/Station';
-    }
+    private const URI = '/estacions';
 
     /**
      * @return string
@@ -31,13 +26,5 @@ abstract class Base extends Xema
     public function getUrl() : string
     {
         return parent::getUrl() . self::URI;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function __toString() : string
-    {
-        return $this->getUrl();
     }
 }

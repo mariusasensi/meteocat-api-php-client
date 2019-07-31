@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XEMA\Measurement;
 
 /**
- * Class Measurement\Get
+ * Class Measurement\GetUnique
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#metadades-duna-variable
  * @package Meteocat\Model\Query\XEMA\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Get extends Base
+final class GetUnique extends Base
 {
     /**
      * Endpoint.
@@ -24,7 +24,7 @@ final class Get extends Base
     private $variable = null;
 
     /**
-     * Get constructor.
+     * GetUnique constructor.
      *
      * @param int $variable Variable code.
      */
@@ -47,17 +47,26 @@ final class Get extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getUrl() : string
     {
-        return parent::getName() . '/Get';
+        return parent::getUrl() . $this->generateUri();
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getName() : string
     {
-        return parent::getUrl() . $this->generateUri();
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
     }
 
     /**

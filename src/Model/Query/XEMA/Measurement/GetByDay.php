@@ -76,14 +76,6 @@ final class GetByDay extends Base
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return parent::getName() . "/GetByDay";
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
         return parent::getUrl() . $this->generateUri();
@@ -92,8 +84,25 @@ final class GetByDay extends Base
     /**
      * @return string
      */
+    public function getName() : string
+    {
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
+    }
+
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

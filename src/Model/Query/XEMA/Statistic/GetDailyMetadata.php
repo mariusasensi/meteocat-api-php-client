@@ -21,14 +21,6 @@ final class GetDailyMetadata extends Base
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return parent::getName() . "/GetDailyMetadata";
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
         return parent::getUrl() . self::URI;
@@ -37,8 +29,25 @@ final class GetDailyMetadata extends Base
     /**
      * @return string
      */
+    public function getName() : string
+    {
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
+    }
+
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

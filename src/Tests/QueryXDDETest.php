@@ -16,7 +16,7 @@ class QueryXDDETest extends TestCase
     {
         $query = new Lightning\GetOfCatalunyaByDateTime(DateTime::createFromFormat('Y-m-d H', '2016-12-16 13'));
 
-        $this->assertEquals('XDDE/Lightning/GetOfCatalunyaByDateTime', $query->getName());
+        $this->assertEquals('api.meteo.cat.xdde.v1.catalunya.2016.12.16.13', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xdde/v1/catalunya/2016/12/16/13', $query->getUrl());
     }
 
@@ -24,7 +24,7 @@ class QueryXDDETest extends TestCase
     {
         $query = new Lightning\GetOfCountyByDate(31, DateTime::createFromFormat('Y-m-d', '2017-03-31'));
 
-        $this->assertEquals('XDDE/Lightning/GetOfCountyByDate', $query->getName());
+        $this->assertEquals('api.meteo.cat.xdde.v1.informes.comarques.31.2017.03.31', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xdde/v1/informes/comarques/31/2017/03/31', $query->getUrl());
     }
 }

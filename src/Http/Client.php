@@ -9,6 +9,8 @@ use Meteocat\Model\Exception\InvalidResponseType;
 use Meteocat\Model\Exception\InvalidServerResponse;
 use Meteocat\Model\Exception\InvalidCredentials;
 use Meteocat\Model\Exception\QuotaExceeded;
+use Meteocat\Model\Exception\StoreResponseAlreadyExist;
+use Meteocat\Model\Exception\StoreResponseDirectoryNotFound;
 use Meteocat\Model\Factory\Builder;
 use Meteocat\Model\Query\Query;
 use GuzzleHttp\Client as HttpClient;
@@ -39,6 +41,16 @@ abstract class Client
      * @var bool
      */
     private $debug = false;
+
+    /**
+     * @var bool
+     */
+    private $saveResponse = false;
+
+    /**
+     * @var string|null
+     */
+    private $saveDir = null;
 
     /**
      * ApiClient constructor.
@@ -82,6 +94,19 @@ abstract class Client
         return $this;
     }
 
+    /***
+     * @param string $path
+     *
+     * @return Client
+     */
+    public function saveResponse(string $path) : Client
+    {
+        $this->saveDir      = $path;
+        $this->saveResponse = true;
+
+        return $this;
+    }
+
     /**
      * Makes the requests.
      *
@@ -118,7 +143,7 @@ abstract class Client
             throw InvalidServerResponse::emptyResponse((string)$query->getUrl());
         }
 
-        //$this->saveResponse($query->getUrl(), $body);
+        $this->storeResponse($query->getName(), $body);
 
         return $this->parseResponse($query->getResponseClass(), $body);
     }
@@ -138,19 +163,26 @@ abstract class Client
     }
 
     /**
-     * TODO: MAKE EASY SAVE RAW RESPONSE WITH PARAMETERS.
+     * Save the raw response in a specific directory as JSON file.
      *
-     * @param string $url
-     * @param string $response
+     * @param string $fileName Only the file name.
+     * @param string $response Raw response as string.
      *
      * @return bool
+     * @throws StoreResponseDirectoryNotFound
      */
-    private function saveResponse(string $url, string $response) : bool
+    private function storeResponse(string $fileName, string $response) : bool
     {
-        $urlWithoutProtocol = str_replace("https://","", $url);
-        $file = sprintf("src/Tests/.cached_responses/response.%s.json", str_replace("/", ".", $urlWithoutProtocol));
+        if ($this->saveResponse) {
 
-        return Builder::save($file, $response);
+            try {
+                return Builder::save($this->saveDir, $fileName, $response);
+            } catch (StoreResponseAlreadyExist $exception) {
+                // Ignore this.
+            }
+        }
+
+        return false;
     }
 
     /**

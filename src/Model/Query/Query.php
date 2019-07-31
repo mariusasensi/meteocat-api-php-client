@@ -15,7 +15,8 @@ interface Query
     /**
      * The base URL for API requests.
      */
-    const BASE_URL            = 'https://api.meteo.cat';
+    const BASE_URL            = 'api.meteo.cat';
+    const DEFAULT_PROTOCOL    = 'https';
     const DEFAULT_DATE_FORMAT = 'Y-m-d\Z';
 
     /**

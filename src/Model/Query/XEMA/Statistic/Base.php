@@ -20,24 +20,8 @@ abstract class Base extends Xema
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return parent::getName() . '/Statistic';
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
         return parent::getUrl() . self::URI;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function __toString() : string
-    {
-        return $this->getUrl();
     }
 }

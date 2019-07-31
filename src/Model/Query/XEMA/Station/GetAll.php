@@ -7,13 +7,13 @@ namespace Meteocat\Model\Query\XEMA\Station;
 use DateTime;
 
 /**
- * Class Station\All
+ * Class Station\GetAll
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/metadades-estacions/#metadades-de-totes-les-estacions
  * @package Meteocat\Model\Query\XEMA\Station
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class All extends Base
+final class GetAll extends Base
 {
     /**
      * Endpoint.
@@ -70,14 +70,6 @@ final class All extends Base
     /**
      * @return string
      */
-    public function getName() : string
-    {
-        return parent::getName() . "/All";
-    }
-
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
         return parent::getUrl() . $this->generateUri();
@@ -86,8 +78,25 @@ final class All extends Base
     /**
      * @return string
      */
+    public function getName() : string
+    {
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
+    }
+
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

@@ -15,27 +15,4 @@ use Meteocat\Model\Query\XDDE\Xdde;
  */
 abstract class Base extends Xdde
 {
-    /**
-     * @return string
-     */
-    public function getName() : string
-    {
-        return parent::getName() . '/Lightning';
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl() : string
-    {
-        return parent::getUrl();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function __toString() : string
-    {
-        return $this->getUrl();
-    }
 }

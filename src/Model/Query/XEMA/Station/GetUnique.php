@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XEMA\Station;
 
 /**
- * Class Station\Get
+ * Class Station\GetUnique
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/representatives/#metadades-de-variables
  * @package Meteocat\Model\Query\XEMA\Station
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Get extends Base
+final class GetUnique extends Base
 {
     /**
      * Endpoint.
@@ -47,17 +47,26 @@ final class Get extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getUrl() : string
     {
-        return parent::getName() . '/Get';
+        return parent::getUrl() . $this->generateUri();
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getName() : string
     {
-        return parent::getUrl() . $this->generateUri();
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
     }
 
     /**
@@ -65,6 +74,6 @@ final class Get extends Base
      */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

@@ -11,20 +11,12 @@ namespace Meteocat\Model\Query\XEMA\MultivariableCalculation;
  * @package Meteocat\Model\Query\XEMA\MultivariableCalculation
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class All extends Base
+final class GetAll extends Base
 {
     /**
      * Endpoint.
      */
     private const URI = '/metadades';
-
-    /**
-     * @return string
-     */
-    public function getName() : string
-    {
-        return parent::getName() . "/All";
-    }
 
     /**
      * @return string
@@ -37,8 +29,25 @@ final class All extends Base
     /**
      * @return string
      */
+    public function getName() : string
+    {
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
+    }
+
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }

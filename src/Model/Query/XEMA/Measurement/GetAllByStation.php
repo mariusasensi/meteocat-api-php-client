@@ -7,13 +7,13 @@ namespace Meteocat\Model\Query\XEMA\Measurement;
 use DateTime;
 
 /**
- * Class Measurement\AllByStation
+ * Class Measurement\GetAllByStation
  *
  * @link    https://apidocs.meteocat.gencat.cat/documentacio/dades-mesurades/#metadades-de-les-variables-duna-estacio
  * @package Meteocat\Model\Query\XEMA\Measurement
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class AllByStation extends Base
+final class GetAllByStation extends Base
 {
     /**
      * Endpoint.
@@ -36,7 +36,7 @@ final class AllByStation extends Base
     private $date = null;
 
     /**
-     * AllByStation constructor.
+     * GetAllByStation constructor.
      *
      * @param string $station Station code.
      */
@@ -88,17 +88,26 @@ final class AllByStation extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getUrl() : string
     {
-        return parent::getName() . "/AllByStation";
+        return sprintf('%s://%s/%s/v%s%s', parent::DEFAULT_PROTOCOL, parent::BASE_URL, parent::NAME, parent::VERSION, $this->generateUri());
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getName() : string
     {
-        return sprintf('%s/%s/v%s%s',parent::BASE_URL, parent::NAME, parent::VERSION, $this->generateUri());
+        return $this->clear($this->getUrl());
+    }
+
+    /**
+     * TODO: Entity response class.
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return "";
     }
 
     /**
@@ -106,6 +115,6 @@ final class AllByStation extends Base
      */
     public function __toString() : string
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 }
