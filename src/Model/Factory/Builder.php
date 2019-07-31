@@ -21,17 +21,43 @@ class Builder
      * @param string $entity
      * @param string $raw
      *
-     * @return Response
+     * @return Response|array
      * @throws EntityNotFound
      */
     public static function create(string $entity, string $raw)
     {
-        $response = (object)json_decode($raw);
-
         if (!class_exists($entity)) {
             throw new EntityNotFound();
         }
 
-        return new $entity($response);
+        // Parse.
+        $response = json_decode(html_entity_decode($raw));
+
+        // Unique response.
+        if (!is_array($response)) {
+            return new $entity($response);
+        }
+
+        $result = [];
+        foreach ($response as $item) {
+            $result[] = new $entity($item);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Saves the $raw string in a new file.
+     *
+     * @param string $fileName Path of the new file.
+     * @param string $raw      Data to save.
+     *
+     * @return bool
+     */
+    public static function save(string $fileName, string $raw) : bool
+    {
+        $result = file_put_contents($fileName, html_entity_decode($raw));
+
+        return $result !== false;
     }
 }

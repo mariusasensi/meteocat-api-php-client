@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Reference\Data;
 
+use Meteocat\Model\Entity\City;
+
 /**
  * Class Data\GetAllCities
  *
@@ -40,5 +42,13 @@ final class GetAllCities extends Base
     public function __toString() : string
     {
         return $this->getUrl();
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponseClass() : string
+    {
+        return City::class;
     }
 }

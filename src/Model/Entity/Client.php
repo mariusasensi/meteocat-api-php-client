@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Entity\Quota;
+namespace Meteocat\Model\Entity;
 
 use stdClass;
 
 /**
  * Class Client
  *
- * @package Meteocat\Model\Entity\Quota
+ * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
 final class Client

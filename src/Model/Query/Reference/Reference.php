@@ -33,12 +33,6 @@ abstract class Reference implements Query
         return 'Reference';
     }
 
-    public function getResponseClass() : string
-    {
-        // TODO!
-        return "";
-    }
-
     /**
      * @return string
      */

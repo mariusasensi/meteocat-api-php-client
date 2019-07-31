@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
-use Meteocat\Model\Entity\Quota\Client;
-use Meteocat\Model\Entity\Quota\Plan;
 use stdClass;
 
 /**

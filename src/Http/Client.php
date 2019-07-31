@@ -118,13 +118,15 @@ abstract class Client
             throw InvalidServerResponse::emptyResponse((string)$query->getUrl());
         }
 
+        //$this->saveResponse($query->getUrl(), $body);
+
         return $this->parseResponse($query->getResponseClass(), $body);
     }
 
     /**
      * Returns the result of the petition in an entity.
      *
-     * @param string $entity Entity to be generated.
+     * @param string $entity   Entity to be generated.
      * @param string $response Response of the request in json format.
      *
      * @return Response
@@ -133,6 +135,22 @@ abstract class Client
     private function parseResponse(string $entity, string $response) : Response
     {
         return Builder::create($entity, $response);
+    }
+
+    /**
+     * TODO: MAKE EASY SAVE RAW RESPONSE WITH PARAMETERS.
+     *
+     * @param string $url
+     * @param string $response
+     *
+     * @return bool
+     */
+    private function saveResponse(string $url, string $response) : bool
+    {
+        $urlWithoutProtocol = str_replace("https://","", $url);
+        $file = sprintf("src/Tests/.cached_responses/response.%s.json", str_replace("/", ".", $urlWithoutProtocol));
+
+        return Builder::save($file, $response);
     }
 
     /**
