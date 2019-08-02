@@ -21,7 +21,7 @@ class GetCurrentWarnings extends Base
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . self::URI;
     }
@@ -29,24 +29,25 @@ class GetCurrentWarnings extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
 
     /**
      * TODO: Entity response class.
+     *
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
-        return "";
+        return '';
     }
 
     /**
      * @return mixed
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

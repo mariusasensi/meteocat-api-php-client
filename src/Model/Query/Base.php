@@ -21,7 +21,7 @@ abstract class Base implements Query
     {
         $sentence = str_replace(Query::DEFAULT_PROTOCOL . '://', '', $sentence);
         $sentence = mb_ereg_replace("([^\s\w\d.\/\-\=\?\&\,\;\[\]\(\)])", '', $sentence);
-        $sentence = mb_ereg_replace("([\?\/\=\?\&])", ".", $sentence);
+        $sentence = mb_ereg_replace("([\?\/\=\?\&])", '.', $sentence);
         $sentence = mb_strtolower($sentence);
 
         return $sentence;

@@ -41,9 +41,9 @@ final class GetYearlyByVariable extends Base
     /**
      * @param string $station
      *
-     * @return $this
+     * @return GetYearlyByVariable
      */
-    public function withStation(string $station)
+    public function withStation(string $station): self
     {
         $this->station = $station;
 
@@ -53,22 +53,21 @@ final class GetYearlyByVariable extends Base
     /**
      * @return string
      */
-    private function generateUri() : string
+    private function generateUri(): string
     {
-        $uri = self::URI;
-        $uri = str_replace('{codi_variable}', $this->variable, $uri);
+        $uri = str_replace('{codi_variable}', $this->variable, self::URI);
 
         $query = http_build_query([
             'codiEstacio' => $this->station,
         ]);
 
-        return $uri . (empty($query) ? "" : "?{$query}");
+        return $uri . (empty($query) ? '' : "?{$query}");
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . $this->generateUri();
     }
@@ -76,24 +75,25 @@ final class GetYearlyByVariable extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
 
     /**
      * TODO: Entity response class.
+     *
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
-        return "";
+        return '';
     }
 
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

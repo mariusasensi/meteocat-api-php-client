@@ -36,43 +36,42 @@ final class GetMetadataByStation extends Base
     /**
      * @return string
      */
-    private function generateUri() : string
+    private function generateUri(): string
     {
-        $uri = self::URI;
-        $uri = str_replace('{codi_estacio}', $this->station, $uri);
-
-        return $uri;
+        return str_replace('{codi_estacio}', $this->station, self::URI);
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
-        return sprintf('%s://%s/%s/v%s%s', parent::DEFAULT_PROTOCOL, parent::BASE_URL, parent::NAME, parent::VERSION, $this->generateUri());
+        return sprintf('%s://%s/%s/v%s%s', parent::DEFAULT_PROTOCOL, parent::BASE_URL, parent::NAME, parent::VERSION,
+            $this->generateUri());
     }
 
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
 
     /**
      * TODO: Entity response class.
+     *
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
-        return "";
+        return '';
     }
 
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

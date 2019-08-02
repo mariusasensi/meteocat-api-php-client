@@ -47,7 +47,7 @@ class Symbol extends Response
     /**
      * @return string|null
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -55,7 +55,7 @@ class Symbol extends Response
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -63,7 +63,7 @@ class Symbol extends Response
     /**
      * @return array|null
      */
-    public function getValues() : ?array
+    public function getValues(): ?array
     {
         return $this->values;
     }

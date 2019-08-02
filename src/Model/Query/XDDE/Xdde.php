@@ -29,7 +29,7 @@ abstract class Xdde extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return sprintf('%s.%s.v%s', Query::BASE_URL, self::NAME, self::VERSION);
     }
@@ -37,7 +37,7 @@ abstract class Xdde extends Base
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return sprintf('%s://%s/%s/v%s', Query::DEFAULT_PROTOCOL, Query::BASE_URL, self::NAME, self::VERSION);
     }

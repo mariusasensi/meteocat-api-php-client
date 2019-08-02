@@ -23,7 +23,7 @@ abstract class Base extends Xema
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . self::URI;
     }

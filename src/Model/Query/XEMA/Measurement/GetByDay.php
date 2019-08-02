@@ -58,25 +58,25 @@ final class GetByDay extends Base
     /**
      * @return string
      */
-    private function generateUri() : string
+    private function generateUri(): string
     {
-        $uri = self::URI;
-        $uri = str_replace('{codi_variable}', $this->variable, $uri);
-        $uri = str_replace('{any}', $this->date->format('Y'), $uri);
-        $uri = str_replace('{mes}', $this->date->format('m'), $uri);
-        $uri = str_replace('{dia}', $this->date->format('d'), $uri);
+        $uri = str_replace(
+            ['{codi_variable}', '{any}', '{mes}', '{dia}'],
+            [$this->variable, $this->date->format('Y'), $this->date->format('m'), $this->date->format('d')],
+            self::URI
+        );
 
         $query = http_build_query([
             'codiEstacio' => $this->station,
         ]);
 
-        return $uri . (empty($query) ? "" : "?{$query}");
+        return $uri . (empty($query) ? '' : "?{$query}");
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . $this->generateUri();
     }
@@ -84,24 +84,25 @@ final class GetByDay extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
 
     /**
      * TODO: Entity response class.
+     *
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
-        return "";
+        return '';
     }
 
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

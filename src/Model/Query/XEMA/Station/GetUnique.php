@@ -36,18 +36,15 @@ final class GetUnique extends Base
     /**
      * @return string
      */
-    private function generateUri() : string
+    private function generateUri(): string
     {
-        $uri = self::URI;
-        $uri = str_replace('{codi_estacio}', $this->station, $uri);
-
-        return $uri;
+        return str_replace('{codi_estacio}', $this->station, self::URI);
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . $this->generateUri();
     }
@@ -55,24 +52,25 @@ final class GetUnique extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
 
     /**
      * TODO: Entity response class.
+     *
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
-        return "";
+        return '';
     }
 
     /**
      * @return mixed
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

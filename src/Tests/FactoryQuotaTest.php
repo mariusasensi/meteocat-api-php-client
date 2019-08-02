@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Meteocat\Model\Entity as Entity;
+use Meteocat\Model\Entity;
 use Meteocat\Model\Factory\Builder;
-use Meteocat\Model\Query\Quota\Information as Information;
+use Meteocat\Model\Query\Quota\Information;
 use PHPUnit\Framework\TestCase;
 
 class FactoryQuotaTest extends TestCase
@@ -24,7 +24,7 @@ class FactoryQuotaTest extends TestCase
         /** @var Entity\Client $client */
         $client = $entityResponse->getClient();
         $this->assertInstanceOf(Entity\Client::class, $client);
-        $this->assertEquals("Màrius Asensi Jordà", $client->getName());
+        $this->assertEquals('Màrius Asensi Jordà', $client->getName());
 
         /** @var array $plans */
         $plans = $entityResponse->getPlans();
@@ -33,28 +33,28 @@ class FactoryQuotaTest extends TestCase
         /** @var Entity\Plan $firstPlan */
         $firstPlan = current($plans);
 
-        $this->assertEquals("XDDE_250", $firstPlan->getName());
-        $this->assertEquals("Mensual", $firstPlan->getPeriod());
-        $this->assertEquals("250", $firstPlan->getRequestsMax());
-        $this->assertEquals("0", $firstPlan->getRequestsRealised());
-        $this->assertEquals("250", $firstPlan->getRequestsRemaining());
+        $this->assertEquals('XDDE_250', $firstPlan->getName());
+        $this->assertEquals('Mensual', $firstPlan->getPeriod());
+        $this->assertEquals('250', $firstPlan->getRequestsMax());
+        $this->assertEquals('0', $firstPlan->getRequestsRealised());
+        $this->assertEquals('250', $firstPlan->getRequestsRemaining());
 
         /** @var Entity\Plan $secondPlan */
         $secondPlan = next($plans);
 
-        $this->assertEquals("Predicció_100", $secondPlan->getName());
-        $this->assertEquals("Mensual", $secondPlan->getPeriod());
-        $this->assertEquals("100", $secondPlan->getRequestsMax());
-        $this->assertEquals("0", $secondPlan->getRequestsRealised());
-        $this->assertEquals("100", $secondPlan->getRequestsRemaining());
+        $this->assertEquals('Predicció_100', $secondPlan->getName());
+        $this->assertEquals('Mensual', $secondPlan->getPeriod());
+        $this->assertEquals('100', $secondPlan->getRequestsMax());
+        $this->assertEquals('0', $secondPlan->getRequestsRealised());
+        $this->assertEquals('100', $secondPlan->getRequestsRemaining());
 
         /** @var Entity\Plan $thirdPlan */
         $thirdPlan = next($plans);
 
-        $this->assertEquals("XEMA_750", $thirdPlan->getName());
-        $this->assertEquals("Mensual", $thirdPlan->getPeriod());
-        $this->assertEquals("750", $thirdPlan->getRequestsMax());
-        $this->assertEquals("1", $thirdPlan->getRequestsRealised());
-        $this->assertEquals("749", $thirdPlan->getRequestsRemaining());
+        $this->assertEquals('XEMA_750', $thirdPlan->getName());
+        $this->assertEquals('Mensual', $thirdPlan->getPeriod());
+        $this->assertEquals('750', $thirdPlan->getRequestsMax());
+        $this->assertEquals('1', $thirdPlan->getRequestsRealised());
+        $this->assertEquals('749', $thirdPlan->getRequestsRemaining());
     }
 }

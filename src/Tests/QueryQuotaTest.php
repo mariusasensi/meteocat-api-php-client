@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Meteocat\Model\Query\Quota\Information as Information;
+use Meteocat\Model\Query\Quota\Information;
 
 class QueryQuotaTest extends TestCase
 {

@@ -38,7 +38,7 @@ final class County extends Response
     /**
      * @return int|null
      */
-    public function getCode() : ?int
+    public function getCode(): ?int
     {
         return $this->code;
     }
@@ -46,7 +46,7 @@ final class County extends Response
     /**
      * @return string|null
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name;
     }

@@ -23,7 +23,7 @@ final class GetAllCounties extends Base
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . self::URI;
     }
@@ -31,7 +31,7 @@ final class GetAllCounties extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
@@ -39,7 +39,7 @@ final class GetAllCounties extends Base
     /**
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
         return County::class;
     }
@@ -47,7 +47,7 @@ final class GetAllCounties extends Base
     /**
      * @return mixed
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

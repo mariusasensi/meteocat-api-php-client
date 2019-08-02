@@ -13,7 +13,7 @@ class RequestTest extends TestCase
     {
         $this->expectException(InvalidCredentials::class);
 
-        $client = new Meteocat("InvalidToken!");
+        $client = new Meteocat('InvalidToken!');
         $client
             ->enableDebugMode()
             ->executeQuery(new GetCurrentUsage()); // Bum!

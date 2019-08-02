@@ -62,7 +62,7 @@ class SymbolValue
     /**
      * @return string|null
      */
-    public function getCode() : ?string
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -70,7 +70,7 @@ class SymbolValue
     /**
      * @return string|null
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -78,7 +78,7 @@ class SymbolValue
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -86,7 +86,7 @@ class SymbolValue
     /**
      * @return string|null
      */
-    public function getCategory() : ?string
+    public function getCategory(): ?string
     {
         return $this->category;
     }
@@ -94,7 +94,7 @@ class SymbolValue
     /**
      * @return string|null
      */
-    public function getUrlIcon() : ?string
+    public function getUrlIcon(): ?string
     {
         return $this->urlIcon;
     }
@@ -102,7 +102,7 @@ class SymbolValue
     /**
      * @return string|null
      */
-    public function getUrlIconNight() : ?string
+    public function getUrlIconNight(): ?string
     {
         return $this->urlIconNight;
     }

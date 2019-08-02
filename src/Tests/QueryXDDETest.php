@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Meteocat\Model\Query\XDDE\Lightning as Lightning;
+use Meteocat\Model\Query\XDDE\Lightning;
 
 /**
  * Class QueryXDDETest

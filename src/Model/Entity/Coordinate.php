@@ -38,7 +38,7 @@ final class Coordinate
     /**
      * @return float|null
      */
-    public function getLatitude() : ?float
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
@@ -46,7 +46,7 @@ final class Coordinate
     /**
      * @return float|null
      */
-    public function getLongitude() : ?float
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }

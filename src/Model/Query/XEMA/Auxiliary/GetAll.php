@@ -21,7 +21,7 @@ final class GetAll extends Base
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . self::URI;
     }
@@ -29,24 +29,25 @@ final class GetAll extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
 
     /**
      * TODO: Entity response class.
+     *
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
-        return "";
+        return '';
     }
 
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

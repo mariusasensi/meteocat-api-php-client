@@ -54,41 +54,41 @@ final class Plan
     }
 
     /**
-     * @return null
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @return null
+     * @return string|null
      */
-    public function getPeriod()
+    public function getPeriod(): ?string
     {
         return $this->period;
     }
 
     /**
-     * @return null
+     * @return int|null
      */
-    public function getRequestsMax()
+    public function getRequestsMax(): ?int
     {
         return $this->requestsMax;
     }
 
     /**
-     * @return null
+     * @return int|null
      */
-    public function getRequestsRemaining()
+    public function getRequestsRemaining(): ?int
     {
         return $this->requestsRemaining;
     }
 
     /**
-     * @return null
+     * @return int|null
      */
-    public function getRequestsRealised()
+    public function getRequestsRealised(): ?int
     {
         return $this->requestsRealised;
     }

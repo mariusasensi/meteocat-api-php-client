@@ -33,7 +33,7 @@ class Builder
         }
 
         // Parse.
-        $response = json_decode(html_entity_decode($raw));
+        $response = json_decode(html_entity_decode($raw), false);
 
         // Unique response.
         if (!is_array($response)) {
@@ -55,7 +55,7 @@ class Builder
      *
      * @return bool
      */
-    public static function canUsePathToSave(string $path)
+    public static function canUsePathToSave(string $path): bool
     {
         return empty($path) || !file_exists($path);
     }
@@ -71,14 +71,14 @@ class Builder
      * @return bool
      * @throws StoreResponseAlreadyExist|StoreResponseDirectoryNotFound
      */
-    public static function save(string $path, string $file, string $raw, bool $replace = false) : bool
+    public static function save(string $path, string $file, string $raw, bool $replace = false): bool
     {
         if (!self::canUsePathToSave($path)) {
             throw new StoreResponseDirectoryNotFound();
         }
 
         // Name with path and file extension.
-        $file = sprintf("%s/response.%s.json", $path, $file);
+        $file = sprintf('%s/response.%s.json', $path, $file);
 
         if ($replace || !file_exists($file)) {
             $result = file_put_contents($file, html_entity_decode($raw));

@@ -35,7 +35,7 @@ final class GetAll extends Base
      *
      * @return $this
      */
-    public function withState(string $state)
+    public function withState(string $state): self
     {
         $this->state = $state;
 
@@ -47,7 +47,7 @@ final class GetAll extends Base
      *
      * @return $this
      */
-    public function withDate(DateTime $date)
+    public function withDate(DateTime $date): self
     {
         $this->date = $date;
 
@@ -57,20 +57,20 @@ final class GetAll extends Base
     /**
      * @return string
      */
-    private function generateUri() : string
+    private function generateUri(): string
     {
         $query = http_build_query([
             'estat' => $this->state,
-            'data'  => is_null($this->date) ? null : $this->date->format(parent::DEFAULT_DATE_FORMAT),
+            'data'  => $this->date === null ? null : $this->date->format(parent::DEFAULT_DATE_FORMAT),
         ]);
 
-        return self::URI . (empty($query) ? "" : "?{$query}");
+        return self::URI . (empty($query) ? '' : "?{$query}");
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . $this->generateUri();
     }
@@ -78,24 +78,25 @@ final class GetAll extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
 
     /**
      * TODO: Entity response class.
+     *
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
-        return "";
+        return '';
     }
 
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

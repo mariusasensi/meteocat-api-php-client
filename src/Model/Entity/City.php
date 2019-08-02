@@ -50,7 +50,7 @@ final class City extends Response
     /**
      * @return string|null
      */
-    public function getCode() : ?string
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -58,7 +58,7 @@ final class City extends Response
     /**
      * @return string|null
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -66,7 +66,7 @@ final class City extends Response
     /**
      * @return Coordinate|null
      */
-    public function getCoordinate() : ?Coordinate
+    public function getCoordinate(): ?Coordinate
     {
         return $this->coordinate;
     }
@@ -74,7 +74,7 @@ final class City extends Response
     /**
      * @return County|null
      */
-    public function getCounty() : ?County
+    public function getCounty(): ?County
     {
         return $this->county;
     }

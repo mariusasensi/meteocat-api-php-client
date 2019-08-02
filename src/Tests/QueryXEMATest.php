@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Meteocat\Model\Query\XEMA\Representative as Representative;
-use Meteocat\Model\Query\XEMA\Station as Station;
-use Meteocat\Model\Query\XEMA\Measurement as Measurement;
-use Meteocat\Model\Query\XEMA\Statistic as Statistic;
-use Meteocat\Model\Query\XEMA\MultivariableCalculation as MultivariableCalculation;
-use Meteocat\Model\Query\XEMA\Auxiliary as Auxiliary;
+use Meteocat\Model\Query\XEMA\Representative;
+use Meteocat\Model\Query\XEMA\Station;
+use Meteocat\Model\Query\XEMA\Measurement;
+use Meteocat\Model\Query\XEMA\Statistic;
+use Meteocat\Model\Query\XEMA\MultivariableCalculation;
+use Meteocat\Model\Query\XEMA\Auxiliary;
 
 /**
  * Class QueryXEMATest

@@ -43,19 +43,15 @@ final class GetStationByCity extends Base
     /**
      * @return string
      */
-    private function generateUri() : string
+    private function generateUri(): string
     {
-        $uri = self::URI;
-        $uri = str_replace('{codi_municipi}', $this->city, $uri);
-        $uri = str_replace('{codi_variable}', $this->variable, $uri);
-
-        return $uri;
+        return str_replace(['{codi_municipi}', '{codi_variable}'], [$this->city, $this->variable], self::URI);
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return parent::getUrl() . $this->generateUri();
     }
@@ -63,24 +59,25 @@ final class GetStationByCity extends Base
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->clear($this->getUrl());
     }
 
     /**
      * TODO: Entity response class.
+     *
      * @return string
      */
-    public function getResponseClass() : string
+    public function getResponseClass(): string
     {
-        return "";
+        return '';
     }
 
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

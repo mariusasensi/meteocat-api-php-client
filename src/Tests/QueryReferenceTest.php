@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Meteocat\Model\Query\Reference\Data as Data;
+use Meteocat\Model\Query\Reference\Data;
 
 class QueryReferenceTest extends TestCase
 {

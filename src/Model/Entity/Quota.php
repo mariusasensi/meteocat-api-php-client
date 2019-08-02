@@ -41,7 +41,7 @@ final class Quota extends Response
     /**
      * @return Client|null
      */
-    public function getClient() : Client
+    public function getClient(): Client
     {
         return $this->client;
     }
@@ -49,7 +49,7 @@ final class Quota extends Response
     /**
      * @return array
      */
-    public function getPlans() : array
+    public function getPlans(): array
     {
         return $this->plans;
     }

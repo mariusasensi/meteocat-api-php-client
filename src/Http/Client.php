@@ -67,7 +67,7 @@ abstract class Client
      *
      * @return Client
      */
-    protected function setToken(string $token) : Client
+    protected function setToken(string $token): Client
     {
         $this->token = $token;
 
@@ -77,7 +77,7 @@ abstract class Client
     /**
      * @return Client
      */
-    public function enableDebugMode() : Client
+    public function enableDebugMode(): Client
     {
         $this->debug = true;
 
@@ -87,7 +87,7 @@ abstract class Client
     /**
      * @return Client
      */
-    public function disableDebugMode() : Client
+    public function disableDebugMode(): Client
     {
         $this->debug = false;
 
@@ -99,7 +99,7 @@ abstract class Client
      *
      * @return Client
      */
-    public function saveResponse(string $path) : Client
+    public function saveResponse(string $path): Client
     {
         $this->saveDir      = $path;
         $this->saveResponse = true;
@@ -114,7 +114,7 @@ abstract class Client
      *
      * @return Response
      */
-    public function executeQuery(Query $query)
+    public function executeQuery(Query $query): Response
     {
         $response = null;
 
@@ -127,20 +127,23 @@ abstract class Client
                 'verify'  => !$this->debug,
             ]);
         } catch (ClientException $e) {
-            if ($e->getCode() === 401 || $e->getCode() === 403) {
+            $code = $e->getCode();
+            if ($code === 401 || $code === 403) {
                 throw new InvalidCredentials();
-            } elseif ($e->getCode() === 429) {
-                throw new QuotaExceeded();
-            } else {
-                throw $e;
             }
+
+            if ($code === 429) {
+                throw new QuotaExceeded();
+            }
+
+            throw $e;
         } catch (ServerException $e) {
             throw InvalidServerResponse::create($query->getUrl(), $e->getCode());
         }
 
         $body = (string)$response->getBody();
         if (empty($body)) {
-            throw InvalidServerResponse::emptyResponse((string)$query->getUrl());
+            throw InvalidServerResponse::emptyResponse($query->getUrl());
         }
 
         $this->storeResponse($query->getName(), $body);
@@ -157,7 +160,7 @@ abstract class Client
      * @return Response
      * @throws InvalidResponseType
      */
-    private function parseResponse(string $entity, string $response) : Response
+    private function parseResponse(string $entity, string $response): Response
     {
         return Builder::create($entity, $response);
     }
@@ -171,7 +174,7 @@ abstract class Client
      * @return bool
      * @throws StoreResponseDirectoryNotFound
      */
-    private function storeResponse(string $fileName, string $response) : bool
+    private function storeResponse(string $fileName, string $response): bool
     {
         if ($this->saveResponse) {
 
@@ -190,7 +193,7 @@ abstract class Client
      *
      * @return HttpClient
      */
-    protected function getHttpClient() : HttpClient
+    protected function getHttpClient(): HttpClient
     {
         return $this->httpClient;
     }

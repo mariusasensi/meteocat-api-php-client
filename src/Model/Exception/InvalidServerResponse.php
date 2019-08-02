@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Exception;
 
+use RuntimeException;
+
 /**
  * Class InvalidServerResponse
  *
  * @package Meteocat\Model\Exception
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class InvalidServerResponse extends \RuntimeException
+final class InvalidServerResponse extends RuntimeException
 {
     /**
      * @param string $query
@@ -20,7 +22,8 @@ final class InvalidServerResponse extends \RuntimeException
      */
     public static function create(string $query, int $code = 0): self
     {
-        return new self(sprintf('The server returned an invalid response (%d) for query "%s". We could not parse it.', $code, $query));
+        return new self(sprintf('The server returned an invalid response (%d) for query "%s". We could not parse it.',
+            $code, $query));
     }
 
     /**
