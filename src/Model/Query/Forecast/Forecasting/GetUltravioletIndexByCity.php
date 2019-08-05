@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Forecast\Forecasting;
 
+use Meteocat\Model\Entity\UltravioletIndex;
+
 /**
  * Class GetUltravioletIndexByCity
  *
@@ -58,13 +60,11 @@ class GetUltravioletIndexByCity extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return UltravioletIndex::class;
     }
 
     /**

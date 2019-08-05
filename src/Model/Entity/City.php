@@ -42,14 +42,20 @@ final class City extends Entity implements Response
     private $lightningDischarges = [];
 
     /**
+     * @var bool|null
+     */
+    private $capital = null;
+
+    /**
      * City constructor.
      *
      * @param stdClass $data
      */
     public function __construct(stdClass $data)
     {
-        $this->code = (string)$this->getPropertyData($data, 'codi');
-        $this->name = (string)$this->getPropertyData($data, 'nom');
+        $this->code    = $this->getPropertyData($data, 'codi');
+        $this->name    = $this->getPropertyData($data, 'nom');
+        $this->capital = $this->getPropertyData($data, 'capital');
 
         $coordinates = $this->getPropertyData($data, 'coordenades');
         if ($coordinates !== null) {
@@ -107,5 +113,13 @@ final class City extends Entity implements Response
     public function getLightningDischarges(): array
     {
         return $this->lightningDischarges;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function isCapital(): ?bool
+    {
+        return $this->capital;
     }
 }

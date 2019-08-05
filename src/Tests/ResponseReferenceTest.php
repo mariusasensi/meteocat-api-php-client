@@ -62,6 +62,7 @@ class ResponseReferenceTest extends TestCase
         $this->assertEquals('250019', $city1->getCode());
         $this->assertEquals('Abella de la Conca', $city1->getName());
         $this->assertEquals([], $city1->getLightningDischarges());
+        $this->assertEquals(null, $city1->isCapital());
 
         /** @var Entity\Coordinate $city1Cood */
         $city1Cood = $city1->getCoordinate();

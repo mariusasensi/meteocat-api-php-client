@@ -25,18 +25,18 @@ class Builder
      * @param string $raw
      *
      * @return Response|array
-     * @throws EntityNotFound
+     * @throws EntityNotFound|NoDataAvailable
      */
     public static function create(string $entity, string $raw)
     {
-        if (!class_exists($entity)) {
-            throw new EntityNotFound();
-        }
-
         // Always returns a JSON, else this will return null.
         $response = json_decode(html_entity_decode($raw), false);
         if (empty($response)) {
             throw new NoDataAvailable();
+        }
+
+        if (!class_exists($entity)) {
+            throw new EntityNotFound();
         }
 
         // Unique response.

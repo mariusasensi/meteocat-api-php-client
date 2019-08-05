@@ -7,6 +7,8 @@ use Meteocat\Model\Query\Quota\Information\GetCurrentUsage;
 use Meteocat\Provider\Meteocat;
 use PHPUnit\Framework\TestCase;
 
+/*use Meteocat\Model\Query\Forecast\Forecasting as Forecast;*/
+
 class RequestTest extends TestCase
 {
     public function testInvalidCredentials()
@@ -27,8 +29,16 @@ class RequestTest extends TestCase
             ->enableDebugMode()
             ->saveResponse('src/Tests/.cached_responses');
 
-        $query = new Lightning\GetOfCountyByDate(14, DateTime::createFromFormat('Y-m-d H', '2019-08-04 16'));
-        $response = $client->executeQuery($query);
+        $date = DateTime::createFromFormat('Y-m-d', '2019-08-06');
+        $queries[] = new Forecast\GetCatalunyaByDate($date);
+
+        foreach ($queries as $query) {
+            try {
+                $response = $client->executeQuery($query);
+            } catch (\Exception $e) {
+                var_dump(get_class($e));
+            }
+        }
     }
     */
 }
