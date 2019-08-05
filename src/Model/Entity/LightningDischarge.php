@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
 use stdClass;
 
 /**
@@ -12,7 +13,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class LightningDischarge
+final class LightningDischarge extends Entity
 {
     /**
      * @var string|null
@@ -31,8 +32,8 @@ final class LightningDischarge
      */
     public function __construct(stdClass $data)
     {
-        $this->type  = (string)$data->tipus;
-        $this->count = (int)$data->recompte;
+        $this->type  = $this->getPropertyData($data, 'tipus');
+        $this->count = $this->getPropertyData($data, 'recompte', 0);
     }
 
     /**

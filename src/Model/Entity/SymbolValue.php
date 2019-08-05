@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
 use stdClass;
 
 /**
@@ -12,7 +13,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-class SymbolValue
+class SymbolValue extends Entity
 {
     /**
      * @var string|null
@@ -51,12 +52,12 @@ class SymbolValue
      */
     public function __construct(stdClass $data)
     {
-        $this->code         = (string)$data->codi;
-        $this->name         = (string)$data->nom;
-        $this->description  = (string)$data->descripcio;
-        $this->category     = isset($data->categoria) ? (string)$data->categoria : null;
-        $this->urlIcon      = (string)$data->icona;
-        $this->urlIconNight = (string)$data->icona_nit;
+        $this->code         = $this->getPropertyData($data, 'codi');
+        $this->name         = $this->getPropertyData($data, 'nom');
+        $this->description  = $this->getPropertyData($data, 'descripcio');
+        $this->category     = $this->getPropertyData($data, 'categoria');
+        $this->urlIcon      = $this->getPropertyData($data, 'icona');
+        $this->urlIconNight = $this->getPropertyData($data, 'icona_nit');
     }
 
     /**

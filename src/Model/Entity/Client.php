@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
 use stdClass;
 
 /**
@@ -12,7 +13,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Client
+final class Client extends Entity
 {
     /**
      * @var string|null
@@ -26,7 +27,7 @@ final class Client
      */
     public function __construct(stdClass $data)
     {
-        $this->name = (string)$data->nom;
+        $this->name = (string)$this->getPropertyData($data, 'nom');
     }
 
     /**

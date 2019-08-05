@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Factory;
 
-use Meteocat\Model\Entity\Response;
+use Meteocat\Model\Common\Response;
 use Meteocat\Model\Exception\EntityNotFound;
 use Meteocat\Model\Exception\NoDataAvailable;
 use Meteocat\Model\Exception\StoreResponseAlreadyExist;

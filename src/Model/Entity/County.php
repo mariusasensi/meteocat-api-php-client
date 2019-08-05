@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
+use Meteocat\Model\Common\Response;
 use stdClass;
 
 /**
@@ -12,12 +14,12 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class County extends Response
+final class County extends Entity implements Response
 {
     /**
-     * @var int|null
+     * @var int
      */
-    private $code = null;
+    private $code = 0;
 
     /**
      * @var string|null
@@ -31,14 +33,14 @@ final class County extends Response
      */
     public function __construct(stdClass $data)
     {
-        $this->code = (int)$data->codi;
-        $this->name = (string)$data->nom;
+        $this->code = $this->getPropertyData($data, 'codi', 0);
+        $this->name = $this->getPropertyData($data, 'nom');
     }
 
     /**
      * @return int|null
      */
-    public function getCode(): ?int
+    public function getCode(): int
     {
         return $this->code;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
 use stdClass;
 
 /**
@@ -12,7 +13,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Plan
+final class Plan extends Entity
 {
     /**
      * @var string|null
@@ -25,19 +26,19 @@ final class Plan
     private $period = null;
 
     /**
-     * @var int|null
+     * @var int
      */
-    private $requestsMax = null;
+    private $requestsMax = 0;
 
     /**
-     * @var int|null
+     * @var int
      */
-    private $requestsRemaining = null;
+    private $requestsRemaining = 0;
 
     /**
-     * @var int|null
+     * @var int
      */
-    private $requestsRealised = null;
+    private $requestsRealised = 0;
 
     /**
      * Plan constructor.
@@ -46,11 +47,11 @@ final class Plan
      */
     public function __construct(stdClass $data)
     {
-        $this->name              = (string)$data->nom;
-        $this->period            = (string)$data->periode;
-        $this->requestsMax       = (int)$data->maxConsultes;
-        $this->requestsRemaining = (int)$data->consultesRestants;
-        $this->requestsRealised  = (int)$data->consultesRealitzades;
+        $this->name              = (string)$this->getPropertyData($data, 'nom');
+        $this->period            = (string)$this->getPropertyData($data, 'periode');
+        $this->requestsMax       = (int)$this->getPropertyData($data, 'maxConsultes', 0);
+        $this->requestsRemaining = (int)$this->getPropertyData($data, 'consultesRestants', 0);
+        $this->requestsRealised  = (int)$this->getPropertyData($data, 'consultesRealitzades', 0);
     }
 
     /**
@@ -70,25 +71,25 @@ final class Plan
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getRequestsMax(): ?int
+    public function getRequestsMax(): int
     {
         return $this->requestsMax;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getRequestsRemaining(): ?int
+    public function getRequestsRemaining(): int
     {
         return $this->requestsRemaining;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getRequestsRealised(): ?int
+    public function getRequestsRealised(): int
     {
         return $this->requestsRealised;
     }

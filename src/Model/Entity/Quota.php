@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
+use Meteocat\Model\Common\Response;
 use stdClass;
 
 /**
@@ -12,7 +14,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Quota extends Response
+final class Quota extends Entity implements Response
 {
     /**
      * @var Client|null
@@ -31,17 +33,23 @@ final class Quota extends Response
      */
     public function __construct(stdClass $data)
     {
-        $this->client = new Client($data->client);
+        $client = $this->getPropertyData($data, 'client');
+        if ($client !== null) {
+            $this->client = new Client((object)$client);
+        }
 
-        foreach ($data->plans as $plan) {
-            $this->plans[] = new Plan($plan);
+        $plans = $this->getPropertyData($data, 'plans');
+        if (is_array($plans)) {
+            foreach ($plans as $plan) {
+                $this->plans[] = new Plan((object)$plan);
+            }
         }
     }
 
     /**
      * @return Client|null
      */
-    public function getClient(): Client
+    public function getClient(): ?Client
     {
         return $this->client;
     }

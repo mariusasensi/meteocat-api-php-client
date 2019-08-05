@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Response;
+use Meteocat\Model\Common\Entity;
 use stdClass;
 
 /**
@@ -12,7 +14,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class City extends Response
+final class City extends Entity implements Response
 {
     /**
      * @var string|null
@@ -46,14 +48,23 @@ final class City extends Response
      */
     public function __construct(stdClass $data)
     {
-        $this->code       = (string)$data->codi;
-        $this->name       = (string)$data->nom;
-        $this->coordinate = isset($data->coordenades) ? new Coordinate((object)$data->coordenades) : null;
-        $this->county     = isset($data->comarca) ? new County((object)$data->comarca) : null;
+        $this->code = (string)$this->getPropertyData($data, 'codi');
+        $this->name = (string)$this->getPropertyData($data, 'nom');
 
-        if (isset($data->descarregues)) {
-            foreach ($data->descarregues as $discharges) {
-                $this->lightningDischarges[] = new LightningDischarge((object)$discharges);
+        $coordinates = $this->getPropertyData($data, 'coordenades');
+        if ($coordinates !== null) {
+            $this->coordinate = new Coordinate((object)$coordinates);
+        }
+
+        $county = $this->getPropertyData($data, 'comarca');
+        if ($county !== null) {
+            $this->county = new County((object)$county);
+        }
+
+        $discharges = $this->getPropertyData($data, 'descarregues');
+        if (is_array($discharges)) {
+            foreach ($discharges as $discharge) {
+                $this->lightningDischarges[] = new LightningDischarge((object)$discharge);
             }
         }
     }

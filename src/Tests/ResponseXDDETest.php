@@ -27,7 +27,15 @@ class ResponseXDDETest extends TestCase
         $this->assertEquals(0.5, $lightning1->getChiSquared());
         $this->assertEquals(2, $lightning1->getSensorsCount());
         $this->assertEquals(true, $lightning1->isCloudGround());
-        $this->assertEquals('251462', $lightning1->getCityId());
+
+        /** @var Entity\City $lightning1City */
+        $lightning1City = $lightning1->getCity();
+        $this->assertInstanceOf(Entity\City::class, $lightning1City);
+        $this->assertEquals('251462', $lightning1City->getCode());
+        $this->assertEquals(null, $lightning1City->getName());
+        $this->assertEquals([], $lightning1City->getLightningDischarges());
+        $this->assertEquals(null, $lightning1City->getCounty());
+        $this->assertEquals(null, $lightning1City->getCoordinate());
 
         /** @var Entity\Coordinate $lightning1Coordinate */
         $lightning1Coordinate = $lightning1->getCoordinate();
@@ -51,7 +59,15 @@ class ResponseXDDETest extends TestCase
         $this->assertEquals(1.8, $lightning2->getChiSquared());
         $this->assertEquals(4, $lightning2->getSensorsCount());
         $this->assertEquals(true, $lightning2->isCloudGround());
-        $this->assertEquals('251462', $lightning2->getCityId());
+
+        /** @var Entity\City $lightning2City */
+        $lightning2City = $lightning1->getCity();
+        $this->assertInstanceOf(Entity\City::class, $lightning2City);
+        $this->assertEquals('251462', $lightning2City->getCode());
+        $this->assertEquals(null, $lightning2City->getName());
+        $this->assertEquals([], $lightning2City->getLightningDischarges());
+        $this->assertEquals(null, $lightning2City->getCounty());
+        $this->assertEquals(null, $lightning2City->getCoordinate());
 
         /** @var Entity\Coordinate $lightning2Coordinate */
         $lightning2Coordinate = $lightning2->getCoordinate();

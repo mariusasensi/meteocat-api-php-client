@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
+use Meteocat\Model\Common\Response;
 use DateTime;
 use DateTimeZone;
 use stdClass;
@@ -14,7 +16,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Lightning extends Response
+final class Lightning extends Entity implements Response
 {
     /**
      * @var int|null
@@ -52,9 +54,9 @@ final class Lightning extends Response
     private $cloudGround = false;
 
     /**
-     * @var string|null
+     * @var City|null
      */
-    private $cityId = null;
+    private $city = null;
 
     /**
      * @var Coordinate|null
@@ -68,15 +70,34 @@ final class Lightning extends Response
      */
     public function __construct(stdClass $data)
     {
-        $this->id           = (int)$data->id;
-        $this->date         = DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $data->data, new DateTimeZone('UTC'));
-        $this->intensity    = (float)$data->correntPic;
-        $this->chiSquared   = (float)$data->chi2;
-        $this->ellipse      = new Ellipse($data->ellipse);
-        $this->sensorsCount = (int)$data->numSensors;
-        $this->cloudGround  = (bool)$data->nuvolTerra;
-        $this->cityId       = (string)$data->idMunicipi;
-        $this->coordinate   = new Coordinate($data->coordenades);
+        $this->id           = $this->getPropertyData($data, 'id');
+        $this->intensity    = $this->getPropertyData($data, 'correntPic', 0);
+        $this->chiSquared   = $this->getPropertyData($data, 'chi2', 0);
+        $this->sensorsCount = $this->getPropertyData($data, 'numSensors', 0);
+        $this->cloudGround  = $this->getPropertyData($data, 'nuvolTerra', false);
+
+        $cityCode = $this->getPropertyData($data, 'idMunicipi');
+        if ($cityCode !== null) {
+            $cityObject = new stdClass();
+            $cityObject->codi = $cityCode;
+
+            $this->city = new City($cityObject);
+        }
+
+        $ellipse = $this->getPropertyData($data, 'ellipse');
+        if ($ellipse !== null) {
+            $this->ellipse = new Ellipse((object)$ellipse);
+        }
+
+        $date = $this->getPropertyData($data, 'data');
+        if ($date !== null) {
+            $this->date = DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $date, new DateTimeZone('UTC'));
+        }
+
+        $coordinates = $this->getPropertyData($data, 'coordenades');
+        if ($coordinates !== null) {
+            $this->coordinate = new Coordinate((object)$coordinates);
+        }
     }
 
     /**
@@ -136,11 +157,11 @@ final class Lightning extends Response
     }
 
     /**
-     * @return string|null
+     * @return City|null
      */
-    public function getCityId(): ?string
+    public function getCity(): ?City
     {
-        return $this->cityId;
+        return $this->city;
     }
 
     /**

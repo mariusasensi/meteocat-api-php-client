@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
 use stdClass;
 
 /**
@@ -12,17 +13,17 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Coordinate
+final class Coordinate extends Entity
 {
     /**
-     * @var float|null
+     * @var float
      */
-    private $latitude = null;
+    private $latitude = 0;
 
     /**
-     * @var float|null
+     * @var float
      */
-    private $longitude = null;
+    private $longitude = 0;
 
     /**
      * Coordinate constructor.
@@ -31,22 +32,22 @@ final class Coordinate
      */
     public function __construct(stdClass $data)
     {
-        $this->latitude  = (float)$data->latitud;
-        $this->longitude = (float)$data->longitud;
+        $this->latitude  = (float)(string)$this->getPropertyData($data, 'latitud', 0);
+        $this->longitude = (float)(string)$this->getPropertyData($data, 'longitud', 0);
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getLatitude(): ?float
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getLongitude(): ?float
+    public function getLongitude(): float
     {
         return $this->longitude;
     }

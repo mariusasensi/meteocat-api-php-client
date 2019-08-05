@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
 use stdClass;
 
 /**
@@ -12,7 +13,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-final class Ellipse
+final class Ellipse extends Entity
 {
     /**
      * @var int
@@ -25,7 +26,7 @@ final class Ellipse
     private $minorAxis = 0;
 
     /**
-     * @var float|int
+     * @var float
      */
     private $angle = 0;
 
@@ -36,9 +37,9 @@ final class Ellipse
      */
     public function __construct(stdClass $data)
     {
-        $this->majorAxis = (int)$data->eixMajor;
-        $this->minorAxis = (int)$data->eixMenor;
-        $this->angle = (float)$data->angle;
+        $this->majorAxis = $this->getPropertyData($data, 'eixMajor', 0);
+        $this->minorAxis = $this->getPropertyData($data, 'eixMenor', 0);
+        $this->angle     = $this->getPropertyData($data, 'angle', 0);
     }
 
     /**
@@ -58,9 +59,9 @@ final class Ellipse
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getAngle()
+    public function getAngle(): float
     {
         return $this->angle;
     }

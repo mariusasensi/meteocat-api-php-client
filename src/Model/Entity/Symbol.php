@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Meteocat\Model\Common\Entity;
+use Meteocat\Model\Common\Response;
 use stdClass;
 
 /**
@@ -12,7 +14,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-class Symbol extends Response
+class Symbol extends Entity implements Response
 {
     /**
      * @var string|null
@@ -36,11 +38,14 @@ class Symbol extends Response
      */
     public function __construct(stdClass $data)
     {
-        $this->name        = (string)$data->nom;
-        $this->description = (string)$data->descripcio;
+        $this->name        = $this->getPropertyData($data, 'nom');
+        $this->description = $this->getPropertyData($data, 'descripcio');
 
-        foreach ($data->valors as $symbol) {
-            $this->values[] = new SymbolValue($symbol);
+        $symbols = $this->getPropertyData($data, 'valors');
+        if ($symbols !== null) {
+            foreach ($symbols as $symbol) {
+                $this->values[] = new SymbolValue((object)$symbol);
+            }
         }
     }
 

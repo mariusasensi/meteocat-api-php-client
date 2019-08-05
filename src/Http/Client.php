@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Meteocat\Http;
 
-use Meteocat\Model\Entity\Response;
-use Meteocat\Model\Exception\InvalidResponseType;
+use Meteocat\Model\Common\Response;
 use Meteocat\Model\Exception\InvalidServerResponse;
 use Meteocat\Model\Exception\InvalidCredentials;
 use Meteocat\Model\Exception\QuotaExceeded;
@@ -156,13 +155,12 @@ abstract class Client
     /**
      * Returns the result of the petition in an entity.
      *
-     * @param string $entity   Entity to be generated.
-     * @param string $raw      Response of the request in json format.
+     * @param string $entity Entity to be generated.
+     * @param string $raw    Response of the request in json format.
      *
-     * @return Response
-     * @throws InvalidResponseType
+     * @return array|Response
      */
-    private function parseResponse(string $entity, string $raw): Response
+    private function parseResponse(string $entity, string $raw)
     {
         return Builder::create($entity, $raw);
     }
