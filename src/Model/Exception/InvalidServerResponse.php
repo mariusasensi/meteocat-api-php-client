@@ -22,8 +22,7 @@ final class InvalidServerResponse extends RuntimeException
      */
     public static function create(string $query, int $code = 0): self
     {
-        return new self(sprintf('The server returned an invalid response (%d) for query "%s". We could not parse it.',
-            $code, $query));
+        return new self(sprintf('The server returned an invalid response (%d) for query "%s". We could not parse it.', $code, $query));
     }
 
     /**

@@ -35,6 +35,11 @@ final class City extends Response
     private $county = null;
 
     /**
+     * @var array
+     */
+    private $lightningDischarges = [];
+
+    /**
      * City constructor.
      *
      * @param stdClass $data
@@ -43,8 +48,14 @@ final class City extends Response
     {
         $this->code       = (string)$data->codi;
         $this->name       = (string)$data->nom;
-        $this->coordinate = new Coordinate((object)$data->coordenades);
-        $this->county     = new County((object)$data->comarca);
+        $this->coordinate = isset($data->coordenades) ? new Coordinate((object)$data->coordenades) : null;
+        $this->county     = isset($data->comarca) ? new County((object)$data->comarca) : null;
+
+        if (isset($data->descarregues)) {
+            foreach ($data->descarregues as $discharges) {
+                $this->lightningDischarges[] = new LightningDischarge((object)$discharges);
+            }
+        }
     }
 
     /**
@@ -77,5 +88,13 @@ final class City extends Response
     public function getCounty(): ?County
     {
         return $this->county;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLightningDischarges(): array
+    {
+        return $this->lightningDischarges;
     }
 }

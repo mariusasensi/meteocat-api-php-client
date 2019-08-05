@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XDDE\Lightning;
 
 use DateTime;
+use Meteocat\Model\Entity\City;
 
 /**
  * Class GetOfCountyByDate
@@ -71,13 +72,11 @@ final class GetOfCountyByDate extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return City::class;
     }
 
     /**

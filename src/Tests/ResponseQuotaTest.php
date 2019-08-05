@@ -7,7 +7,7 @@ use Meteocat\Model\Factory\Builder;
 use Meteocat\Model\Query\Quota\Information;
 use PHPUnit\Framework\TestCase;
 
-class FactoryQuotaTest extends TestCase
+class ResponseQuotaTest extends TestCase
 {
     public function testGetCurrentUsage()
     {

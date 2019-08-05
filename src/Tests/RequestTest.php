@@ -25,10 +25,10 @@ class RequestTest extends TestCase
         $client = new Meteocat($_SERVER['API_KEY']);
         $client
             ->enableDebugMode()
-            ->saveResponse(__DIR__ . "/.cached_responses");
-        $response = $client->executeQuery(new GetCurrentUsage());
+            ->saveResponse('src/Tests/.cached_responses');
 
-        $this->assertInstanceOf(Quota::class, $response);
+        $query = new Lightning\GetOfCountyByDate(14, DateTime::createFromFormat('Y-m-d H', '2019-08-04 16'));
+        $response = $client->executeQuery($query);
     }
     */
 }

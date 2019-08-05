@@ -141,7 +141,9 @@ abstract class Client
             throw InvalidServerResponse::create($query->getUrl(), $e->getCode());
         }
 
-        $body = (string)$response->getBody();
+        // Gets response body.
+        $body = (string)$response->getBody()->getContents();
+
         if (empty($body)) {
             throw InvalidServerResponse::emptyResponse($query->getUrl());
         }
@@ -155,14 +157,14 @@ abstract class Client
      * Returns the result of the petition in an entity.
      *
      * @param string $entity   Entity to be generated.
-     * @param string $response Response of the request in json format.
+     * @param string $raw      Response of the request in json format.
      *
      * @return Response
      * @throws InvalidResponseType
      */
-    private function parseResponse(string $entity, string $response): Response
+    private function parseResponse(string $entity, string $raw): Response
     {
-        return Builder::create($entity, $response);
+        return Builder::create($entity, $raw);
     }
 
     /**

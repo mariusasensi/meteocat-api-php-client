@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XDDE\Lightning;
 
 use DateTime;
+use Meteocat\Model\Entity\Lightning;
 
 /**
  * Class GetOfCatalunyaByDateTime
@@ -64,13 +65,11 @@ final class GetOfCatalunyaByDateTime extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Lightning::class;
     }
 
     /**

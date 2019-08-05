@@ -6,6 +6,7 @@ namespace Meteocat\Model\Factory;
 
 use Meteocat\Model\Entity\Response;
 use Meteocat\Model\Exception\EntityNotFound;
+use Meteocat\Model\Exception\NoDataAvailable;
 use Meteocat\Model\Exception\StoreResponseAlreadyExist;
 use Meteocat\Model\Exception\StoreResponseDirectoryNotFound;
 
@@ -32,8 +33,11 @@ class Builder
             throw new EntityNotFound();
         }
 
-        // Parse.
+        // Always returns a JSON, else this will return null.
         $response = json_decode(html_entity_decode($raw), false);
+        if (empty($response)) {
+            throw new NoDataAvailable();
+        }
 
         // Unique response.
         if (!is_array($response)) {
@@ -57,7 +61,7 @@ class Builder
      */
     public static function canUsePathToSave(string $path): bool
     {
-        return empty($path) || !file_exists($path);
+        return !empty($path) && is_dir($path);
     }
 
     /**

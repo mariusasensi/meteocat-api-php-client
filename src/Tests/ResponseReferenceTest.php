@@ -7,7 +7,7 @@ use Meteocat\Model\Factory\Builder;
 use Meteocat\Model\Query\Reference\Data;
 use PHPUnit\Framework\TestCase;
 
-class FactoryReferenceTest extends TestCase
+class ResponseReferenceTest extends TestCase
 {
     public function testGetAllCounties()
     {
@@ -61,6 +61,7 @@ class FactoryReferenceTest extends TestCase
         $this->assertInstanceOf(Entity\City::class, $city1);
         $this->assertEquals('250019', $city1->getCode());
         $this->assertEquals('Abella de la Conca', $city1->getName());
+        $this->assertEquals([], $city1->getLightningDischarges());
 
         /** @var Entity\Coordinate $city1Cood */
         $city1Cood = $city1->getCoordinate();
