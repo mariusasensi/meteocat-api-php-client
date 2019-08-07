@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\Forecast\Forecasting;
 
 use Datetime;
+use Meteocat\Model\Entity\Forecast;
 
 /**
  * Class GetCatalunyaByDate
@@ -70,7 +71,7 @@ class GetCatalunyaByDate extends Base
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Forecast::class;
     }
 
     /**
