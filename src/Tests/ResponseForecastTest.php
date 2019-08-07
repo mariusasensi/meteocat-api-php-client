@@ -209,14 +209,141 @@ class ResponseForecastTest extends TestCase
         // Load from file.
         $mockResponse = file_get_contents(__DIR__ . '/.cached_responses/response.api.meteo.cat.pronostic.v1.comarcal.2019.08.06.json');
 
-        /** @var Forecast\GetCatalunyaByDate $query */
+        /** @var Forecast\GetCountyByDate $query */
         $query = new Forecast\GetCountyByDate(DateTime::createFromFormat('Y-m-d', '2019-08-06'));
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var Entity\ForecastCounty $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertInstanceOf(Entity\ForecastCounty::class, $entityResponse);
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        /** @var Entity\ForecastCountyPart $morning */
+        $morning = $entityResponse->getMorning();
+        $this->assertInstanceOf(Entity\ForecastCountyPart::class, $morning);
+        $this->assertEquals('morning', $morning->getDayPart());
+
+        /** @var array $morningSkies */
+        $morningSkies = $morning->getSky();
+        $this->assertIsArray($morningSkies);
+        $this->assertCount(42, $morningSkies);
+
+        /** @var Entity\ForecastCountySky $morningSkies1 */
+        $morningSkies1 = current($morningSkies);
+        $this->assertInstanceOf(Entity\ForecastCountySky::class, $morningSkies1);
+        $this->assertInstanceOf(Entity\SymbolValue::class, $morningSkies1->getSymbol());
+        $this->assertEquals('3', $morningSkies1->getSymbol()->getCode());
+        $this->assertEquals(null, $morningSkies1->getSymbol()->getName());
+        $this->assertEquals(null, $morningSkies1->getSymbol()->getDescription());
+        $this->assertEquals(null, $morningSkies1->getSymbol()->getCategory());
+        $this->assertEquals(null, $morningSkies1->getSymbol()->getUrlIcon());
+        $this->assertEquals(null, $morningSkies1->getSymbol()->getUrlIconNight());
+        $this->assertInstanceOf(Entity\County::class, $morningSkies1->getCounty());
+        $this->assertEquals(1, $morningSkies1->getCounty()->getCode());
+        $this->assertEquals(null, $morningSkies1->getCounty()->getName());
+
+        /** @var array $morningHails */
+        $morningHails = $morning->getHail();
+        $this->assertIsArray($morningHails);
+        $this->assertCount(42, $morningHails);
+
+        /** @var Entity\ForecastCountyHail $morningHails1 */
+        $morningHails1 = current($morningHails);
+        $this->assertInstanceOf(Entity\ForecastCountyHail::class, $morningHails1);
+        $this->assertInstanceOf(Entity\County::class, $morningHails1->getCounty());
+        $this->assertEquals(1, $morningHails1->getCounty()->getCode());
+        $this->assertEquals(null, $morningHails1->getCounty()->getName());
+        $this->assertEquals(1, $morningHails1->getLevel());
+
+        /** @var array $morningRains */
+        $morningRains = $morning->getRain();
+        $this->assertIsArray($morningRains);
+        $this->assertCount(42, $morningRains);
+
+        /** @var Entity\ForecastCountyRain $morningRains1 */
+        $morningRains1 = current($morningRains);
+        $this->assertInstanceOf(Entity\ForecastCountyRain::class, $morningRains1);
+        $this->assertInstanceOf(Entity\County::class, $morningRains1->getCounty());
+        $this->assertEquals(23, $morningRains1->getCounty()->getCode());
+        $this->assertEquals(null, $morningRains1->getCounty()->getName());
+        $this->assertEquals(1, $morningRains1->getChance());
+        $this->assertEquals(0, $morningRains1->getIntensity());
+        $this->assertEquals(0, $morningRains1->getAccumulation());
+
+        /** @var Entity\ForecastCountyPart $afternoon */
+        $afternoon = $entityResponse->getAfternoon();
+        $this->assertInstanceOf(Entity\ForecastCountyPart::class, $afternoon);
+        $this->assertEquals('afternoon', $afternoon->getDayPart());
+
+        /** @var array $afternoonSkies */
+        $afternoonSkies = $afternoon->getSky();
+        $this->assertIsArray($afternoonSkies);
+        $this->assertCount(42, $afternoonSkies);
+
+        /** @var Entity\ForecastCountySky $afternoonSkies1 */
+        $afternoonSkies1 = current($afternoonSkies);
+        $this->assertInstanceOf(Entity\ForecastCountySky::class, $afternoonSkies1);
+        $this->assertInstanceOf(Entity\SymbolValue::class, $afternoonSkies1->getSymbol());
+        $this->assertEquals('3', $afternoonSkies1->getSymbol()->getCode());
+        $this->assertEquals(null, $afternoonSkies1->getSymbol()->getName());
+        $this->assertEquals(null, $afternoonSkies1->getSymbol()->getDescription());
+        $this->assertEquals(null, $afternoonSkies1->getSymbol()->getCategory());
+        $this->assertEquals(null, $afternoonSkies1->getSymbol()->getUrlIcon());
+        $this->assertEquals(null, $afternoonSkies1->getSymbol()->getUrlIconNight());
+        $this->assertInstanceOf(Entity\County::class, $afternoonSkies1->getCounty());
+        $this->assertEquals('1', $afternoonSkies1->getCounty()->getCode());
+        $this->assertEquals(null, $afternoonSkies1->getCounty()->getName());
+
+        /** @var array $afternoonHails */
+        $afternoonHails = $afternoon->getHail();
+        $this->assertIsArray($afternoonHails);
+        $this->assertCount(42, $afternoonHails);
+
+        /** @var Entity\ForecastCountyHail $afternoonHails1 */
+        $afternoonHails1 = current($afternoonHails);
+        $this->assertInstanceOf(Entity\ForecastCountyHail::class, $afternoonHails1);
+        $this->assertInstanceOf(Entity\County::class, $afternoonHails1->getCounty());
+        $this->assertEquals(1, $afternoonHails1->getCounty()->getCode());
+        $this->assertEquals(null, $afternoonHails1->getCounty()->getName());
+        $this->assertEquals(1, $afternoonHails1->getLevel());
+
+        /** @var array $afternoonRains */
+        $afternoonRains = $afternoon->getRain();
+        $this->assertIsArray($afternoonRains);
+        $this->assertCount(42, $afternoonRains);
+
+        /** @var Entity\ForecastCountyRain $afternoonRains1 */
+        $afternoonRains1 = current($afternoonRains);
+        $this->assertInstanceOf(Entity\ForecastCountyRain::class, $afternoonRains1);
+        $this->assertInstanceOf(Entity\County::class, $afternoonRains1->getCounty());
+        $this->assertEquals(19, $afternoonRains1->getCounty()->getCode());
+        $this->assertEquals(null, $afternoonRains1->getCounty()->getName());
+        $this->assertEquals(1, $afternoonRains1->getChance());
+        $this->assertEquals(0, $afternoonRains1->getIntensity());
+        $this->assertEquals(0, $afternoonRains1->getAccumulation());
+
+        /** @var array $maximums */
+        $maximums = $entityResponse->getMaximum();
+        $this->assertIsArray($maximums);
+        $this->assertCount(42, $maximums);
+
+        /** @var Entity\ForecastCountyTemperature $maximums20 */
+        $maximums20 = $maximums[19];
+        $this->assertEquals(34, $maximums20->getTemperature());
+        $this->assertInstanceOf(Entity\County::class, $maximums20->getCounty());
+        $this->assertEquals(20, $maximums20->getCounty()->getCode());
+        $this->assertEquals(null, $maximums20->getCounty()->getName());
+
+        /** @var array $minimums */
+        $minimums = $entityResponse->getMinimum();
+        $this->assertIsArray($minimums);
+        $this->assertCount(42, $minimums);
+
+        /** @var Entity\ForecastCountyTemperature $minimums10 */
+        $minimums10 = $minimums[9];
+        $this->assertEquals(19, $minimums10->getTemperature());
+        $this->assertInstanceOf(Entity\County::class, $minimums10->getCounty());
+        $this->assertEquals(10, $minimums10->getCounty()->getCode());
+        $this->assertEquals(null, $minimums10->getCounty()->getName());
+
     }
 
     public function testGetByCity()

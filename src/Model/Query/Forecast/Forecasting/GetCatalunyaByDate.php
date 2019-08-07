@@ -65,8 +65,6 @@ class GetCatalunyaByDate extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string

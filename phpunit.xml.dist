@@ -9,6 +9,7 @@
 
     <php>
         <server name="API_KEY" value="YOUR_API_KEY" />
+        <server name="SKIP_REQUEST_TESTS" value="true" />
     </php>
 
     <testsuites>

@@ -38,7 +38,7 @@ final class County extends Entity implements Response
     }
 
     /**
-     * @return int|null
+     * @return int
      */
     public function getCode(): int
     {

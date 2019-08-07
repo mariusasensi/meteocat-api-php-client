@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\Forecast\Forecasting;
 
 use Datetime;
+use Meteocat\Model\Entity\ForecastCounty;
 
 /**
  * Class GetCountyByDate
@@ -64,13 +65,11 @@ class GetCountyByDate extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return ForecastCounty::class;
     }
 
     /**

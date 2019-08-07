@@ -7,12 +7,14 @@ use Meteocat\Model\Query\Quota\Information\GetCurrentUsage;
 use Meteocat\Provider\Meteocat;
 use PHPUnit\Framework\TestCase;
 
-/*use Meteocat\Model\Query\Forecast\Forecasting as Forecast;*/
-
 class RequestTest extends TestCase
 {
     public function testInvalidCredentials()
     {
+        if ($_SERVER['SKIP_REQUEST_TESTS'] === true) {
+            $this->markTestSkipped('Skipped by configuration');
+        }
+
         $this->expectException(InvalidCredentials::class);
 
         $client = new Meteocat('InvalidToken!');
@@ -20,25 +22,4 @@ class RequestTest extends TestCase
             ->enableDebugMode()
             ->executeQuery(new GetCurrentUsage()); // Bum!
     }
-
-    /*
-    public function testRequest()
-    {
-        $client = new Meteocat($_SERVER['API_KEY']);
-        $client
-            ->enableDebugMode()
-            ->saveResponse('src/Tests/.cached_responses');
-
-        $date = DateTime::createFromFormat('Y-m-d', '2019-08-06');
-        $queries[] = new Forecast\GetCatalunyaByDate($date);
-
-        foreach ($queries as $query) {
-            try {
-                $response = $client->executeQuery($query);
-            } catch (\Exception $e) {
-                var_dump(get_class($e));
-            }
-        }
-    }
-    */
 }
