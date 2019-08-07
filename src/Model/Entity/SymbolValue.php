@@ -13,7 +13,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-class SymbolValue extends Entity
+final class SymbolValue extends Entity
 {
     /**
      * @var string|null

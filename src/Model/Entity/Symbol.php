@@ -14,7 +14,7 @@ use stdClass;
  * @package Meteocat\Model\Entity
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-class Symbol extends Entity implements Response
+final class Symbol extends Entity implements Response
 {
     /**
      * @var string|null
