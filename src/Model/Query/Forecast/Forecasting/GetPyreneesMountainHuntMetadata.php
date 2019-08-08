@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Forecast\Forecasting;
 
+use Meteocat\Model\Entity\MountainHunt;
+
 /**
  * Class GetPyreneesMountainHuntMetadata
  *
@@ -35,13 +37,11 @@ class GetPyreneesMountainHuntMetadata extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return MountainHunt::class;
     }
 
     /**

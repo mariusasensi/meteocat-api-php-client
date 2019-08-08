@@ -399,11 +399,24 @@ class ResponseForecastTest extends TestCase
         /** @var Forecast\GetPyreneesMountainPeakMetadata $query */
         $query = new Forecast\GetPyreneesMountainPeakMetadata();
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var array $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertIsArray($entityResponse);
+        $this->assertCount(49,$entityResponse);
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        /** @var Entity\MountainPeak $peak1 */
+        $peak1 = current($entityResponse);
+        $this->assertInstanceOf(Entity\MountainPeak::class, $peak1);
+        $this->assertEquals('5a69e26b', $peak1->getCode());
+        $this->assertEquals('Pic de Montlude', $peak1->getName());
+        $this->assertEquals('pic-de-montlude', $peak1->getSlug());
+        $this->assertEquals('Pics', $peak1->getType());
+
+        /** @var Entity\Coordinate $peak1Coordinate */
+        $peak1Coordinate = $peak1->getCoordinate();
+        $this->assertInstanceOf(Entity\Coordinate::class, $peak1Coordinate);
+        $this->assertEquals(42.78524000000477, $peak1Coordinate->getLatitude());
+        $this->assertEquals(0.7587399999917329, $peak1Coordinate->getLongitude());
     }
 
     public function testGetPyreneesMountainHuntMetadata()
@@ -414,11 +427,24 @@ class ResponseForecastTest extends TestCase
         /** @var Forecast\GetPyreneesMountainHuntMetadata $query */
         $query = new Forecast\GetPyreneesMountainHuntMetadata();
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var array $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertIsArray($entityResponse);
+        $this->assertCount(41,$entityResponse);
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        /** @var Entity\MountainHunt $hunt1 */
+        $hunt1 = current($entityResponse);
+        $this->assertInstanceOf(Entity\MountainHunt::class, $hunt1);
+        $this->assertEquals('9cc1a507', $hunt1->getCode());
+        $this->assertEquals('Refugi Colomina', $hunt1->getName());
+        $this->assertEquals('refugi-colomina', $hunt1->getSlug());
+        $this->assertEquals('Refugis', $hunt1->getType());
+
+        /** @var Entity\Coordinate $hunt1Coordinate */
+        $hunt1Coordinate = $hunt1->getCoordinate();
+        $this->assertInstanceOf(Entity\Coordinate::class, $hunt1Coordinate);
+        $this->assertEquals(42.5194300000046, $hunt1Coordinate->getLatitude());
+        $this->assertEquals(1.0012399999953603, $hunt1Coordinate->getLongitude());
     }
 
     public function testGetPyreneesMountainPeakByDate()
