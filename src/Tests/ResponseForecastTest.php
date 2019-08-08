@@ -354,11 +354,45 @@ class ResponseForecastTest extends TestCase
         /** @var Forecast\GetByCity $query */
         $query = new Forecast\GetByCity('082444');
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var Entity\ForecastCity $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertInstanceOf(Entity\ForecastCity::class, $entityResponse);
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        /** @var Entity\City $city */
+        $city = $entityResponse->getCity();
+        $this->assertInstanceOf(Entity\City::class, $city);
+        $this->assertEquals('082444', $city->getCode());
+        $this->assertEquals(null, $city->getName());
+        $this->assertEquals(null, $city->getCounty());
+        $this->assertEquals(null, $city->getCoordinate());
+        $this->assertEquals([], $city->getLightningDischarges());
+
+        /** @var array $days */
+        $days = $entityResponse->getDays();
+        $this->assertIsArray($days);
+        $this->assertCount(8, $days);
+
+        /** @var Entity\ForecastCityDay $day1 */
+        $day1 = current($days);
+        $this->assertInstanceOf(Entity\ForecastCityDay::class, $day1);
+        $this->assertInstanceOf(DateTime::class, $day1->getDate());
+        $this->assertEquals('2019-08-05', $day1->getDate()->format('Y-m-d'));
+        $this->assertInstanceOf(Entity\ForecastCityVariable::class, $day1->getTemperatureMaximum());
+        $this->assertEquals('Maximum Temperature', $day1->getTemperatureMaximum()->getName());
+        $this->assertEquals('°C', $day1->getTemperatureMaximum()->getUnit());
+        $this->assertEquals(30.917, $day1->getTemperatureMaximum()->getValue());
+        $this->assertInstanceOf(Entity\ForecastCityVariable::class, $day1->getTemperatureMinimum());
+        $this->assertEquals('Minimum Temperature', $day1->getTemperatureMinimum()->getName());
+        $this->assertEquals('°C', $day1->getTemperatureMinimum()->getUnit());
+        $this->assertEquals(20.42, $day1->getTemperatureMinimum()->getValue());
+        $this->assertInstanceOf(Entity\ForecastCityVariable::class, $day1->getRain());
+        $this->assertEquals('Rain', $day1->getRain()->getName());
+        $this->assertEquals('%', $day1->getRain()->getUnit());
+        $this->assertEquals(3.72, $day1->getRain()->getValue());
+        $this->assertInstanceOf(Entity\ForecastCityVariable::class, $day1->getSky());
+        $this->assertEquals('Sky', $day1->getSky()->getName());
+        $this->assertEquals(null, $day1->getSky()->getUnit());
+        $this->assertEquals(1, $day1->getSky()->getValue());
     }
 
     public function testGetCurrentWarnings()

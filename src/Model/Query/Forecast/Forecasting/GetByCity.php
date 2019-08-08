@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\Forecast\Forecasting;
 
+use Meteocat\Model\Entity\ForecastCity;
+
 /**
  * Class GetByCity
  *
@@ -58,13 +60,11 @@ class GetByCity extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return ForecastCity::class;
     }
 
     /**
