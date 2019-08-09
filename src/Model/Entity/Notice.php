@@ -63,6 +63,11 @@ final class Notice extends Entity
     private $comment = null;
 
     /**
+     * @var array
+     */
+    private $evolutions = [];
+
+    /**
      * Status constructor.
      *
      * @param stdClass $data
@@ -89,6 +94,13 @@ final class Notice extends Entity
         $dateEmission = $this->getPropertyData($data, 'dataEmisio');
         if ($dateEmission !== null) {
             $this->dateEmission = DateTime::createFromFormat('Y-m-d\TH:i\Z', $dateEmission, new DateTimeZone('UTC'));
+        }
+
+        $evolutions = $this->getPropertyData($data, 'evolucions');
+        if (is_array($evolutions)) {
+            foreach ($evolutions as $evolution) {
+                $this->evolutions[] = new Evolution((object)$evolution);
+            }
         }
     }
 
@@ -162,5 +174,13 @@ final class Notice extends Entity
     public function getComment(): ?string
     {
         return $this->comment;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEvolutions(): array
+    {
+        return $this->evolutions;
     }
 }

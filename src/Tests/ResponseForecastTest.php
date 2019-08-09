@@ -408,11 +408,106 @@ class ResponseForecastTest extends TestCase
         /** @var Forecast\GetCurrentWarnings $query */
         $query = new Forecast\GetCurrentWarnings();
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var array $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertIsArray($entityResponse);
+        $this->assertCount(1, $entityResponse);
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        /** @var Entity\Alert $alert1 */
+        $alert1 = current($entityResponse);
+        $this->assertInstanceOf(Entity\Alert::class, $alert1);
+
+        /** @var Entity\Status $alert1Status */
+        $alert1Status = $alert1->getStatus();
+        $this->assertInstanceOf(Entity\Status::class, $alert1Status);
+        $this->assertEquals('Obert', $alert1Status->getName());
+        $this->assertEquals(null, $alert1Status->getDate());
+
+        /** @var Entity\Meteor $alert1Meteor */
+        $alert1Meteor = $alert1->getMeteor();
+        $this->assertInstanceOf(Entity\Meteor::class, $alert1Meteor);
+        $this->assertEquals('Calor', $alert1Meteor->getName());
+
+        /** @var array $alert1Notices */
+        $alert1Notices = $alert1->getNotices();
+        $this->assertIsArray($alert1Notices);
+        $this->assertCount(3, $alert1Notices);
+
+        /** @var Entity\Notice $alert1Notices1 */
+        $alert1Notices1 = current($alert1Notices);
+        $this->assertInstanceOf(Entity\Notice::class, $alert1Notices1);
+        $this->assertEquals(null, $alert1Notices1->getLevel());
+        $this->assertEquals('Avís', $alert1Notices1->getType());
+        $this->assertEquals('Ampliat', $alert1Notices1->getStatus());
+        $this->assertEquals(null, $alert1Notices1->getThreshold());
+        $this->assertEquals(null, $alert1Notices1->getWarning());
+        $this->assertEquals(null, $alert1Notices1->getComment());
+        $this->assertInstanceOf(DateTime::class, $alert1Notices1->getDateStart());
+        $this->assertEquals('2019-08-05 12:00:00', $alert1Notices1->getDateStart()->format('Y-m-d H:i:s'));
+        $this->assertInstanceOf(DateTime::class, $alert1Notices1->getDateEnd());
+        $this->assertEquals('2019-08-05 17:59:00', $alert1Notices1->getDateEnd()->format('Y-m-d H:i:s'));
+        $this->assertInstanceOf(DateTime::class, $alert1Notices1->getDateEmission());
+        $this->assertEquals('2019-08-04 17:20:00', $alert1Notices1->getDateEmission()->format('Y-m-d H:i:s'));
+
+        /** @var array $alert1Evolutions */
+        $alert1Evolutions = $alert1Notices1->getEvolutions();
+        $this->assertIsArray($alert1Evolutions);
+        $this->assertCount(1, $alert1Evolutions);
+
+        /** @var Entity\Evolution $alert1Evolutions1 */
+        $alert1Evolutions1 = current($alert1Evolutions);
+        $this->assertInstanceOf(Entity\Evolution::class, $alert1Evolutions1);
+        $this->assertInstanceOf(DateTime::class, $alert1Evolutions1->getDay());
+        $this->assertEquals('2019-08-05 00:00:00', $alert1Evolutions1->getDay()->format('Y-m-d H:i:s'));
+        $this->assertEquals('', $alert1Evolutions1->getComment());
+        $this->assertEquals(1, $alert1Evolutions1->getRepresentative());
+        $this->assertEquals('Temperatura màxima extrema', $alert1Evolutions1->getThreshold1());
+        $this->assertEquals(null, $alert1Evolutions1->getThreshold2());
+        $this->assertEquals('LOCAL', $alert1Evolutions1->getGeographicalDistribution());
+        $this->assertEquals('', $alert1Evolutions1->getMaximumValue());
+
+        /** @var array $alert1Evolutions1Periods */
+        $alert1Evolutions1Periods = $alert1Evolutions1->getPeriods();
+        $this->assertIsArray($alert1Evolutions1Periods);
+        $this->assertCount(4, $alert1Evolutions1Periods);
+
+        /** @var Entity\Period $alert1Evolutions1Periods1 */
+        $alert1Evolutions1Periods1 = current($alert1Evolutions1Periods);
+        $this->assertInstanceOf(Entity\Period::class, $alert1Evolutions1Periods1);
+        $this->assertEquals('00-06', $alert1Evolutions1Periods1->getName());
+        $this->assertEquals([], $alert1Evolutions1Periods1->getAffectations());
+
+        /** @var Entity\Period $alert1Evolutions1Periods2 */
+        $alert1Evolutions1Periods2 = next($alert1Evolutions1Periods);
+        $this->assertInstanceOf(Entity\Period::class, $alert1Evolutions1Periods2);
+        $this->assertEquals('06-12', $alert1Evolutions1Periods2->getName());
+        $this->assertEquals([], $alert1Evolutions1Periods2->getAffectations());
+
+        /** @var Entity\Period $alert1Evolutions1Periods3 */
+        $alert1Evolutions1Periods3 = next($alert1Evolutions1Periods);
+        $this->assertInstanceOf(Entity\Period::class, $alert1Evolutions1Periods3);
+        $this->assertEquals('12-18', $alert1Evolutions1Periods3->getName());
+
+        /** @var array $alert1Evolutions1Periods3Affectations */
+        $alert1Evolutions1Periods3Affectations = $alert1Evolutions1Periods3->getAffectations();
+        $this->assertIsArray($alert1Evolutions1Periods3Affectations);
+        $this->assertCount(3, $alert1Evolutions1Periods3Affectations);
+
+        /** @var Entity\Affectation $alert1Evolutions1Periods3Affectations1 */
+        $alert1Evolutions1Periods3Affectations1 = current($alert1Evolutions1Periods3Affectations);
+        $this->assertInstanceOf(Entity\Affectation::class, $alert1Evolutions1Periods3Affectations1);
+        $this->assertEquals('Temperatura màxima extrema', $alert1Evolutions1Periods3Affectations1->getThreshold());
+        $this->assertEquals(false, $alert1Evolutions1Periods3Affectations1->isAuxiliary());
+        $this->assertEquals(1, $alert1Evolutions1Periods3Affectations1->getWarning());
+        $this->assertEquals(1, $alert1Evolutions1Periods3Affectations1->getLevel());
+        $this->assertInstanceOf(DateTime::class, $alert1Evolutions1Periods3Affectations1->getDay());
+        $this->assertEquals('2019-08-05 00:00:00', $alert1Evolutions1Periods3Affectations1->getDay()->format('Y-m-d H:i:s'));
+
+        /** @var Entity\County $alert1Evolutions1Periods3Affectations1County */
+        $alert1Evolutions1Periods3Affectations1County = $alert1Evolutions1Periods3Affectations1->getCounty();
+        $this->assertInstanceOf(Entity\County::class, $alert1Evolutions1Periods3Affectations1County);
+        $this->assertEquals(23, $alert1Evolutions1Periods3Affectations1County->getCode());
+        $this->assertEquals(null, $alert1Evolutions1Periods3Affectations1County->getName());
     }
 
     public function testGetCurrentAlerts()
@@ -457,6 +552,7 @@ class ResponseForecastTest extends TestCase
         $this->assertEquals('Temperatura màxima extrema', $alert1Notices1->getThreshold());
         $this->assertEquals(2, $alert1Notices1->getWarning());
         $this->assertEquals('', $alert1Notices1->getComment());
+        $this->assertEquals([], $alert1Notices1->getEvolutions());
         $this->assertInstanceOf(DateTime::class, $alert1Notices1->getDateStart());
         $this->assertEquals('2017-03-06 00:00:00', $alert1Notices1->getDateStart()->format('Y-m-d H:i:s'));
         $this->assertInstanceOf(DateTime::class, $alert1Notices1->getDateEnd());
