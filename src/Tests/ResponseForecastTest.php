@@ -197,11 +197,16 @@ class ResponseForecastTest extends TestCase
         /** @var Entity\ForecastVariable $variables */
         $variables = $entityResponse->getVariable();
         $this->assertInstanceOf(Entity\ForecastVariable::class, $variables);
-        $this->assertEquals('Cel serè o poc ennuvolat fins a migdia. A partir de llavors arribaran bandes de núvols alts per l\'oest del territori que al final del dia s\'estendran a tot el territori; a més, també creixeran algunes nuvolades a zones de muntanya. Independentment, a la meitat sud del litoral i prelitoral i al litoral nord hi haurà intervals de núvols baixos, més trencats durant les hores centrals de la jornada, que localment deixaran el cel entre mig i molt ennuvolat; de forma puntual, sobretot fins a primera hora del matí i també a partir del vespre aquests intervals de núvols baixos també podran estendre\'s a altres punts del litoral.', $variables->getSky());
-        $this->assertEquals('Al Pirineu no es descarta algun ruixat aïllat durant la tarda, i és possible a partir del vespre.', $variables->getRain());
-        $this->assertEquals('La temperatura mínima serà similar o lleugerament més alta; al Pirineu oscil·larà entre 11 i 16 ºC, al Prepirineu, depressió Central i prelitoral entre 16 i 21 ºC i al litoral entre 20 i 25 ºC. Per la seva banda la temperatura màxima també serà similar o lleugerament més alta i es mourà entre 29 i 34 ºC al Pirineu i al litoral, entre 34 i 39 ºC a Ponent i entre 32 i 37 ºC a la resta.', $variables->getTemperature());
-        $this->assertEquals('La visibilitat serà excel·lent arreu, si bé serà bona o regular fins a mig matí i de nou a partir del vespre a punts del litoral i del prelitoral, sobretot a la meitat sud del sector.', $variables->getVisibility());
-        $this->assertEquals('El vent serà fluix i de direcció variable a l\'inici i al final de la jornada. Durant les hores centrals del dia s\'imposarà el component sud entre fluix i moderat, amb cops forts a la tarda a l\'extrem nord del litoral i al sud de Ponent.', $variables->getWind());
+        $this->assertEquals('Cel serè o poc ennuvolat fins a migdia. A partir de llavors arribaran bandes de núvols alts per l\'oest del territori que al final del dia s\'estendran a tot el territori; a més, també creixeran algunes nuvolades a zones de muntanya. Independentment, a la meitat sud del litoral i prelitoral i al litoral nord hi haurà intervals de núvols baixos, més trencats durant les hores centrals de la jornada, que localment deixaran el cel entre mig i molt ennuvolat; de forma puntual, sobretot fins a primera hora del matí i també a partir del vespre aquests intervals de núvols baixos també podran estendre\'s a altres punts del litoral.',
+            $variables->getSky());
+        $this->assertEquals('Al Pirineu no es descarta algun ruixat aïllat durant la tarda, i és possible a partir del vespre.',
+            $variables->getRain());
+        $this->assertEquals('La temperatura mínima serà similar o lleugerament més alta; al Pirineu oscil·larà entre 11 i 16 ºC, al Prepirineu, depressió Central i prelitoral entre 16 i 21 ºC i al litoral entre 20 i 25 ºC. Per la seva banda la temperatura màxima també serà similar o lleugerament més alta i es mourà entre 29 i 34 ºC al Pirineu i al litoral, entre 34 i 39 ºC a Ponent i entre 32 i 37 ºC a la resta.',
+            $variables->getTemperature());
+        $this->assertEquals('La visibilitat serà excel·lent arreu, si bé serà bona o regular fins a mig matí i de nou a partir del vespre a punts del litoral i del prelitoral, sobretot a la meitat sud del sector.',
+            $variables->getVisibility());
+        $this->assertEquals('El vent serà fluix i de direcció variable a l\'inici i al final de la jornada. Durant les hores centrals del dia s\'imposarà el component sud entre fluix i moderat, amb cops forts a la tarda a l\'extrem nord del litoral i al sud de Ponent.',
+            $variables->getWind());
     }
 
     public function testGetCountyByDate()
@@ -418,11 +423,46 @@ class ResponseForecastTest extends TestCase
         /** @var Forecast\GetCurrentAlerts $query */
         $query = new Forecast\GetCurrentAlerts();
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var array $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertIsArray($entityResponse);
+        $this->assertCount(2, $entityResponse);
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        /** @var Entity\Alert $alert1 */
+        $alert1 = current($entityResponse);
+        $this->assertInstanceOf(Entity\Alert::class, $alert1);
+
+        /** @var Entity\Status $alert1Status */
+        $alert1Status = $alert1->getStatus();
+        $this->assertInstanceOf(Entity\Status::class, $alert1Status);
+        $this->assertEquals('Obert', $alert1Status->getName());
+        $this->assertEquals(null, $alert1Status->getDate());
+
+        /** @var Entity\Meteor $alert1Meteor */
+        $alert1Meteor = $alert1->getMeteor();
+        $this->assertInstanceOf(Entity\Meteor::class, $alert1Meteor);
+        $this->assertEquals('Calor', $alert1Meteor->getName());
+
+        /** @var array $alert1Notices */
+        $alert1Notices = $alert1->getNotices();
+        $this->assertIsArray($alert1Notices);
+        $this->assertCount(1, $alert1Notices);
+
+        /** @var Entity\Notice $alert1Notices1 */
+        $alert1Notices1 = current($alert1Notices);
+        $this->assertInstanceOf(Entity\Notice::class, $alert1Notices1);
+        $this->assertEquals(1, $alert1Notices1->getLevel());
+        $this->assertEquals('Preavís', $alert1Notices1->getType());
+        $this->assertEquals('Vigent', $alert1Notices1->getStatus());
+        $this->assertEquals('Temperatura màxima extrema', $alert1Notices1->getThreshold());
+        $this->assertEquals(2, $alert1Notices1->getWarning());
+        $this->assertEquals('', $alert1Notices1->getComment());
+        $this->assertInstanceOf(DateTime::class, $alert1Notices1->getDateStart());
+        $this->assertEquals('2017-03-06 00:00:00', $alert1Notices1->getDateStart()->format('Y-m-d H:i:s'));
+        $this->assertInstanceOf(DateTime::class, $alert1Notices1->getDateEnd());
+        $this->assertEquals('2017-03-08 23:59:00', $alert1Notices1->getDateEnd()->format('Y-m-d H:i:s'));
+        $this->assertInstanceOf(DateTime::class, $alert1Notices1->getDateEmission());
+        $this->assertEquals('2017-03-06 12:07:00', $alert1Notices1->getDateEmission()->format('Y-m-d H:i:s'));
     }
 
     public function testGetPyreneesMountainPeakMetadata()
@@ -436,7 +476,7 @@ class ResponseForecastTest extends TestCase
         /** @var array $entityResponse */
         $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
         $this->assertIsArray($entityResponse);
-        $this->assertCount(49,$entityResponse);
+        $this->assertCount(49, $entityResponse);
 
         /** @var Entity\MountainPeak $peak1 */
         $peak1 = current($entityResponse);
@@ -464,7 +504,7 @@ class ResponseForecastTest extends TestCase
         /** @var array $entityResponse */
         $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
         $this->assertIsArray($entityResponse);
-        $this->assertCount(41,$entityResponse);
+        $this->assertCount(41, $entityResponse);
 
         /** @var Entity\MountainHunt $hunt1 */
         $hunt1 = current($entityResponse);
@@ -487,7 +527,8 @@ class ResponseForecastTest extends TestCase
         $mockResponse = file_get_contents(__DIR__ . '/.cached_responses/response.api.meteo.cat.pronostic.v1.pirineu.pics.costabona.2019.08.06.json');
 
         /** @var Forecast\GetPyreneesMountainPeakByDate $query */
-        $query = new Forecast\GetPyreneesMountainPeakByDate('costabona', DateTime::createFromFormat('Y-m-d', '2019-08-06'));
+        $query = new Forecast\GetPyreneesMountainPeakByDate('costabona',
+            DateTime::createFromFormat('Y-m-d', '2019-08-06'));
 
         /** @var array $entityResponse */
         $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
@@ -544,7 +585,8 @@ class ResponseForecastTest extends TestCase
         $mockResponse = file_get_contents(__DIR__ . '/.cached_responses/response.api.meteo.cat.pronostic.v1.pirineu.refugis.refugi-costabona.2019.08.06.json');
 
         /** @var Forecast\GetPyreneesMountainHuntByDate $query */
-        $query = new Forecast\GetPyreneesMountainHuntByDate('refugi-costabona', DateTime::createFromFormat('Y-m-d', '2019-08-06'));
+        $query = new Forecast\GetPyreneesMountainHuntByDate('refugi-costabona',
+            DateTime::createFromFormat('Y-m-d', '2019-08-06'));
 
         /** @var array $entityResponse */
         $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
