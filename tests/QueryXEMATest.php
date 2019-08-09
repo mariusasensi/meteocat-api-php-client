@@ -230,7 +230,7 @@ class QueryXEMATest extends TestCase
 
     public function testStatisticGetYearlyMetadataByStation()
     {
-        $query = new Statistic\GetYearlyMetadataByStation("CC");
+        $query = new Statistic\GetYearlyMetadataByStation('CC');
 
         $this->assertEquals('api.meteo.cat.xema.v1.estacions.cc.variables.estadistics.anuals.metadades', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/anuals/metadades', $query->getUrl());
@@ -238,7 +238,7 @@ class QueryXEMATest extends TestCase
 
     public function testStatisticGetYearlyMetadataByFilters()
     {
-        $query = new Statistic\GetYearlyMetadataByFilters("CC", 3000);
+        $query = new Statistic\GetYearlyMetadataByFilters('CC', 3000);
 
         $this->assertEquals('api.meteo.cat.xema.v1.estacions.cc.variables.estadistics.anuals.3000.metadades', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/anuals/3000/metadades', $query->getUrl());
@@ -246,7 +246,7 @@ class QueryXEMATest extends TestCase
 
     public function testStatisticGetMonthlyMetadataByStation()
     {
-        $query = new Statistic\GetMonthlyMetadataByStation("CC");
+        $query = new Statistic\GetMonthlyMetadataByStation('CC');
 
         $this->assertEquals('api.meteo.cat.xema.v1.estacions.cc.variables.estadistics.mensuals.metadades', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/mensuals/metadades', $query->getUrl());
@@ -254,7 +254,7 @@ class QueryXEMATest extends TestCase
 
     public function testStatisticGetMonthlyMetadataByFilters()
     {
-        $query = new Statistic\GetMonthlyMetadataByFilters("CC", 2000);
+        $query = new Statistic\GetMonthlyMetadataByFilters('CC', 2000);
 
         $this->assertEquals('api.meteo.cat.xema.v1.estacions.cc.variables.estadistics.mensuals.2000.metadades', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/mensuals/2000/metadades', $query->getUrl());
@@ -262,7 +262,7 @@ class QueryXEMATest extends TestCase
 
     public function testStatisticGetDailyMetadataByStation()
     {
-        $query = new Statistic\GetDailyMetadataByStation("CC");
+        $query = new Statistic\GetDailyMetadataByStation('CC');
 
         $this->assertEquals('api.meteo.cat.xema.v1.estacions.cc.variables.estadistics.diaris.metadades', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/diaris/metadades', $query->getUrl());
@@ -270,7 +270,7 @@ class QueryXEMATest extends TestCase
 
     public function testStatisticGetDailyMetadataByFilters()
     {
-        $query = new Statistic\GetDailyMetadataByFilters("CC", 1000);
+        $query = new Statistic\GetDailyMetadataByFilters('CC', 1000);
 
         $this->assertEquals('api.meteo.cat.xema.v1.estacions.cc.variables.estadistics.diaris.1000.metadades', $query->getName());
         $this->assertEquals('https://api.meteo.cat/xema/v1/estacions/CC/variables/estadistics/diaris/1000/metadades', $query->getUrl());
