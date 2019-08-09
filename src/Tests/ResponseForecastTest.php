@@ -519,11 +519,53 @@ class ResponseForecastTest extends TestCase
         /** @var Forecast\GetPyreneesZonesByDate $query */
         $query = new Forecast\GetPyreneesZonesByDate(DateTime::createFromFormat('Y-m-d', '2019-08-06'));
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var Entity\ForecastPyrenees $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertInstanceOf(Entity\ForecastPyrenees::class, $entityResponse);
+        $this->assertInstanceOf(DateTime::class, $entityResponse->getDate());
+        $this->assertEquals('2019-08-06', $entityResponse->getDate()->format('Y-m-d'));
+        $this->assertInstanceOf(DateTime::class, $entityResponse->getPublishedAt());
+        $this->assertEquals('2019-08-05 08:33', $entityResponse->getPublishedAt()->format('Y-m-d H:i'));
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        $forecastTimeZones = $entityResponse->getTimeZones();
+        $this->assertIsArray($forecastTimeZones);
+        $this->assertCount(5, $forecastTimeZones);
+
+        /** @var Entity\ForecastPyreneesTimeZone $forecastTimeZones1 */
+        $forecastTimeZones1 = current($forecastTimeZones);
+        $this->assertInstanceOf(Entity\ForecastPyreneesTimeZone::class, $forecastTimeZones1);
+        $this->assertEquals(4, $forecastTimeZones1->getId());
+        $this->assertEquals('18:00h - 24:00h', $forecastTimeZones1->getName());
+
+        /** @var array $forecastTimeZones1Zones */
+        $forecastTimeZones1Zones = $forecastTimeZones1->getZones();
+        $this->assertIsArray($forecastTimeZones1Zones);
+        $this->assertCount(7, $forecastTimeZones1Zones);
+
+        /** @var Entity\PyreneesZone $forecastTimeZones1Zones1 */
+        $forecastTimeZones1Zones1 = current($forecastTimeZones1Zones);
+        $this->assertInstanceOf(Entity\PyreneesZone::class, $forecastTimeZones1Zones1);
+        $this->assertEquals(5, $forecastTimeZones1Zones1->getId());
+        $this->assertEquals('Vessant sud Pirineu occid', $forecastTimeZones1Zones1->getName());
+
+        /** @var array $forecastTimeZones1Zones1Variables */
+        $forecastTimeZones1Zones1Variables = $forecastTimeZones1Zones1->getVariables();
+        $this->assertIsArray($forecastTimeZones1Zones1Variables);
+        $this->assertCount(9, $forecastTimeZones1Zones1Variables);
+
+        /** @var Entity\ForecastPyreneesVariable $forecastTimeZones1Zones1Variables1 */
+        $forecastTimeZones1Zones1Variables1 = current($forecastTimeZones1Zones1Variables);
+        $this->assertInstanceOf(Entity\ForecastPyreneesVariable::class, $forecastTimeZones1Zones1Variables1);
+        $this->assertEquals('probabilitat', $forecastTimeZones1Zones1Variables1->getName());
+        $this->assertEquals('3', $forecastTimeZones1Zones1Variables1->getValue());
+        $this->assertEquals(1, $forecastTimeZones1Zones1Variables1->getPeriod());
+
+        /** @var Entity\ForecastPyreneesVariable $forecastTimeZones1Zones1Variables2 */
+        $forecastTimeZones1Zones1Variables2 = next($forecastTimeZones1Zones1Variables);
+        $this->assertInstanceOf(Entity\ForecastPyreneesVariable::class, $forecastTimeZones1Zones1Variables2);
+        $this->assertEquals('cota', $forecastTimeZones1Zones1Variables2->getName());
+        $this->assertEquals(null, $forecastTimeZones1Zones1Variables2->getValue());
+        $this->assertEquals(1, $forecastTimeZones1Zones1Variables2->getPeriod());
     }
 
     public function testGetUltravioletIndexByCity()
