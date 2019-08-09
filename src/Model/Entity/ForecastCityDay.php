@@ -17,16 +17,36 @@ use stdClass;
  */
 final class ForecastCityDay extends Entity
 {
+    /**
+     * @var DateTime|null
+     */
     private $date = null;
 
+    /**
+     * @var ForecastCityVariable|null
+     */
     private $temperatureMaximum = null;
 
+    /**
+     * @var ForecastCityVariable|null
+     */
     private $temperatureMinimum = null;
 
+    /**
+     * @var ForecastCityVariable|null
+     */
     private $rain = null;
 
+    /**
+     * @var ForecastCityVariable|null
+     */
     private $sky = null;
 
+    /**
+     * ForecastCityDay constructor.
+     *
+     * @param stdClass $data
+     */
     public function __construct(stdClass $data)
     {
         $date = $this->getPropertyData($data, 'data');

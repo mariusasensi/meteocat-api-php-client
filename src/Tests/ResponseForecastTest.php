@@ -489,11 +489,53 @@ class ResponseForecastTest extends TestCase
         /** @var Forecast\GetPyreneesMountainPeakByDate $query */
         $query = new Forecast\GetPyreneesMountainPeakByDate('costabona', DateTime::createFromFormat('Y-m-d', '2019-08-06'));
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var array $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertIsArray($entityResponse);
+        $this->assertCount(8, $entityResponse);
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        /** @var Entity\ForecastMountainPeak $mountain1 */
+        $mountain1 = current($entityResponse);
+        $this->assertInstanceOf(Entity\ForecastMountainPeak::class, $mountain1);
+        $this->assertInstanceOf(DateTime::class, $mountain1->getDate());
+        $this->assertEquals('2019-08-06 00:00', $mountain1->getDate()->format('Y-m-d H:i'));
+
+        /** @var array $mountain1Altitude */
+        $mountain1Altitude = $mountain1->getAltitude();
+        $this->assertIsArray($mountain1Altitude);
+        $this->assertCount(5, $mountain1Altitude);
+
+        /** @var Entity\ForecastMountainAltitude $mountain1Altitude1 */
+        $mountain1Altitude1 = current($mountain1Altitude);
+        $this->assertInstanceOf(Entity\ForecastMountainAltitude::class, $mountain1Altitude1);
+        $this->assertEquals('totes', $mountain1Altitude1->getAltitude());
+
+        /** @var array $mountain1Altitude1Variables */
+        $mountain1Altitude1Variables = $mountain1Altitude1->getVariables();
+        $this->assertIsArray($mountain1Altitude1Variables);
+        $this->assertCount(2, $mountain1Altitude1Variables);
+
+        /** @var Entity\Variable $mountain1Altitude1Variables1 */
+        $mountain1Altitude1Variables1 = current($mountain1Altitude1Variables);
+        $this->assertInstanceOf(Entity\Variable::class, $mountain1Altitude1Variables1);
+        $this->assertEquals('isozero', $mountain1Altitude1Variables1->getName());
+        $this->assertEquals(4500, $mountain1Altitude1Variables1->getValue());
+
+        /** @var Entity\ForecastMountainAltitude $mountain1Altitude2 */
+        $mountain1Altitude2 = next($mountain1Altitude);
+        $this->assertInstanceOf(Entity\ForecastMountainAltitude::class, $mountain1Altitude2);
+        $this->assertEquals('1500', $mountain1Altitude2->getAltitude());
+
+        /** @var array $mountain1Altitude2Variables */
+        $mountain1Altitude2Variables = $mountain1Altitude2->getVariables();
+        $this->assertIsArray($mountain1Altitude2Variables);
+        $this->assertCount(4, $mountain1Altitude2Variables);
+
+        /** @var Entity\Variable $mountain1Altitude2Variables1 */
+        $mountain1Altitude2Variables1 = current($mountain1Altitude2Variables);
+        $this->assertInstanceOf(Entity\Variable::class, $mountain1Altitude2Variables1);
+        $this->assertEquals('humitat', $mountain1Altitude2Variables1->getName());
+        $this->assertEquals(67, $mountain1Altitude2Variables1->getValue());
     }
 
     public function testGetPyreneesMountainHuntByDate()
@@ -504,11 +546,54 @@ class ResponseForecastTest extends TestCase
         /** @var Forecast\GetPyreneesMountainHuntByDate $query */
         $query = new Forecast\GetPyreneesMountainHuntByDate('refugi-costabona', DateTime::createFromFormat('Y-m-d', '2019-08-06'));
 
-        /** @var mixed $entityResponse */
-        //$entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        /** @var array $entityResponse */
+        $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
+        $this->assertIsArray($entityResponse);
+        $this->assertCount(8, $entityResponse);
 
-        // TODO.
-        $this->markTestSkipped('TODO');
+        /** @var Entity\ForecastMountainHunt $mountain1 */
+        $mountain1 = current($entityResponse);
+        $this->assertInstanceOf(Entity\ForecastMountainHunt::class, $mountain1);
+        $this->assertInstanceOf(DateTime::class, $mountain1->getDate());
+        $this->assertEquals('2019-08-06 00:00', $mountain1->getDate()->format('Y-m-d H:i'));
+
+        /** @var array $mountain1Altitude */
+        $mountain1Altitude = $mountain1->getAltitude();
+        $this->assertIsArray($mountain1Altitude);
+        $this->assertCount(5, $mountain1Altitude);
+
+        /** @var Entity\ForecastMountainAltitude $mountain1Altitude1 */
+        $mountain1Altitude1 = current($mountain1Altitude);
+        $this->assertInstanceOf(Entity\ForecastMountainAltitude::class, $mountain1Altitude1);
+        $this->assertEquals('totes', $mountain1Altitude1->getAltitude());
+
+        /** @var array $mountain1Altitude1Variables */
+        $mountain1Altitude1Variables = $mountain1Altitude1->getVariables();
+        $this->assertIsArray($mountain1Altitude1Variables);
+        $this->assertCount(2, $mountain1Altitude1Variables);
+
+        /** @var Entity\Variable $mountain1Altitude1Variables1 */
+        $mountain1Altitude1Variables1 = current($mountain1Altitude1Variables);
+        $this->assertInstanceOf(Entity\Variable::class, $mountain1Altitude1Variables1);
+        $this->assertEquals('isozero', $mountain1Altitude1Variables1->getName());
+        $this->assertEquals(4500, $mountain1Altitude1Variables1->getValue());
+
+        /** @var Entity\ForecastMountainAltitude $mountain1Altitude2 */
+        $mountain1Altitude2 = next($mountain1Altitude);
+        $this->assertInstanceOf(Entity\ForecastMountainAltitude::class, $mountain1Altitude2);
+        $this->assertEquals('1500', $mountain1Altitude2->getAltitude());
+
+        /** @var array $mountain1Altitude2Variables */
+        $mountain1Altitude2Variables = $mountain1Altitude2->getVariables();
+        $this->assertIsArray($mountain1Altitude2Variables);
+        $this->assertCount(4, $mountain1Altitude2Variables);
+
+        /** @var Entity\Variable $mountain1Altitude2Variables1 */
+        $mountain1Altitude2Variables1 = current($mountain1Altitude2Variables);
+        $this->assertInstanceOf(Entity\Variable::class, $mountain1Altitude2Variables1);
+        $this->assertEquals('humitat', $mountain1Altitude2Variables1->getName());
+        $this->assertEquals(67, $mountain1Altitude2Variables1->getValue());
+
     }
 
     public function testGetPyreneesZonesByDate()

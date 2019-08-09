@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\Forecast\Forecasting;
 
 use Datetime;
+use Meteocat\Model\Entity\ForecastMountainPeak;
 
 /**
  * Class GetPyreneesMountainPeakByDate
@@ -71,13 +72,11 @@ class GetPyreneesMountainPeakByDate extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return ForecastMountainPeak::class;
     }
 
     /**
