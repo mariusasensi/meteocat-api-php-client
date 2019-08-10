@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XEMA\Auxiliary;
 
 use Datetime;
+use Meteocat\Model\Entity\Variable;
 
 /**
  * Class Auxiliary\GetByFilters
@@ -84,13 +85,11 @@ final class GetByFilters extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Variable::class;
     }
 
     /**
