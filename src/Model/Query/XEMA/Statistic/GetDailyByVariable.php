@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XEMA\Statistic;
 
 use DateTime;
+use Meteocat\Model\Entity\Statistic;
 
 /**
  * Class Statistic\GetDailyByVariable
@@ -92,13 +93,11 @@ final class GetDailyByVariable extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Statistic::class;
     }
 
     /**

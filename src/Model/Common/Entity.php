@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Common;
 
+use DateTime;
+use DateTimeZone;
 use stdClass;
 
 /**
@@ -14,6 +16,18 @@ use stdClass;
  */
 abstract class Entity
 {
+    /**
+     * @var array
+     */
+    protected static $dateFormats = [
+        'Y-m-d\TH:i:s\Z',
+        'Y-m-d\TH:i\Z',
+        'Y-m-d\TH\Z',
+        'Y-m-d\Z',
+        'Y-m\Z',
+        'Y\Z',
+    ];
+
     /**
      * Checks if a stdClass have a specific property.
      *
@@ -43,5 +57,35 @@ abstract class Entity
         }
 
         return $default;
+    }
+
+    /**
+     * Returns as DateTime a property of stdClass.
+     *
+     * @param stdClass $data
+     * @param string   $name
+     *
+     * @return DateTime|null
+     */
+    protected function getPropertyDataAsDate(stdClass $data, string $name): ?DateTime
+    {
+        $raw = $this->getPropertyData($data, $name);
+        if ($raw !== null) {
+
+            $iterator = 0;
+            $dateTime = false;
+            $countDateFormat = count(self::$dateFormats);
+
+            // Try.
+            while ($dateTime === false && $iterator < $countDateFormat) {
+                $dateFormat = self::$dateFormats[$iterator];
+                $iterator++;
+                $dateTime = DateTime::createFromFormat($dateFormat, $raw, new DateTimeZone('UTC'));
+            }
+
+            return $dateTime === false ? null : $dateTime;
+        }
+
+        return null;
     }
 }

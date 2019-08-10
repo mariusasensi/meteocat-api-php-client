@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Meteocat\Model\Entity;
 
 use DateTime;
-use DateTimeZone;
 use Meteocat\Model\Common\Entity;
 use stdClass;
 
@@ -43,6 +42,11 @@ final class Read extends Entity
     private $timeBase = null;
 
     /**
+     * @var float
+     */
+    private $percentage = 0;
+
+    /**
      * StationNetwork constructor.
      *
      * @param stdClass $data
@@ -52,16 +56,9 @@ final class Read extends Entity
         $this->value = $this->getPropertyData($data, 'valor', 0);
         $this->status = $this->getPropertyData($data, 'estat');
         $this->timeBase = $this->getPropertyData($data, 'baseHoraria');
-
-        $date = $this->getPropertyData($data, 'data');
-        if ($date !== null) {
-            $this->date = DateTime::createFromFormat('Y-m-d\TH:i\Z', $date, new DateTimeZone('UTC'));
-        }
-
-        $dateExtreme = $this->getPropertyData($data, 'dataExtrem');
-        if ($dateExtreme !== null) {
-            $this->dateExtreme = DateTime::createFromFormat('Y-m-d\TH:i\Z', $dateExtreme, new DateTimeZone('UTC'));
-        }
+        $this->percentage = $this->getPropertyData($data, 'percentatge', 0);
+        $this->date = $this->getPropertyDataAsDate($data, 'data');
+        $this->dateExtreme = $this->getPropertyDataAsDate($data, 'dataExtrem');
     }
 
     /**
@@ -102,5 +99,13 @@ final class Read extends Entity
     public function getTimeBase(): ?string
     {
         return $this->timeBase;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPercentage(): float
+    {
+        return $this->percentage;
     }
 }

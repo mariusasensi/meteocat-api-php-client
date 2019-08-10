@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\XEMA\Statistic;
 
+use Meteocat\Model\Entity\Statistic;
+
 /**
  * Class Statistic\GetYearlyByVariable
  *
@@ -81,13 +83,11 @@ final class GetYearlyByVariable extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Statistic::class;
     }
 
     /**
