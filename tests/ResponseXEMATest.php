@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-use PHPUnit\Framework\TestCase;
-use Meteocat\Model\Query\XEMA\Representative;
+use Meteocat\Model\Entity;
+use Meteocat\Model\Factory\Builder;
+
 use Meteocat\Model\Query\XEMA\Station;
 use Meteocat\Model\Query\XEMA\Measurement;
 use Meteocat\Model\Query\XEMA\Statistic;
 use Meteocat\Model\Query\XEMA\MultivariableCalculation;
 use Meteocat\Model\Query\XEMA\Auxiliary;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ResponseXEMA
@@ -17,22 +19,6 @@ use Meteocat\Model\Query\XEMA\Auxiliary;
  */
 class ResponseXEMATest extends TestCase
 {
-    public function testRepresentativeGetStationByCity()
-    {
-        $query = new Representative\GetStationByCity('080057', 32);
-
-        // TODO.
-        $this->markTestSkipped('TODO');
-    }
-
-    public function testRepresentativeGetAllVariableMetadata()
-    {
-        $query = new Representative\GetAllVariableMetadata();
-
-        // TODO.
-        $this->markTestSkipped('TODO');
-    }
-
     public function testStationGetAll()
     {
         $query = new Station\GetAll();

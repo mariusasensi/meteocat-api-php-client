@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XEMA\Station;
 
 use DateTime;
+use Meteocat\Model\Entity\Station;
 
 /**
  * Class Station\GetAll
@@ -84,13 +85,11 @@ final class GetAll extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Station::class;
     }
 
     /**

@@ -47,6 +47,11 @@ final class City extends Entity implements Response
     private $capital = null;
 
     /**
+     * @var array
+     */
+    private $representativeStations = [];
+
+    /**
      * City constructor.
      *
      * @param stdClass $data
@@ -71,6 +76,13 @@ final class City extends Entity implements Response
         if (is_array($discharges)) {
             foreach ($discharges as $discharge) {
                 $this->lightningDischarges[] = new LightningDischarge((object)$discharge);
+            }
+        }
+
+        $representativeStations = $this->getPropertyData($data, 'variables');
+        if (is_array($representativeStations)) {
+            foreach ($representativeStations as $representativeStation) {
+                $this->representativeStations[] = new VariableCity((object)$representativeStation);
             }
         }
     }
@@ -121,5 +133,13 @@ final class City extends Entity implements Response
     public function isCapital(): ?bool
     {
         return $this->capital;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRepresentativeStations(): array
+    {
+        return $this->representativeStations;
     }
 }

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\XEMA\Station;
 
+
+
+use Meteocat\Model\Entity\Station;
+
 /**
  * Class Station\GetUnique
  *
@@ -58,13 +62,11 @@ final class GetUnique extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Station::class;
     }
 
     /**

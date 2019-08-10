@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\XEMA\Representative;
 
+use Meteocat\Model\Entity\City;
+
 /**
  * Class GetStationByCity
  *
@@ -65,13 +67,11 @@ final class GetStationByCity extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return City::class;
     }
 
     /**
