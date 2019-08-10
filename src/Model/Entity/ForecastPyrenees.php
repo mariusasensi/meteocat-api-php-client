@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use DateTime;
 use Meteocat\Model\Common\Entity;
 use stdClass;
-use DateTime;
-use DateTimeZone;
 
 /**
  * Class ForecastPyrenees
@@ -39,15 +38,8 @@ final class ForecastPyrenees extends Entity
      */
     public function __construct(stdClass $data)
     {
-        $date = $this->getPropertyData($data, 'dataPrediccio');
-        if ($date !== null) {
-            $this->date = DateTime::createFromFormat('Y-m-d\Z', $date, new DateTimeZone('UTC'));
-        }
-
-        $publishedAt = $this->getPropertyData($data, 'dataPublicacio');
-        if ($publishedAt !== null) {
-            $this->publishedAt = DateTime::createFromFormat('Y-m-d\Th:i\Z', $publishedAt, new DateTimeZone('UTC'));
-        }
+        $this->date = $this->getPropertyDataAsDate($data, 'dataPrediccio');
+        $this->publishedAt = $this->getPropertyDataAsDate($data, 'dataPublicacio');
 
         $timeZones = $this->getPropertyData($data, 'franjes');
         if (is_array($timeZones)) {

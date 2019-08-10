@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
-use Meteocat\Model\Common\Entity;
 use Datetime;
-use DateTimeZone;
+use Meteocat\Model\Common\Entity;
 use stdClass;
 
 /**
@@ -49,14 +48,7 @@ final class ForecastCityDay extends Entity
      */
     public function __construct(stdClass $data)
     {
-        $date = $this->getPropertyData($data, 'data');
-        if ($date !== null) {
-            $dateTime = DateTime::createFromFormat('Y-m-d\Z', $date, new DateTimeZone('UTC'));
-            if ($dateTime !== false) {
-                $this->date = $dateTime;
-            }
-        }
-
+        $this->date = $this->getPropertyDataAsDate($data, 'data');
         $variables = $this->getPropertyData($data, 'variables');
 
         if ($variables !== null) {

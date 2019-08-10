@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Meteocat\Model\Entity;
 
 use DateTime;
-use DateTimeZone;
 use Meteocat\Model\Common\Entity;
 use Meteocat\Model\Common\Response;
 use stdClass;
@@ -35,10 +34,7 @@ final class ForecastMountainPeak extends Entity implements Response
      */
     public function __construct(stdClass $data)
     {
-        $date = $this->getPropertyData($data, 'data');
-        if ($date !== null) {
-            $this->date = DateTime::createFromFormat('Y-m-d\TH:i\Z', $date, new DateTimeZone('UTC'));
-        }
+        $this->date = $this->getPropertyDataAsDate($data, 'data');
 
         $altitudes = $this->getPropertyData($data, 'cotes');
         if (is_array($altitudes)) {

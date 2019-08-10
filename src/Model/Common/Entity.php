@@ -20,6 +20,7 @@ abstract class Entity
      * @var array
      */
     protected static $dateFormats = [
+        'Y-m-d\TH:i:s.u\Z',
         'Y-m-d\TH:i:s\Z',
         'Y-m-d\TH:i\Z',
         'Y-m-d\TH\Z',

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Meteocat\Model\Entity;
 
 use DateTime;
-use DateTimeZone;
 use Meteocat\Model\Common\Entity;
 use stdClass;
 
@@ -57,15 +56,11 @@ final class Affectation extends Entity
         $this->threshold = $this->getPropertyData($data, 'llindar');
         $this->warning = $this->getPropertyData($data, 'perill');
         $this->level = $this->getPropertyData($data, 'nivell');
+        $this->day = $this->getPropertyDataAsDate($data, 'dia');
 
         $auxiliary = $this->getPropertyData($data, 'auxiliar');
         if ($auxiliary !== null) {
             $this->auxiliary = $auxiliary;
-        }
-
-        $day = $this->getPropertyData($data, 'dia');
-        if ($day !== null) {
-            $this->day = DateTime::createFromFormat('Y-m-d\TH:i\Z', $day, new DateTimeZone('UTC'));
         }
 
         $countyId = $this->getPropertyData($data, 'idComarca');

@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use DateTime;
 use Meteocat\Model\Common\Entity;
 use Meteocat\Model\Common\Response;
-use DateTime;
-use DateTimeZone;
 use stdClass;
 
 /**
@@ -24,17 +23,17 @@ final class Lightning extends Entity implements Response
     private $id = null;
 
     /**
-     * @var bool|\DateTime|null
+     * @var DateTime|null
      */
     private $date = null;
 
     /**
-     * @var float|int
+     * @var float
      */
     private $intensity = 0; // Kilo-Ampere
 
     /**
-     * @var float|int
+     * @var float
      */
     private $chiSquared = 0;
 
@@ -70,11 +69,12 @@ final class Lightning extends Entity implements Response
      */
     public function __construct(stdClass $data)
     {
-        $this->id           = $this->getPropertyData($data, 'id');
-        $this->intensity    = $this->getPropertyData($data, 'correntPic', 0);
-        $this->chiSquared   = $this->getPropertyData($data, 'chi2', 0);
+        $this->id = $this->getPropertyData($data, 'id');
+        $this->intensity = $this->getPropertyData($data, 'correntPic', 0);
+        $this->chiSquared = $this->getPropertyData($data, 'chi2', 0);
         $this->sensorsCount = $this->getPropertyData($data, 'numSensors', 0);
         $this->cloudGround  = $this->getPropertyData($data, 'nuvolTerra', false);
+        $this->date = $this->getPropertyDataAsDate($data, 'data');
 
         $cityCode = $this->getPropertyData($data, 'idMunicipi');
         if ($cityCode !== null) {
@@ -87,11 +87,6 @@ final class Lightning extends Entity implements Response
         $ellipse = $this->getPropertyData($data, 'ellipse');
         if ($ellipse !== null) {
             $this->ellipse = new Ellipse((object)$ellipse);
-        }
-
-        $date = $this->getPropertyData($data, 'data');
-        if ($date !== null) {
-            $this->date = DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $date, new DateTimeZone('UTC'));
         }
 
         $coordinates = $this->getPropertyData($data, 'coordenades');
@@ -109,25 +104,25 @@ final class Lightning extends Entity implements Response
     }
 
     /**
-     * @return bool|\DateTime|null
+     * @return DateTime|null
      */
-    public function getDate()
+    public function getDate(): ?DateTime
     {
         return $this->date;
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getIntensity()
+    public function getIntensity(): float
     {
         return $this->intensity;
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getChiSquared()
+    public function getChiSquared(): float
     {
         return $this->chiSquared;
     }

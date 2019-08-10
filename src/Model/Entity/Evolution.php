@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Datetime;
 use Meteocat\Model\Common\Entity;
 use stdClass;
-use Datetime;
-use DateTimeZone;
 
 /**
  * Class Notice
@@ -64,17 +63,13 @@ final class Evolution extends Entity
      */
     public function __construct(stdClass $data)
     {
-        $this->representative           = $this->getPropertyData($data, 'representatiu', 0);
-        $this->comment                  = $this->getPropertyData($data, 'comentari');
-        $this->threshold1               = $this->getPropertyData($data, 'llindar1');
-        $this->threshold2               = $this->getPropertyData($data, 'llindar2');
+        $this->representative = $this->getPropertyData($data, 'representatiu', 0);
+        $this->comment = $this->getPropertyData($data, 'comentari');
+        $this->threshold1 = $this->getPropertyData($data, 'llindar1');
+        $this->threshold2 = $this->getPropertyData($data, 'llindar2');
         $this->geographicalDistribution = $this->getPropertyData($data, 'distribucioGeografica');
-        $this->maximumValue             = $this->getPropertyData($data, 'valorMaxim');
-
-        $day = $this->getPropertyData($data, 'dia');
-        if ($day !== null) {
-            $this->day = DateTime::createFromFormat('Y-m-d\TH:i\Z', $day, new DateTimeZone('UTC'));
-        }
+        $this->maximumValue = $this->getPropertyData($data, 'valorMaxim');
+        $this->day = $this->getPropertyDataAsDate($data, 'dia');
 
         $periods = $this->getPropertyData($data, 'periodes');
         if (is_array($periods)) {

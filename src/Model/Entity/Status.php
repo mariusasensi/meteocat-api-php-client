@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Datetime;
 use Meteocat\Model\Common\Entity;
 use stdClass;
-use Datetime;
-use DateTimeZone;
 
 /**
  * Class Alert
@@ -38,14 +37,11 @@ final class Status extends Entity
      */
     public function __construct(stdClass $data)
     {
+        $this->date = $this->getPropertyDataAsDate($data, 'data');
+
         $name = $this->getPropertyData($data, 'nom');
         if (in_array($name, $this->getAllStatus(), true)) {
             $this->name = $name;
-        }
-
-        $date = $this->getPropertyData($data, 'data');
-        if ($date !== null) {
-            $this->date = DateTime::createFromFormat('Y-m-d\TH:i\Z', $date, new DateTimeZone('UTC'));
         }
     }
 

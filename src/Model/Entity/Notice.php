@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Entity;
 
+use Datetime;
 use Meteocat\Model\Common\Entity;
 use stdClass;
-use Datetime;
-use DateTimeZone;
 
 /**
  * Class Notice
@@ -80,21 +79,9 @@ final class Notice extends Entity
         $this->threshold = $this->getPropertyData($data, 'llindar');
         $this->warning = $this->getPropertyData($data, 'perill');
         $this->comment = $this->getPropertyData($data, 'comentari');
-
-        $dateStart = $this->getPropertyData($data, 'dataInici');
-        if ($dateStart !== null) {
-            $this->dateStart = DateTime::createFromFormat('Y-m-d\TH:i\Z', $dateStart, new DateTimeZone('UTC'));
-        }
-
-        $dateEnd = $this->getPropertyData($data, 'dataFi');
-        if ($dateEnd !== null) {
-            $this->dateEnd = DateTime::createFromFormat('Y-m-d\TH:i\Z', $dateEnd, new DateTimeZone('UTC'));
-        }
-
-        $dateEmission = $this->getPropertyData($data, 'dataEmisio');
-        if ($dateEmission !== null) {
-            $this->dateEmission = DateTime::createFromFormat('Y-m-d\TH:i\Z', $dateEmission, new DateTimeZone('UTC'));
-        }
+        $this->dateStart = $this->getPropertyDataAsDate($data, 'dataInici');
+        $this->dateEnd = $this->getPropertyDataAsDate($data, 'dataFi');
+        $this->dateEmission = $this->getPropertyDataAsDate($data, 'dataEmisio');
 
         $evolutions = $this->getPropertyData($data, 'evolucions');
         if (is_array($evolutions)) {
