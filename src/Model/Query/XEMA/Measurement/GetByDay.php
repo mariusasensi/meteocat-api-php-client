@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XEMA\Measurement;
 
 use DateTime;
+use Meteocat\Model\Entity\Variable;
 
 /**
  * Class Measurement\GetByDay
@@ -90,13 +91,11 @@ final class GetByDay extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Variable::class;
     }
 
     /**

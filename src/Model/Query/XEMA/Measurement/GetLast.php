@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\XEMA\Measurement;
 
+use Meteocat\Model\Entity\Variable;
+
 /**
  * Class Measurement\GetLast
  *
@@ -81,13 +83,11 @@ final class GetLast extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Variable::class;
     }
 
     /**

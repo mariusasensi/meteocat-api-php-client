@@ -23,6 +23,11 @@ final class Read extends Entity
     private $date = null;
 
     /**
+     * @var Datetime|null
+     */
+    private $dateExtreme = null;
+
+    /**
      * @var float
      */
     private $value = 0;
@@ -52,6 +57,11 @@ final class Read extends Entity
         if ($date !== null) {
             $this->date = DateTime::createFromFormat('Y-m-d\TH:i\Z', $date, new DateTimeZone('UTC'));
         }
+
+        $dateExtreme = $this->getPropertyData($data, 'dataExtrem');
+        if ($dateExtreme !== null) {
+            $this->dateExtreme = DateTime::createFromFormat('Y-m-d\TH:i\Z', $dateExtreme, new DateTimeZone('UTC'));
+        }
     }
 
     /**
@@ -60,6 +70,14 @@ final class Read extends Entity
     public function getDate(): ?DateTime
     {
         return $this->date;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getDateExtreme(): ?DateTime
+    {
+        return $this->dateExtreme;
     }
 
     /**

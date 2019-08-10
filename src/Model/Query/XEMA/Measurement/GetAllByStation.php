@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XEMA\Measurement;
 
 use DateTime;
+use Meteocat\Model\Entity\Variable;
 
 /**
  * Class Measurement\GetAllByStation
@@ -50,7 +51,7 @@ final class GetAllByStation extends Base
      *
      * @return $this
      */
-    public function withState(string $state)
+    public function withState(string $state): self
     {
         $this->state = $state;
 
@@ -62,7 +63,7 @@ final class GetAllByStation extends Base
      *
      * @return $this
      */
-    public function withDate(DateTime $date)
+    public function withDate(DateTime $date): self
     {
         $this->date = $date;
 
@@ -101,13 +102,11 @@ final class GetAllByStation extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Variable::class;
     }
 
     /**
