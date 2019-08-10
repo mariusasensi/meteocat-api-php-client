@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query\XEMA\MultivariableCalculation;
 
+use Meteocat\Model\Entity\Variable;
+
 /**
  * Class MultivariableCalculation\All
  *
@@ -35,13 +37,11 @@ final class GetAll extends Base
     }
 
     /**
-     * TODO: Entity response class.
-     *
      * @return string
      */
     public function getResponseClass(): string
     {
-        return '';
+        return Variable::class;
     }
 
     /**
