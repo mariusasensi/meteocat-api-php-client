@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Meteocat\Model\Query;
+namespace Meteocat\Model\Common;
 
 /**
  * Interface Query

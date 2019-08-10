@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Meteocat\Model\Query;
 
+use Meteocat\Model\Common\Query;
+
 /**
  * Class Base
  *

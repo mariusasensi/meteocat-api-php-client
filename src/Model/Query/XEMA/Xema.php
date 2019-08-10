@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Meteocat\Model\Query\XEMA;
 
 use Meteocat\Model\Query\Base;
-use Meteocat\Model\Query\Query;
+use Meteocat\Model\Common\Query;
 
 /**
  * Class Xema

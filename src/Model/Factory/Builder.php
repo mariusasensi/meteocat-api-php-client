@@ -16,7 +16,7 @@ use Meteocat\Model\Exception\StoreResponseDirectoryNotFound;
  * @package Meteocat\Model\Factory
  * @author  Màrius Asensi Jordà <marius.asensi@gmail.com>
  */
-class Builder
+final class Builder
 {
     /**
      * Convert from JSON response to the desired entity.

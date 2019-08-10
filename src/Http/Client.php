@@ -11,7 +11,7 @@ use Meteocat\Model\Exception\QuotaExceeded;
 use Meteocat\Model\Exception\StoreResponseAlreadyExist;
 use Meteocat\Model\Exception\StoreResponseDirectoryNotFound;
 use Meteocat\Model\Factory\Builder;
-use Meteocat\Model\Query\Query;
+use Meteocat\Model\Common\Query;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
