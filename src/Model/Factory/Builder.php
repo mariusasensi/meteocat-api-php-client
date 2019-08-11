@@ -9,6 +9,8 @@ use Meteocat\Model\Exception\EntityNotFound;
 use Meteocat\Model\Exception\NoDataAvailable;
 use Meteocat\Model\Exception\StoreResponseAlreadyExist;
 use Meteocat\Model\Exception\StoreResponseDirectoryNotFound;
+use Meteocat\Model\Exception\StoreResponseInvalidFileName;
+use Meteocat\Model\Exception\StoreResponseNoDataToSave;
 
 /**
  * Class Builder
@@ -31,7 +33,7 @@ final class Builder
     {
         // Always returns a JSON, else this will return null.
         $response = json_decode(html_entity_decode($raw), false);
-        if (empty($response)) {
+        if (empty((array)$response)) {
             throw new NoDataAvailable();
         }
 
@@ -73,7 +75,7 @@ final class Builder
      * @param bool   $replace Replace if the file already exist.
      *
      * @return bool
-     * @throws StoreResponseAlreadyExist|StoreResponseDirectoryNotFound
+     * @throws StoreResponseAlreadyExist|StoreResponseDirectoryNotFound|StoreResponseInvalidFileName|StoreResponseNoDataToSave
      */
     public static function save(string $path, string $file, string $raw, bool $replace = false): bool
     {
@@ -81,15 +83,42 @@ final class Builder
             throw new StoreResponseDirectoryNotFound();
         }
 
+        // Clear file name.
+        $file = self::sanitizer($file);
+        if (empty($file)) {
+            throw new StoreResponseInvalidFileName();
+        }
+
         // Name with path and file extension.
         $file = sprintf('%s/response.%s.json', $path, $file);
 
+        // Clear.
+        $data = html_entity_decode($raw);
+        if (empty($data)) {
+            throw new StoreResponseNoDataToSave();
+        }
+
         if ($replace || !file_exists($file)) {
-            $result = file_put_contents($file, html_entity_decode($raw));
+            $result = file_put_contents($file, $data);
         } else {
             throw new StoreResponseAlreadyExist();
         }
 
         return $result !== false;
+    }
+
+    /**
+     * Remove invalid characters of a string.
+     *
+     * @param string $sentence
+     *
+     * @return string
+     */
+    private static function sanitizer(string $sentence): string
+    {
+        $sentence = mb_ereg_replace('([^\s\w\d.\/\-\=\?\&\,\;\[\]\(\)])', '', $sentence);
+        $sentence = mb_ereg_replace('([\?\/\=\?\&])', '.', $sentence);
+
+        return $sentence;
     }
 }
