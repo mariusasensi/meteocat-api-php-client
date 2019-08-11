@@ -7,6 +7,7 @@ namespace Meteocat\Model\Entity;
 use DateTime;
 use Meteocat\Model\Common\Entity;
 use Meteocat\Model\Common\Response;
+use Meteocat\Model\Entity\Auxiliary\ForecastMountainAltitude;
 use stdClass;
 
 /**

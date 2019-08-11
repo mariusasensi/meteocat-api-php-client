@@ -46,9 +46,9 @@ class ResponseXEMAStationTest extends TestCase
         $this->assertEquals([], $station1city->getLightningDischarges());
         $this->assertEquals(null, $station1city->isCapital());
 
-        /** @var Entity\Coordinate $station1Coordinate */
+        /** @var Entity\Auxiliary\Coordinate $station1Coordinate */
         $station1Coordinate = $station1->getCoordinate();
-        $this->assertInstanceOf(Entity\Coordinate::class, $station1Coordinate);
+        $this->assertInstanceOf(Entity\Auxiliary\Coordinate::class, $station1Coordinate);
         $this->assertEquals(41.6566, $station1Coordinate->getLatitude());
         $this->assertEquals(0.95172, $station1Coordinate->getLongitude());
 
@@ -60,13 +60,13 @@ class ResponseXEMAStationTest extends TestCase
 
         /** @var Entity\County $station1Region */
         $station1Region = $station1->getRegion();
-        $this->assertInstanceOf(Entity\Region::class, $station1Region);
+        $this->assertInstanceOf(Entity\Auxiliary\Region::class, $station1Region);
         $this->assertEquals(25, $station1Region->getCode());
         $this->assertEquals('Lleida', $station1Region->getName());
 
-        /** @var Entity\StationNetwork $station1Network */
+        /** @var Entity\Auxiliary\StationNetwork $station1Network */
         $station1Network = $station1->getNetwork();
-        $this->assertInstanceOf(Entity\StationNetwork::class, $station1Network);
+        $this->assertInstanceOf(Entity\Auxiliary\StationNetwork::class, $station1Network);
         $this->assertEquals(1, $station1Network->getCode());
         $this->assertEquals('XEMA', $station1Network->getName());
 
@@ -75,9 +75,9 @@ class ResponseXEMAStationTest extends TestCase
         $this->assertIsArray($station1Statuses);
         $this->assertCount(1, $station1Statuses);
 
-        /** @var Entity\StationStatus $station1Statuses1 */
+        /** @var Entity\Auxiliary\StationStatus $station1Statuses1 */
         $station1Statuses1 = current($station1Statuses);
-        $this->assertInstanceOf(Entity\StationStatus::class, $station1Statuses1);
+        $this->assertInstanceOf(Entity\Auxiliary\StationStatus::class, $station1Statuses1);
         $this->assertEquals(2, $station1Statuses1->getCode());
         $this->assertInstanceOf(DateTime::class, $station1Statuses1->getDateStart());
         $this->assertEquals('1995-12-16 23:00:00', $station1Statuses1->getDateStart()->format('Y-m-d H:i:s'));
@@ -110,9 +110,9 @@ class ResponseXEMAStationTest extends TestCase
         $this->assertEquals([], $stationCity->getLightningDischarges());
         $this->assertEquals(null, $stationCity->isCapital());
 
-        /** @var Entity\Coordinate $stationCoordinate */
+        /** @var Entity\Auxiliary\Coordinate $stationCoordinate */
         $stationCoordinate = $entityResponse->getCoordinate();
-        $this->assertInstanceOf(Entity\Coordinate::class, $stationCoordinate);
+        $this->assertInstanceOf(Entity\Auxiliary\Coordinate::class, $stationCoordinate);
         $this->assertEquals(41.29928, $stationCoordinate->getLatitude());
         $this->assertEquals(2.03787, $stationCoordinate->getLongitude());
 
@@ -124,13 +124,13 @@ class ResponseXEMAStationTest extends TestCase
 
         /** @var Entity\County $stationRegion */
         $stationRegion = $entityResponse->getRegion();
-        $this->assertInstanceOf(Entity\Region::class, $stationRegion);
+        $this->assertInstanceOf(Entity\Auxiliary\Region::class, $stationRegion);
         $this->assertEquals(8, $stationRegion->getCode());
         $this->assertEquals('Barcelona', $stationRegion->getName());
 
-        /** @var Entity\StationNetwork $stationNetwork */
+        /** @var Entity\Auxiliary\StationNetwork $stationNetwork */
         $stationNetwork = $entityResponse->getNetwork();
-        $this->assertInstanceOf(Entity\StationNetwork::class, $stationNetwork);
+        $this->assertInstanceOf(Entity\Auxiliary\StationNetwork::class, $stationNetwork);
         $this->assertEquals(1, $stationNetwork->getCode());
         $this->assertEquals('XEMA', $stationNetwork->getName());
 
@@ -139,9 +139,9 @@ class ResponseXEMAStationTest extends TestCase
         $this->assertIsArray($stationStatuses);
         $this->assertCount(1, $stationStatuses);
 
-        /** @var Entity\StationStatus $stationStatuses1 */
+        /** @var Entity\Auxiliary\StationStatus $stationStatuses1 */
         $stationStatuses1 = current($stationStatuses);
-        $this->assertInstanceOf(Entity\StationStatus::class, $stationStatuses1);
+        $this->assertInstanceOf(Entity\Auxiliary\StationStatus::class, $stationStatuses1);
         $this->assertEquals(2, $stationStatuses1->getCode());
         $this->assertInstanceOf(DateTime::class, $stationStatuses1->getDateStart());
         $this->assertEquals('1993-04-29 00:00:00', $stationStatuses1->getDateStart()->format('Y-m-d H:i:s'));

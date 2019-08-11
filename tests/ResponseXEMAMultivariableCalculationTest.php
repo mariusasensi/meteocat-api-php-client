@@ -36,9 +36,9 @@ class ResponseXEMAMultivariableCalculationTest extends TestCase
         $this->assertIsArray($reads);
         $this->assertCount(22, $reads);
 
-        /** @var Entity\Read $read1 */
+        /** @var Entity\Auxiliary\Read $read1 */
         $read1 = current($reads);
-        $this->assertInstanceOf(Entity\Read::class, $read1);
+        $this->assertInstanceOf(Entity\Auxiliary\Read::class, $read1);
         $this->assertInstanceOf(DateTime::class, $read1->getDate());
         $this->assertEquals('2019-08-01 00:00', $read1->getDate()->format('Y-m-d H:i'));
         $this->assertEquals(0, $read1->getValue());
@@ -74,9 +74,9 @@ class ResponseXEMAMultivariableCalculationTest extends TestCase
         $this->assertIsArray($intervals);
         $this->assertCount(1, $intervals);
 
-        /** @var Entity\TemporalInterval $intervals1 */
+        /** @var Entity\Auxiliary\TemporalInterval $intervals1 */
         $intervals1 = current($intervals);
-        $this->assertInstanceOf(Entity\TemporalInterval::class, $intervals1);
+        $this->assertInstanceOf(Entity\Auxiliary\TemporalInterval::class, $intervals1);
         $this->assertEquals('HO', $intervals1->getCode());
         $this->assertInstanceOf(DateTime::class, $intervals1->getDateStart());
         $this->assertEquals('1995-11-15 11:00:00', $intervals1->getDateStart()->format('Y-m-d H:i:s'));
@@ -106,9 +106,9 @@ class ResponseXEMAMultivariableCalculationTest extends TestCase
         $this->assertIsArray($intervals);
         $this->assertCount(1, $intervals);
 
-        /** @var Entity\TemporalInterval $intervals1 */
+        /** @var Entity\Auxiliary\TemporalInterval $intervals1 */
         $intervals1 = current($intervals);
-        $this->assertInstanceOf(Entity\TemporalInterval::class, $intervals1);
+        $this->assertInstanceOf(Entity\Auxiliary\TemporalInterval::class, $intervals1);
         $this->assertEquals('HO', $intervals1->getCode());
         $this->assertInstanceOf(DateTime::class, $intervals1->getDateStart());
         $this->assertEquals('1993-04-29 00:00:00', $intervals1->getDateStart()->format('Y-m-d H:i:s'));

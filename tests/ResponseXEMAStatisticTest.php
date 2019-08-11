@@ -47,9 +47,9 @@ class ResponseXEMAStatisticTest extends TestCase
         $this->assertIsArray($reads);
         $this->assertCount(5, $reads);
 
-        /** @var Entity\Read $read1 */
+        /** @var Entity\Auxiliary\Read $read1 */
         $read1 = current($reads);
-        $this->assertInstanceOf(Entity\Read::class, $read1);
+        $this->assertInstanceOf(Entity\Auxiliary\Read::class, $read1);
         $this->assertInstanceOf(DateTime::class, $read1->getDate());
         $this->assertEquals('2013', $read1->getDate()->format('Y'));
         $this->assertEquals(16.2, $read1->getValue());
@@ -89,9 +89,9 @@ class ResponseXEMAStatisticTest extends TestCase
         $this->assertIsArray($reads);
         $this->assertCount(12, $reads);
 
-        /** @var Entity\Read $read1 */
+        /** @var Entity\Auxiliary\Read $read1 */
         $read1 = current($reads);
-        $this->assertInstanceOf(Entity\Read::class, $read1);
+        $this->assertInstanceOf(Entity\Auxiliary\Read::class, $read1);
         $this->assertInstanceOf(DateTime::class, $read1->getDate());
         $this->assertEquals('2018-01', $read1->getDate()->format('Y-m'));
         $this->assertEquals(11.3, $read1->getValue());
@@ -131,9 +131,9 @@ class ResponseXEMAStatisticTest extends TestCase
         $this->assertIsArray($reads);
         $this->assertCount(31, $reads);
 
-        /** @var Entity\Read $read1 */
+        /** @var Entity\Auxiliary\Read $read1 */
         $read1 = current($reads);
-        $this->assertInstanceOf(Entity\Read::class, $read1);
+        $this->assertInstanceOf(Entity\Auxiliary\Read::class, $read1);
         $this->assertInstanceOf(DateTime::class, $read1->getDate());
         $this->assertInstanceOf(DateTime::class, $read1->getDateExtreme());
         $this->assertEquals('2019-07-01', $read1->getDate()->format('Y-m-d'));

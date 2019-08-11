@@ -6,6 +6,7 @@ namespace Meteocat\Model\Entity;
 
 use Meteocat\Model\Common\Entity;
 use Meteocat\Model\Common\Response;
+use Meteocat\Model\Entity\Auxiliary\SymbolValue;
 use stdClass;
 
 /**

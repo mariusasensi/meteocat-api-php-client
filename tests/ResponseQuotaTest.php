@@ -21,16 +21,16 @@ class ResponseQuotaTest extends TestCase
         $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
         $this->assertInstanceOf(Entity\Quota::class, $entityResponse);
 
-        /** @var Entity\Client $client */
+        /** @var Entity\Auxiliary\Client $client */
         $client = $entityResponse->getClient();
-        $this->assertInstanceOf(Entity\Client::class, $client);
+        $this->assertInstanceOf(Entity\Auxiliary\Client::class, $client);
         $this->assertEquals('Màrius Asensi Jordà', $client->getName());
 
         /** @var array $plans */
         $plans = $entityResponse->getPlans();
         $this->assertIsArray($plans);
 
-        /** @var Entity\Plan $firstPlan */
+        /** @var Entity\Auxiliary\Plan $firstPlan */
         $firstPlan = current($plans);
 
         $this->assertEquals('XDDE_250', $firstPlan->getName());
@@ -39,7 +39,7 @@ class ResponseQuotaTest extends TestCase
         $this->assertEquals('0', $firstPlan->getRequestsRealised());
         $this->assertEquals('250', $firstPlan->getRequestsRemaining());
 
-        /** @var Entity\Plan $secondPlan */
+        /** @var Entity\Auxiliary\Plan $secondPlan */
         $secondPlan = next($plans);
 
         $this->assertEquals('Predicció_100', $secondPlan->getName());
@@ -48,7 +48,7 @@ class ResponseQuotaTest extends TestCase
         $this->assertEquals('0', $secondPlan->getRequestsRealised());
         $this->assertEquals('100', $secondPlan->getRequestsRemaining());
 
-        /** @var Entity\Plan $thirdPlan */
+        /** @var Entity\Auxiliary\Plan $thirdPlan */
         $thirdPlan = next($plans);
 
         $this->assertEquals('XEMA_750', $thirdPlan->getName());

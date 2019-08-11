@@ -64,9 +64,9 @@ class ResponseReferenceTest extends TestCase
         $this->assertEquals([], $city1->getLightningDischarges());
         $this->assertEquals(null, $city1->isCapital());
 
-        /** @var Entity\Coordinate $city1Cood */
+        /** @var Entity\Auxiliary\Coordinate $city1Cood */
         $city1Cood = $city1->getCoordinate();
-        $this->assertInstanceOf(Entity\Coordinate::class, $city1Cood);
+        $this->assertInstanceOf(Entity\Auxiliary\Coordinate::class, $city1Cood);
         $this->assertEquals(42.16130365400063, $city1Cood->getLatitude());
         $this->assertEquals(1.0917273756684127, $city1Cood->getLongitude());
 
@@ -97,9 +97,9 @@ class ResponseReferenceTest extends TestCase
         $symbol1Values = $symbol1->getValues();
         $this->assertIsArray($symbol1Values);
 
-        /** @var Entity\SymbolValue $symbol1Values1 */
+        /** @var Entity\Auxiliary\SymbolValue $symbol1Values1 */
         $symbol1Values1 = current($symbol1Values);
-        $this->assertInstanceOf(Entity\SymbolValue::class, $symbol1Values1);
+        $this->assertInstanceOf(Entity\Auxiliary\SymbolValue::class, $symbol1Values1);
         $this->assertEquals('1', $symbol1Values1->getCode());
         $this->assertEquals('Cel serè', $symbol1Values1->getName());
         $this->assertEquals('', $symbol1Values1->getDescription());

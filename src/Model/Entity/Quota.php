@@ -6,6 +6,8 @@ namespace Meteocat\Model\Entity;
 
 use Meteocat\Model\Common\Entity;
 use Meteocat\Model\Common\Response;
+use Meteocat\Model\Entity\Auxiliary\Client;
+use Meteocat\Model\Entity\Auxiliary\Plan;
 use stdClass;
 
 /**

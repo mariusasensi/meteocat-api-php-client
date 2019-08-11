@@ -38,9 +38,9 @@ class ResponseXEMAMeasurementTest extends TestCase
         $this->assertIsArray($reads);
         $this->assertCount(48, $reads);
 
-        /** @var Entity\Read $read1 */
+        /** @var Entity\Auxiliary\Read $read1 */
         $read1 = current($reads);
-        $this->assertInstanceOf(Entity\Read::class, $read1);
+        $this->assertInstanceOf(Entity\Auxiliary\Read::class, $read1);
         $this->assertInstanceOf(DateTime::class, $read1->getDate());
         $this->assertEquals('2019-08-01 00:00', $read1->getDate()->format('Y-m-d H:i'));
         $this->assertEquals(21.6, $read1->getValue());
@@ -72,9 +72,9 @@ class ResponseXEMAMeasurementTest extends TestCase
         $this->assertIsArray($reads);
         $this->assertCount(1, $reads);
 
-        /** @var Entity\Read $read1 */
+        /** @var Entity\Auxiliary\Read $read1 */
         $read1 = current($reads);
-        $this->assertInstanceOf(Entity\Read::class, $read1);
+        $this->assertInstanceOf(Entity\Auxiliary\Read::class, $read1);
         $this->assertInstanceOf(DateTime::class, $read1->getDate());
         $this->assertEquals('2019-08-09 22:00', $read1->getDate()->format('Y-m-d H:i'));
         $this->assertInstanceOf(DateTime::class, $read1->getDateExtreme());
@@ -115,9 +115,9 @@ class ResponseXEMAMeasurementTest extends TestCase
         $this->assertIsArray($variable1statuses);
         $this->assertCount(1, $variable1statuses);
 
-        /** @var Entity\StationStatus $variable1statuses1 */
+        /** @var Entity\Auxiliary\StationStatus $variable1statuses1 */
         $variable1statuses1 = current($variable1statuses);
-        $this->assertInstanceOf(Entity\StationStatus::class, $variable1statuses1);
+        $this->assertInstanceOf(Entity\Auxiliary\StationStatus::class, $variable1statuses1);
         $this->assertEquals(2, $variable1statuses1->getCode());
         $this->assertInstanceOf(DateTime::class, $variable1statuses1->getDateStart());
         $this->assertEquals('2009-07-15 09:00:00', $variable1statuses1->getDateStart()->format('Y-m-d H:i:s'));
@@ -128,18 +128,18 @@ class ResponseXEMAMeasurementTest extends TestCase
         $this->assertIsArray($variable1intervals);
         $this->assertCount(2, $variable1intervals);
 
-        /** @var Entity\TemporalInterval $variable1intervals1 */
+        /** @var Entity\Auxiliary\TemporalInterval $variable1intervals1 */
         $variable1intervals1 = current($variable1intervals);
-        $this->assertInstanceOf(Entity\TemporalInterval::class, $variable1intervals1);
+        $this->assertInstanceOf(Entity\Auxiliary\TemporalInterval::class, $variable1intervals1);
         $this->assertEquals('HO', $variable1intervals1->getCode());
         $this->assertInstanceOf(DateTime::class, $variable1intervals1->getDateStart());
         $this->assertEquals('2009-07-15 09:00:00', $variable1intervals1->getDateStart()->format('Y-m-d H:i:s'));
         $this->assertInstanceOf(DateTime::class, $variable1intervals1->getDateEnd());
         $this->assertEquals('2014-04-02 00:00:00', $variable1intervals1->getDateEnd()->format('Y-m-d H:i:s'));
 
-        /** @var Entity\TemporalInterval $variable1intervals2 */
+        /** @var Entity\Auxiliary\TemporalInterval $variable1intervals2 */
         $variable1intervals2 = next($variable1intervals);
-        $this->assertInstanceOf(Entity\TemporalInterval::class, $variable1intervals2);
+        $this->assertInstanceOf(Entity\Auxiliary\TemporalInterval::class, $variable1intervals2);
         $this->assertEquals('SH', $variable1intervals2->getCode());
         $this->assertInstanceOf(DateTime::class, $variable1intervals2->getDateStart());
         $this->assertEquals('2014-04-02 00:00:00', $variable1intervals2->getDateStart()->format('Y-m-d H:i:s'));
@@ -169,9 +169,9 @@ class ResponseXEMAMeasurementTest extends TestCase
         $this->assertIsArray($statuses);
         $this->assertCount(1, $statuses);
 
-        /** @var Entity\StationStatus $statuses1 */
+        /** @var Entity\Auxiliary\StationStatus $statuses1 */
         $statuses1 = current($statuses);
-        $this->assertInstanceOf(Entity\StationStatus::class, $statuses1);
+        $this->assertInstanceOf(Entity\Auxiliary\StationStatus::class, $statuses1);
         $this->assertEquals(2, $statuses1->getCode());
         $this->assertInstanceOf(DateTime::class, $statuses1->getDateStart());
         $this->assertEquals('2009-07-15 09:00:00', $statuses1->getDateStart()->format('Y-m-d H:i:s'));
@@ -182,18 +182,18 @@ class ResponseXEMAMeasurementTest extends TestCase
         $this->assertIsArray($intervals);
         $this->assertCount(2, $intervals);
 
-        /** @var Entity\TemporalInterval $intervals1 */
+        /** @var Entity\Auxiliary\TemporalInterval $intervals1 */
         $intervals1 = current($intervals);
-        $this->assertInstanceOf(Entity\TemporalInterval::class, $intervals1);
+        $this->assertInstanceOf(Entity\Auxiliary\TemporalInterval::class, $intervals1);
         $this->assertEquals('HO', $intervals1->getCode());
         $this->assertInstanceOf(DateTime::class, $intervals1->getDateStart());
         $this->assertEquals('2009-07-15 09:00:00', $intervals1->getDateStart()->format('Y-m-d H:i:s'));
         $this->assertInstanceOf(DateTime::class, $intervals1->getDateEnd());
         $this->assertEquals('2014-04-02 00:00:00', $intervals1->getDateEnd()->format('Y-m-d H:i:s'));
 
-        /** @var Entity\TemporalInterval $intervals2 */
+        /** @var Entity\Auxiliary\TemporalInterval $intervals2 */
         $intervals2 = next($intervals);
-        $this->assertInstanceOf(Entity\TemporalInterval::class, $intervals2);
+        $this->assertInstanceOf(Entity\Auxiliary\TemporalInterval::class, $intervals2);
         $this->assertEquals('SH', $intervals2->getCode());
         $this->assertInstanceOf(DateTime::class, $intervals2->getDateStart());
         $this->assertEquals('2014-04-02 00:00:00', $intervals2->getDateStart()->format('Y-m-d H:i:s'));

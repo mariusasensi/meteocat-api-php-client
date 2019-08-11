@@ -6,6 +6,8 @@ namespace Meteocat\Model\Entity;
 
 use Meteocat\Model\Common\Entity;
 use Meteocat\Model\Common\Response;
+use Meteocat\Model\Entity\Auxiliary\ForecastCountyPart;
+use Meteocat\Model\Entity\Auxiliary\ForecastCountyTemperature;
 use stdClass;
 
 /**
@@ -60,10 +62,10 @@ final class ForecastCounty extends Entity implements Response
             }
         }
 
-        $miniums = $this->getPropertyData($data, 'minimes');
-        if (is_array($miniums)) {
-            foreach ($miniums as $minium) {
-                $this->minimum[] = new ForecastCountyTemperature((object)$minium);
+        $minimums = $this->getPropertyData($data, 'minimes');
+        if (is_array($minimums)) {
+            foreach ($minimums as $minimum) {
+                $this->minimum[] = new ForecastCountyTemperature((object)$minimum);
             }
         }
     }

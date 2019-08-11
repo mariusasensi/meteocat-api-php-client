@@ -37,9 +37,9 @@ class ResponseXEMARepresentativeTest extends TestCase
         $this->assertIsArray($cityRepresentative);
         $this->assertCount(1, $cityRepresentative);
 
-        /** @var Entity\VariableCity $cityRepresentativeVariable */
+        /** @var Entity\Auxiliary\VariableCity $cityRepresentativeVariable */
         $cityRepresentativeVariable = current($cityRepresentative);
-        $this->assertInstanceOf(Entity\VariableCity::class, $cityRepresentativeVariable);
+        $this->assertInstanceOf(Entity\Auxiliary\VariableCity::class, $cityRepresentativeVariable);
         $this->assertInstanceOf(Entity\Variable::class, $cityRepresentativeVariable->getVariable());
         $this->assertEquals(32, $cityRepresentativeVariable->getVariable()->getCode());
 

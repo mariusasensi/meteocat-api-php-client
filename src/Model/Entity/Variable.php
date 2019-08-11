@@ -6,6 +6,9 @@ namespace Meteocat\Model\Entity;
 
 use Meteocat\Model\Common\Entity;
 use Meteocat\Model\Common\Response;
+use Meteocat\Model\Entity\Auxiliary\Read;
+use Meteocat\Model\Entity\Auxiliary\StationStatus;
+use Meteocat\Model\Entity\Auxiliary\TemporalInterval;
 use stdClass;
 
 /**

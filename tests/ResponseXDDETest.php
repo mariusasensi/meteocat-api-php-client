@@ -37,15 +37,15 @@ class ResponseXDDETest extends TestCase
         $this->assertEquals(null, $lightning1City->getCounty());
         $this->assertEquals(null, $lightning1City->getCoordinate());
 
-        /** @var Entity\Coordinate $lightning1Coordinate */
+        /** @var Entity\Auxiliary\Coordinate $lightning1Coordinate */
         $lightning1Coordinate = $lightning1->getCoordinate();
-        $this->assertInstanceOf(Entity\Coordinate::class, $lightning1Coordinate);
+        $this->assertInstanceOf(Entity\Auxiliary\Coordinate::class, $lightning1Coordinate);
         $this->assertEquals(42.03649, $lightning1Coordinate->getLatitude());
         $this->assertEquals(1.672512, $lightning1Coordinate->getLongitude());
 
-        /** @var Entity\Ellipse $lightning1Ellipse */
+        /** @var Entity\Auxiliary\Ellipse $lightning1Ellipse */
         $lightning1Ellipse = $lightning1->getEllipse();
-        $this->assertInstanceOf(Entity\Ellipse::class, $lightning1Ellipse);
+        $this->assertInstanceOf(Entity\Auxiliary\Ellipse::class, $lightning1Ellipse);
         $this->assertEquals(1500, $lightning1Ellipse->getMajorAxis());
         $this->assertEquals(400, $lightning1Ellipse->getMinorAxis());
         $this->assertEquals(313.89999, $lightning1Ellipse->getAngle());
@@ -69,15 +69,15 @@ class ResponseXDDETest extends TestCase
         $this->assertEquals(null, $lightning2City->getCounty());
         $this->assertEquals(null, $lightning2City->getCoordinate());
 
-        /** @var Entity\Coordinate $lightning2Coordinate */
+        /** @var Entity\Auxiliary\Coordinate $lightning2Coordinate */
         $lightning2Coordinate = $lightning2->getCoordinate();
-        $this->assertInstanceOf(Entity\Coordinate::class, $lightning2Coordinate);
+        $this->assertInstanceOf(Entity\Auxiliary\Coordinate::class, $lightning2Coordinate);
         $this->assertEquals(42.00192, $lightning2Coordinate->getLatitude());
         $this->assertEquals(1.632251, $lightning2Coordinate->getLongitude());
 
-        /** @var Entity\Ellipse $lightning2Ellipse */
+        /** @var Entity\Auxiliary\Ellipse $lightning2Ellipse */
         $lightning2Ellipse = $lightning2->getEllipse();
-        $this->assertInstanceOf(Entity\Ellipse::class, $lightning2Ellipse);
+        $this->assertInstanceOf(Entity\Auxiliary\Ellipse::class, $lightning2Ellipse);
         $this->assertEquals(300, $lightning2Ellipse->getMajorAxis());
         $this->assertEquals(200, $lightning2Ellipse->getMinorAxis());
         $this->assertEquals(355.20001, $lightning2Ellipse->getAngle());
@@ -105,7 +105,7 @@ class ResponseXDDETest extends TestCase
         $this->assertIsArray($city1->getLightningDischarges());
         $this->assertCount(1, $lightningDischarges);
 
-        /** @var Entity\LightningDischarge $uniqueDischarge */
+        /** @var Entity\Auxiliary\LightningDischarge $uniqueDischarge */
         $uniqueDischarge = current($lightningDischarges);
         $this->assertEquals('cc', $uniqueDischarge->getType());
         $this->assertEquals(5, $uniqueDischarge->getCount());
