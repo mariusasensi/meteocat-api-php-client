@@ -4,7 +4,7 @@
     "keywords": ["meteocat", "meteo.cat", "weather", "provider", "catalunya"],
     "type": "library",
     "require": {
-        "php": "^7.0",
+        "php": "^7.1",
         "guzzlehttp/guzzle": "~6.0",
         "ext-json": "*",
         "ext-mbstring": "*"
