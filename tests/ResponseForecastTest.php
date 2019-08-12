@@ -21,8 +21,7 @@ class ResponseForecastTest extends TestCase
         $entityResponse = Builder::create($query->getResponseClass(), $mockResponse);
         $this->assertInstanceOf(Entity\Forecast::class, $entityResponse);
 
-        /** @var Entity\Auxiliary\ForecastPart $morning
-         */
+        /** @var Entity\Auxiliary\ForecastPart $morning */
         $morning = $entityResponse->getMorning();
         $this->assertInstanceOf(Entity\Auxiliary\ForecastPart::class, $morning);
 

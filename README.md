@@ -5,31 +5,31 @@ Documentation of the API can be found at [https://apidocs.meteocat.gencat.cat/do
 
 As the documentation indicates, to use this provider it is necessary to request the _access token_ from this [form](https://apidocs.meteocat.gencat.cat/documentacio/acces-ciutada-i-administracio/). 
 
-### About the provider
+## About the provider
 - [_Servei Meteorològic de Catalunya_](http://www.meteo.cat/).
 - [Wikipedia](https://en.wikipedia.org/wiki/Meteorological_Service_of_Catalonia). 
 
-### Installation
-The best way to install the client is through dependency manager [Composer](https://getcomposer.org/):
+## Installation
+Use [Composer](https://getcomposer.org/):
 
 ```bash
 $ composer require mariusasensi/meteocat-api-php-client
 ```
-or
-```json
-{
-    "require": {
-        "mariusasensi/meteocat-api-php-client": "^1.0"
-    }
-}
+
+## Usage
+```php
+use Meteocat\Provider\Meteocat;
+use Meteocat\Model\Query\Forecast\Forecasting\GetCatalunyaByDate;
+use Meteocat\Model\Entity\Forecast;
+
+$client = new Meteocat('your_api_token');
+$query = new GetCatalunyaByDate(DateTime::createFromFormat('Y-m-d', '2019-08-06'));
+
+/** @var Forecast $entityResponse */
+$response = $client->executeQuery($query);
 ```
 
-### Usage
-```
-TODO
-```
-
-### Operation query types
+## Operation query types
 | Type      | Subtype                  | Query class name                | Documentation                                                                                                                             | Description (CA)                                               |
 |-----------|--------------------------|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | XEMA      | Representative           | GetStationByCity                | [Link](https://apidocs.meteocat.gencat.cat/documentacio/representatives/#estacions-representatives-per-a-un-municipi-i-una-variable)      | Estacions representatives per a un municipi i una variable     |
@@ -84,3 +84,7 @@ TODO
 | Reference | Data                     | GetAllCounties                  | [Link](https://apidocs.meteocat.gencat.cat/documentacio/referencia/#dades-de-referencia-de-les-comarques)                                 | Dades de referència de les comarques                           |
 | Reference | Data                     | GetAllSymbols                   | [Link](https://apidocs.meteocat.gencat.cat/documentacio/referencia/#dades-de-referencia-dels-simbols-meteorologics)                       | Dades de referència dels símbols meteorològics                 |
 | Reference | Data                     | GetAllCities                    | [Link](https://apidocs.meteocat.gencat.cat/documentacio/referencia/#dades-de-referencia-dels-municipis)                                   | Dades de referència dels municipis                             |
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
