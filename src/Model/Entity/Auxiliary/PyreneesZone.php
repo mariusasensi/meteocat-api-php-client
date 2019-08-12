@@ -49,7 +49,7 @@ final class PyreneesZone extends Entity
     }
 
     /**
-     * @return int|mixed|null
+     * @return int
      */
     public function getId()
     {
