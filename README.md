@@ -1,4 +1,8 @@
 # [Meteo.cat](https://www.meteo.cat) API Client
+[![Build Status](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/?branch=master)
+
 An **unofficial** PHP client for easy use of the [Meteo.cat API REST](https://apidocs.meteocat.gencat.cat/).
 
 Documentation of the API can be found at [https://apidocs.meteocat.gencat.cat/documentacio/](https://apidocs.meteocat.gencat.cat/documentacio/).
