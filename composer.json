@@ -1,5 +1,5 @@
 {
-    "name": "mariusasensi/meteocat",
+    "name": "mariusasensi/meteocat-api-php-client",
     "description": "API client for Meteocat REST API",
     "keywords": ["meteocat", "meteo.cat", "weather", "provider", "catalunya"],
     "type": "library",
