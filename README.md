@@ -1,7 +1,8 @@
 # [Meteo.cat](https://www.meteo.cat) API Client
-[![Build Status](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/?branch=master)
+[![Build Status](https://travis-ci.org/mariusasensi/meteocat-api-php-client.svg?branch=master)](https://travis-ci.org/mariusasensi/meteocat-api-php-client)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Code Coverage](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/?branch=master)
+[![Quality Score](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mariusasensi/meteocat-api-php-client/?branch=master)
 
 An **unofficial** PHP client for easy use of the [Meteo.cat API REST](https://apidocs.meteocat.gencat.cat/).
 
